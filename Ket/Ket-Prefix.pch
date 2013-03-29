@@ -1,3 +1,6 @@
 #ifdef __OBJC__
   #import <Cocoa/Cocoa.h>
+  #import <libextobjc/EXTScope.h>
+  #import <BlocksKit/BlocksKit.h>
+  #import <ReactiveCocoa/ReactiveCocoa.h>
 #endif

@@ -1,20 +1,26 @@
 #import "Document.h"
+#import "CatalogTableViewDataSource.h"
+#import "CatalogTableViewDelegate.h"
+
+@interface Document ()
+
+@property (strong, nonatomic) IBOutlet NSTableView *tableView;
+@property (strong, nonatomic) IBOutlet CatalogTableViewDataSource *tableViewDataSource;
+@property (strong, nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
+
+@end
 
 @implementation Document
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-    // Add your subclass-specific initialization here.
-    }
-    return self;
+  self = [super init];
+  if (!self) return nil;
+  return self;
 }
 
 - (NSString *)windowNibName
 {
-  // Override returning the nib file name of the document
-  // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
   return @"Document";
 }
 

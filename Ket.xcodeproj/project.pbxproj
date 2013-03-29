@@ -20,6 +20,8 @@
 		58C381301705BBE9001FF665 /* KetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3812F1705BBE9001FF665 /* KetTests.m */; };
 		58C3813B1705E6AD001FF665 /* PagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3813A1705E6AD001FF665 /* PagesController.m */; };
 		58C3813E1705E6F1001FF665 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3813D1705E6F0001FF665 /* Page.m */; };
+		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
+		58C3814417060083001FF665 /* CatalogTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814317060083001FF665 /* CatalogTableViewDataSource.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,10 @@
 		58C3813A1705E6AD001FF665 /* PagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagesController.m; sourceTree = "<group>"; };
 		58C3813C1705E6F0001FF665 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
 		58C3813D1705E6F0001FF665 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
+		58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDelegate.h; sourceTree = "<group>"; };
+		58C3814017060059001FF665 /* CatalogTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDelegate.m; sourceTree = "<group>"; };
+		58C3814217060082001FF665 /* CatalogTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDataSource.h; sourceTree = "<group>"; };
+		58C3814317060083001FF665 /* CatalogTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDataSource.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -137,6 +143,10 @@
 				58C381171705BBE9001FF665 /* Document.xib */,
 				58C3811A1705BBE9001FF665 /* MainMenu.xib */,
 				58C381091705BBE9001FF665 /* Supporting Files */,
+				58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */,
+				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
+				58C3814217060082001FF665 /* CatalogTableViewDataSource.h */,
+				58C3814317060083001FF665 /* CatalogTableViewDataSource.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -300,6 +310,8 @@
 				58C381161705BBE9001FF665 /* Document.m in Sources */,
 				58C3813B1705E6AD001FF665 /* PagesController.m in Sources */,
 				58C3813E1705E6F1001FF665 /* Page.m in Sources */,
+				58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */,
+				58C3814417060083001FF665 /* CatalogTableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

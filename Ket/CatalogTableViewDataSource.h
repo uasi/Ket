@@ -1,3 +1,3 @@
-@interface CatalogTableViewDataSource : NSObject <NSTableViewDataSource>
+@interface CatalogTableViewDataSource : NSArrayController <NSTableViewDataSource>
 
 @end

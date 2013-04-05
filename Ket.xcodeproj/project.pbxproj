@@ -22,6 +22,7 @@
 		58C3813E1705E6F1001FF665 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3813D1705E6F0001FF665 /* Page.m */; };
 		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
 		58C3814417060083001FF665 /* CatalogTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814317060083001FF665 /* CatalogTableViewDataSource.m */; };
+		58C3814717060BB9001FF665 /* CatalogTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814617060BB9001FF665 /* CatalogTableCellView.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		58C3814017060059001FF665 /* CatalogTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDelegate.m; sourceTree = "<group>"; };
 		58C3814217060082001FF665 /* CatalogTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDataSource.h; sourceTree = "<group>"; };
 		58C3814317060083001FF665 /* CatalogTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDataSource.m; sourceTree = "<group>"; };
+		58C3814517060BB9001FF665 /* CatalogTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableCellView.h; sourceTree = "<group>"; };
+		58C3814617060BB9001FF665 /* CatalogTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableCellView.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +150,8 @@
 				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
 				58C3814217060082001FF665 /* CatalogTableViewDataSource.h */,
 				58C3814317060083001FF665 /* CatalogTableViewDataSource.m */,
+				58C3814517060BB9001FF665 /* CatalogTableCellView.h */,
+				58C3814617060BB9001FF665 /* CatalogTableCellView.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				58C3813E1705E6F1001FF665 /* Page.m in Sources */,
 				58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */,
 				58C3814417060083001FF665 /* CatalogTableViewDataSource.m in Sources */,
+				58C3814717060BB9001FF665 /* CatalogTableCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

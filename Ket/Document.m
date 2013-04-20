@@ -1,11 +1,9 @@
 #import "Document.h"
-#import "CatalogTableViewDataSource.h"
 #import "CatalogTableViewDelegate.h"
 
 @interface Document ()
 
 @property (strong, nonatomic) IBOutlet NSTableView *tableView;
-@property (strong, nonatomic) IBOutlet CatalogTableViewDataSource *tableViewDataSource;
 @property (strong, nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
 
 @end

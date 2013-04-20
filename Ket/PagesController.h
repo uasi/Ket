@@ -1,3 +1,0 @@
-@interface PagesController : NSArrayController
-
-@end

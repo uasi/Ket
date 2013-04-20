@@ -2,6 +2,7 @@
 #import "CatalogTableCellView.h"
 #import "CatalogDatabase.h"
 #import "CircleCutArchive.h"
+#import "CircleCutCell.h"
 #import "Circle.h"
 
 @interface CatalogTableViewDelegate ()
@@ -56,7 +57,8 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:self];
 
   if (!view) {
-    NSImageCell *prototypeCell = [[NSImageCell alloc] init];
+    CircleCutCell *prototypeCell = [[CircleCutCell alloc] init];
+    prototypeCell.cutSize = self.archive.cutSize;
     prototypeCell.imageScaling = NSImageScaleProportionallyUpOrDown;
     view = [[NSMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:6 numberOfColumns:6];
     view.identifier = identifier;
@@ -68,13 +70,14 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   NSArray *circles = [self.database circlesInPagePaddedWithNull:indexAtIndex(self.database.pageNoIndexSet, row)];
 
   for (NSInteger i = 0; i < 36; i++) {
-    NSImageCell *cell = view.cells[i];
+    CircleCutCell *cell = view.cells[i];
     Circle *circle = circles[i];
     if ((NSNull *)circle == [NSNull null]) {
       cell.image = [NSImage imageNamed:@"Placeholder210x300"];
     }
     else {
-      cell.image = [self.archive imageForCircle:circles[i]];
+      cell.image = [self.archive imageForCircle:circle];
+      cell.circle = circle;
     }
   }
   

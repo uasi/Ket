@@ -28,7 +28,10 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
   [super drawInteriorWithFrame:cellFrame inView:controlView];
-  [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
+
+  if (self.circle) {
+    [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
+  };
 }
 
 - (void)drawCutShoulderRect:(NSRect)rect
@@ -36,7 +39,11 @@
   NSGraphicsContext *context = [NSGraphicsContext currentContext];
   [context saveGraphicsState];
 
-  [[NSColor blueColor] drawSwatchInRect:rect];
+  [[NSColor yellowColor] drawSwatchInRect:rect];
+
+  NSDictionary *attributes =
+  @{NSFontAttributeName: [NSFont systemFontOfSize:24]};
+  [self.circle.spaceString drawAtPoint:rect.origin withAttributes:attributes];
 
   [context restoreGraphicsState];
 }

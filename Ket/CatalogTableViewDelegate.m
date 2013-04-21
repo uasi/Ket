@@ -95,6 +95,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     Circle *circle = circles[i];
     if ((NSNull *)circle == [NSNull null]) {
       cell.image = [NSImage imageNamed:@"Placeholder210x300"];
+      cell.circle = nil;
     }
     else {
       cell.image = [self.archive imageForCircle:circle];

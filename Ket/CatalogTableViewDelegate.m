@@ -3,6 +3,7 @@
 #import "CatalogDatabase.h"
 #import "CircleCutArchive.h"
 #import "CircleCutCell.h"
+#import "CircleCutMatrix.h"
 #import "Circle.h"
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
@@ -80,7 +81,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     CircleCutCell *prototypeCell = [[CircleCutCell alloc] init];
     prototypeCell.cutSize = self.archive.cutSize;
     prototypeCell.imageScaling = NSImageScaleProportionallyUpOrDown;
-    view = [[NSMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:rows numberOfColumns:columns];
+    view = [[CircleCutMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:rows numberOfColumns:columns];
     view.identifier = identifier;
     view.intercellSpacing = NSMakeSize(0, 0);
   }

@@ -37,8 +37,8 @@
     [NSGraphicsContext saveGraphicsState];
     NSColor *color = [NSColor greenColor];
     [color setStroke];
-    [NSBezierPath setDefaultLineWidth:10];
-    [NSBezierPath strokeRect:cellFrame];
+    [NSBezierPath setDefaultLineWidth:5];
+    [NSBezierPath strokeRect:NSInsetRect(cellFrame, 2.5, 2.5)];
     [NSGraphicsContext restoreGraphicsState];
   }
 }

@@ -85,7 +85,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     view.intercellSpacing = NSMakeSize(0, 0);
   }
 
-  [view setBoundsSize:NSMakeSize(210*6, 300*6)];
+  [view setBoundsSize:NSMakeSize(self.archive.cutSize.width * columns, self.archive.cutSize.height * rows)];
   view.cellSize = [self cellSizeForTableView:tableView];
 
   NSArray *circles = [self.database circlesInPagePaddedWithNull:indexAtIndex(self.database.pageNoIndexSet, row)];

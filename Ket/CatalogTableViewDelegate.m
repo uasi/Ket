@@ -26,8 +26,7 @@
 - (NSSize)cellSizeForTableView:(NSTableView *)tableView
 {
   NSSize originalSize = self.database.cutSize;
-  CGFloat columnsInMatrix = 6;
-  CGFloat scale = tableView.bounds.size.width / (originalSize.width * columnsInMatrix);
+  CGFloat scale = tableView.bounds.size.width / (originalSize.width * self.database.numberOfCutsInColumn);
   CGFloat actualWidth = floor(originalSize.width * scale);
   CGFloat actualHeight = floor(originalSize.height * scale);
   return NSMakeSize(actualWidth, actualHeight);
@@ -56,11 +55,14 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   NSString *identifier = NSStringFromClass([NSMatrix class]);
   NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:self];
 
+  NSUInteger rows = self.database.numberOfCutsInRow;
+  NSUInteger columns = self.database.numberOfCutsInColumn;
+
   if (!view) {
     CircleCutCell *prototypeCell = [[CircleCutCell alloc] init];
     prototypeCell.cutSize = self.archive.cutSize;
     prototypeCell.imageScaling = NSImageScaleProportionallyUpOrDown;
-    view = [[NSMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:6 numberOfColumns:6];
+    view = [[NSMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:rows numberOfColumns:columns];
     view.identifier = identifier;
     view.intercellSpacing = NSMakeSize(0, 0);
   }
@@ -69,7 +71,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
   NSArray *circles = [self.database circlesInPagePaddedWithNull:indexAtIndex(self.database.pageNoIndexSet, row)];
 
-  for (NSInteger i = 0; i < 36; i++) {
+  for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];
     Circle *circle = circles[i];
     if ((NSNull *)circle == [NSNull null]) {
@@ -86,8 +88,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-  CGFloat rowsInMatrix = 6;
-  return [self cellSizeForTableView:tableView].height * rowsInMatrix;
+  return [self cellSizeForTableView:tableView].height * self.database.numberOfCutsInRow;
 }
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row

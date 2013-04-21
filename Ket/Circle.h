@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
 @property (readonly, assign, nonatomic) NSUInteger cutIndex; // in [1, 36].
 @property (readonly, assign, nonatomic) NSUInteger space;
 @property (readonly, assign, nonatomic) CircleSpaceSub spaceSub;
+@property (readonly, assign, nonatomic) NSUInteger blockID;
 @property (readonly, nonatomic) NSString *spaceString;
 
 + (instancetype)circleWithResultSet:(FMResultSet *)result;

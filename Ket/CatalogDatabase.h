@@ -12,4 +12,6 @@
 - (NSArray *)circlesInPage:(NSUInteger)page;
 - (NSArray *)circlesInPagePaddedWithNull:(NSUInteger)page;
 
+- (NSString *)blockNameForID:(NSInteger)blockID;
+
 @end

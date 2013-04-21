@@ -7,6 +7,7 @@
 @property (readwrite, assign, nonatomic) NSUInteger page;
 @property (readwrite, assign, nonatomic) NSUInteger cutIndex;
 @property (readwrite, assign, nonatomic) NSUInteger space;
+@property (readwrite, assign, nonatomic) NSUInteger blockID;
 @property (readwrite, assign, nonatomic) CircleSpaceSub spaceSub;
 
 @end
@@ -30,6 +31,7 @@
   self.cutIndex = [result intForColumn:@"cutIndex"];
   self.space = [result intForColumn:@"spaceNo"];
   self.spaceSub = (CircleSpaceSub)[result intForColumn:@"spaceNoSub"];
+  self.blockID = [result intForColumn:@"blockId"];
   
   return self;
 }

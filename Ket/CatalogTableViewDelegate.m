@@ -28,6 +28,12 @@
   [[self.tableViewColumnDidResizeSignal throttle:RELOAD_DATA_ON_RESIZING_THROTTOLE] subscribeNext:^(NSTableView *tableView) {
     [tableView reloadData];
   }];
+
+  [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
+    CircleCutCell *cell = notification.userInfo[@"cell"];
+    NSString *blockName = [self.database blockNameForID:cell.circle.blockID];
+    NSLog(@"Sender=%@, selected circle block name=%@",notification.object ,blockName);
+  }];
 }
 
 #pragma mark -

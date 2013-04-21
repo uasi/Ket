@@ -39,6 +39,7 @@ NSString *CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidSelectC
   [cell setHighlighted:!cell.isHighlighted];
 
   // Post a notification to tell other matrices to unhighlight cells.
+  // FIXME: multiple notifications is posted for a single click.
   NSDictionary *userInfo =
   @{@"tableView": self.superview.superview,
     @"cell": cell};

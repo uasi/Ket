@@ -62,6 +62,14 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
+  if (!tableColumn) {
+    NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:self];
+    textField.stringValue = @"Group Row";
+    return textField;
+  }
+
+  row /= 2;
+
   NSString *identifier = NSStringFromClass([NSMatrix class]);
   NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:self];
 
@@ -99,6 +107,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
+  if (row % 2 == 0) return 22;
   CGFloat scale = tableView.bounds.size.width / (self.database.cutSize.width * self.database.numberOfCutsInColumn);
   return (self.database.cutSize.height * self.database.numberOfCutsInRow) * scale;
 }
@@ -114,12 +123,17 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   [self.tableViewColumnDidResizeSignal sendNext:tableView];
 }
 
+- (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row
+{
+  return row % 2 == 0;
+}
+
 #pragma mark -
 #pragma mark NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-  return self.database.pageNoIndexSet.count;
+  return self.database.pageNoIndexSet.count * 2;
 }
 
 @end

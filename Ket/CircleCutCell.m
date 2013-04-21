@@ -28,12 +28,15 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
   [super drawInteriorWithFrame:cellFrame inView:controlView];
+  [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
+}
 
+- (void)drawCutShoulderRect:(NSRect)rect
+{
   NSGraphicsContext *context = [NSGraphicsContext currentContext];
   [context saveGraphicsState];
 
-  NSRect cutShoulderRect = [self cutShoulderRectForCutRect:cellFrame];
-  [[NSColor blueColor] drawSwatchInRect:cutShoulderRect];
+  [[NSColor blueColor] drawSwatchInRect:rect];
 
   [context restoreGraphicsState];
 }

@@ -32,6 +32,15 @@
   if (self.circle) {
     [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
   };
+
+  if (self.isHighlighted) {
+    [NSGraphicsContext saveGraphicsState];
+    NSColor *color = [NSColor greenColor];
+    [color setStroke];
+    [NSBezierPath setDefaultLineWidth:10];
+    [NSBezierPath strokeRect:cellFrame];
+    [NSGraphicsContext restoreGraphicsState];
+  }
 }
 
 - (void)drawCutShoulderRect:(NSRect)rect

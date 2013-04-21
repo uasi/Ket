@@ -5,7 +5,9 @@
 #import <FMDB/FMDatabaseAdditions.h>
 #import <FMDB/FMResultSet.h>
 
-#define CIRCLE_COUNT_PER_PAGE 36
+#define NUMBER_OF_CUTS_IN_ROW 6
+#define NUMBER_OF_CUTS_IN_COLUMN 6
+#define CIRCLE_COUNT_PER_PAGE (NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN)
 
 @interface CatalogDatabase ()
 
@@ -18,6 +20,8 @@
 @dynamic comiketNo;
 @dynamic cutSize;
 @dynamic cutOrigin;
+@dynamic numberOfCutsInRow;
+@dynamic numberOfCutsInColumn;
 @synthesize pageNoIndexSet = _pageNoIndexSet;
 
 + (CatalogDatabase *)databaseWithContentsOfFile:(NSString *)file
@@ -63,6 +67,16 @@
   CGFloat x = [self.database intForQuery:@"SELECT cutOriginX FROM ComiketInfo"];
   CGFloat y = [self.database intForQuery:@"SELECT cutOriginY FROM ComiketInfo"];
   return NSMakePoint(x, y);
+}
+
+- (NSUInteger)numberOfCutsInRow
+{
+  return NUMBER_OF_CUTS_IN_ROW;
+}
+
+- (NSUInteger)numberOfCutsInColumn
+{
+  return NUMBER_OF_CUTS_IN_COLUMN;
 }
 
 - (NSIndexSet *)pageNoIndexSet

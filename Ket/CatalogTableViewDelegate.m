@@ -4,11 +4,15 @@
 #import "CircleCutArchive.h"
 #import "CircleCutCell.h"
 #import "Circle.h"
+#import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
+
+#define RELOAD_DATA_ON_RESIZING_THROTTOLE 0.1
 
 @interface CatalogTableViewDelegate ()
 
 @property (strong, nonatomic) CatalogDatabase *database;
 @property (strong, nonatomic) CircleCutArchive *archive;
+@property (strong, nonatomic) RACSubject *tableViewColumnDidResizeSignal;
 
 @end
 
@@ -18,6 +22,11 @@
 {
   self.database = [CatalogDatabase databaseWithContentsOfFile:@"/Users/uasi/tmp/CCATALOG79.sqlite3"];
   self.archive = [CircleCutArchive archiveWithContentsOfURL:[NSURL URLWithString:@"file://localhost/Users/uasi/tmp/C079CUTH.CCZ"]];
+
+  self.tableViewColumnDidResizeSignal = [RACSubject subject];
+  [[self.tableViewColumnDidResizeSignal throttle:RELOAD_DATA_ON_RESIZING_THROTTOLE] subscribeNext:^(NSTableView *tableView) {
+    [tableView reloadData];
+  }];
 }
 
 #pragma mark -
@@ -25,6 +34,7 @@
 
 - (NSSize)cellSizeForTableView:(NSTableView *)tableView
 {
+  return NSMakeSize(210, 300);
   NSSize originalSize = self.database.cutSize;
   CGFloat scale = tableView.bounds.size.width / (originalSize.width * self.database.numberOfCutsInColumn);
   CGFloat actualWidth = floor(originalSize.width * scale);
@@ -67,6 +77,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     view.intercellSpacing = NSMakeSize(0, 0);
   }
 
+  [view setBoundsSize:NSMakeSize(210*6, 300*6)];
   view.cellSize = [self cellSizeForTableView:tableView];
 
   NSArray *circles = [self.database circlesInPagePaddedWithNull:indexAtIndex(self.database.pageNoIndexSet, row)];
@@ -88,7 +99,8 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-  return [self cellSizeForTableView:tableView].height * self.database.numberOfCutsInRow;
+  CGFloat scale = tableView.bounds.size.width / (self.database.cutSize.width * self.database.numberOfCutsInColumn);
+  return (self.database.cutSize.height * self.database.numberOfCutsInRow) * scale;
 }
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
@@ -99,15 +111,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 - (void)tableViewColumnDidResize:(NSNotification *)notification
 {
   NSTableView *tableView = notification.object;
-  NSRange visibleRows = [tableView rowsInRect:tableView.bounds];
-
-  NSSize cellSize = [self cellSizeForTableView:tableView];
-  for (NSInteger row = visibleRows.location; row < visibleRows.location + visibleRows.length; row++) {
-    NSMatrix *matrix = [tableView viewAtColumn:0 row:row makeIfNecessary:NO];
-    if (matrix) matrix.cellSize = cellSize;
-  }
-
-  [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
+  [self.tableViewColumnDidResizeSignal sendNext:tableView];
 }
 
 #pragma mark -

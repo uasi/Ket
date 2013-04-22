@@ -8,7 +8,7 @@
 
 #define NUMBER_OF_CUTS_IN_ROW 6
 #define NUMBER_OF_CUTS_IN_COLUMN 6
-#define CIRCLE_COUNT_PER_PAGE (NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN)
+#define CUT_COUNT_PER_PAGE (NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN)
 
 @interface CatalogDatabase ()
 
@@ -99,7 +99,7 @@
 
 - (NSArray *)circlesInPage:(NSUInteger)page
 {
-  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:CIRCLE_COUNT_PER_PAGE];
+  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:CUT_COUNT_PER_PAGE];
 
   NSString *query = (@"SELECT * FROM ComiketCircle"
                      @"  WHERE pageNo = (?)"
@@ -115,7 +115,7 @@
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
   NSArray *circles = [self circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:CIRCLE_COUNT_PER_PAGE];
+  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:CUT_COUNT_PER_PAGE];
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID

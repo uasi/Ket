@@ -12,7 +12,7 @@ NSString *CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidSelectC
   if (!self) return nil;
 
   // Observe the notification to unhighlight all cells when any other matrix
-  // belonging to the same table view selects a cell.
+  // belonging to the same table view highlights a cell.
   @weakify(self);
   [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
     @strongify(self);

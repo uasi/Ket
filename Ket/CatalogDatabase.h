@@ -1,3 +1,5 @@
+@class CircleCollection;
+
 @interface CatalogDatabase : NSObject
 
 @property (readonly, nonatomic) NSInteger comiketNo;
@@ -9,8 +11,7 @@
 
 + (CatalogDatabase *)databaseWithContentsOfFile:(NSString *)file;
 
-- (NSArray *)circlesInPage:(NSUInteger)page;
-- (NSArray *)circlesInPagePaddedWithNull:(NSUInteger)page;
+- (CircleCollection *)circleCollectionForPage:(NSUInteger)page;
 
 - (NSString *)blockNameForID:(NSInteger)blockID;
 

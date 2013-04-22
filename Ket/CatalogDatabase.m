@@ -1,5 +1,6 @@
 #import "CatalogDatabase.h"
 #import "Circle.h"
+#import "CircleCollection.h"
 #import <sqlite3.h>
 #import <FMDB/FMDatabase.h>
 #import <FMDB/FMDatabaseAdditions.h>
@@ -111,22 +112,10 @@
   return [circles copy];
 }
 
-- (NSArray *)circlesInPagePaddedWithNull:(NSUInteger)page
+- (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
-  NSMutableArray *paddedCircles = [NSMutableArray arrayWithCapacity:CIRCLE_COUNT_PER_PAGE];
   NSArray *circles = [self circlesInPage:page];
-
-  NSInteger circleIndex = 0;
-  for (NSInteger cutIndex = 1; cutIndex <= CIRCLE_COUNT_PER_PAGE; cutIndex++) {
-    if (circleIndex >= circles.count || cutIndex != ((Circle *)circles[circleIndex]).cutIndex) {
-      paddedCircles[cutIndex - 1] = [NSNull null];
-    }
-    else {
-      paddedCircles[cutIndex - 1] = circles[circleIndex++];
-    }
-  }
-
-  return paddedCircles;
+  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:CIRCLE_COUNT_PER_PAGE];
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID

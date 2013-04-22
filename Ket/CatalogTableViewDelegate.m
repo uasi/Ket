@@ -5,6 +5,7 @@
 #import "CircleCutCell.h"
 #import "CircleCutMatrix.h"
 #import "Circle.h"
+#import "CircleCollection.h"
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
 #define RELOAD_DATA_ON_RESIZING_THROTTOLE 0.1
@@ -69,13 +70,13 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
+  NSUInteger page = indexAtIndex(self.database.pageNoIndexSet, row / 2);
+
   if (!tableColumn) {
     NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:nil];
-    textField.stringValue = @"Group Row";
+    textField.stringValue = [NSString stringWithFormat:@"Page %d", (int)page];
     return textField;
   }
-
-  row /= 2;
 
   NSString *identifier = NSStringFromClass([NSMatrix class]);
   NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:nil];
@@ -95,7 +96,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   [view setBoundsSize:NSMakeSize(self.archive.cutSize.width * columns, self.archive.cutSize.height * rows)];
   view.cellSize = [self cellSizeForTableView:tableView];
 
-  NSArray *circles = [self.database circlesInPagePaddedWithNull:indexAtIndex(self.database.pageNoIndexSet, row)];
+  NSArray *circles = [self.database circleCollectionForPage:page].circlesPaddedWithNull;
 
   for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];

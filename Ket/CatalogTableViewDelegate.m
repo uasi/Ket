@@ -70,7 +70,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
   if (!tableColumn) {
-    NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:self];
+    NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:nil];
     textField.stringValue = @"Group Row";
     return textField;
   }
@@ -78,7 +78,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   row /= 2;
 
   NSString *identifier = NSStringFromClass([NSMatrix class]);
-  NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:self];
+  NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:nil];
 
   NSUInteger rows = self.database.numberOfCutsInRow;
   NSUInteger columns = self.database.numberOfCutsInColumn;

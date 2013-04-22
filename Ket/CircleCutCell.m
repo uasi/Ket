@@ -5,26 +5,6 @@
 
 @implementation CircleCutCell
 
-- (instancetype)init
-{
-  return [super init];
-}
-
-- (instancetype)initImageCell:(NSImage *)image
-{
-  return [super initImageCell:image];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)decoder
-{
-  return [super initWithCoder:decoder];
-}
-
-- (instancetype)initTextCell:(NSString *)string
-{
-  return [super initTextCell:string];
-}
-
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
   [super drawInteriorWithFrame:cellFrame inView:controlView];

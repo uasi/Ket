@@ -69,7 +69,7 @@
 											<string key="NSFrameSize">{507, 397}</string>
 											<reference key="NSSuperview" ref="219853677"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="872044354"/>
+											<reference key="NSNextKeyView" ref="452505818"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -230,7 +230,7 @@
 							<string key="NSFrame">{{-1, -1}, {509, 415}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="452505818"/>
+							<reference key="NSNextKeyView" ref="219853677"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="872044354"/>
@@ -269,14 +269,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">tableView</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="300902012"/>
-					</object>
-					<int key="connectionID">100056</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">tableViewDelegate</string>
 						<reference key="source" ref="512844837"/>
 						<reference key="destination" ref="142098055"/>
@@ -306,14 +298,6 @@
 						<reference key="destination" ref="142098055"/>
 					</object>
 					<int key="connectionID">100078</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">tableView</string>
-						<reference key="source" ref="142098055"/>
-						<reference key="destination" ref="300902012"/>
-					</object>
-					<int key="connectionID">100077</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -461,7 +445,6 @@
 								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{1, 1}, {504, 17}}</string>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:1535</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="740004225">
@@ -603,20 +586,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">Document</string>
 					<string key="superclassName">NSDocument</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="tableView">NSTableView</string>
-						<string key="tableViewDelegate">CatalogTableViewDelegate</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="tableView">
-							<string key="name">tableView</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tableViewDelegate">
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">tableViewDelegate</string>
+						<string key="NS.object.0">CatalogTableViewDelegate</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">tableViewDelegate</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
 							<string key="name">tableViewDelegate</string>
 							<string key="candidateClassName">CatalogTableViewDelegate</string>
 						</object>
-					</dictionary>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/Document.h</string>

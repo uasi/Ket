@@ -1,3 +1,0 @@
-@interface CatalogTableCellView : NSTableCellView
-
-@end

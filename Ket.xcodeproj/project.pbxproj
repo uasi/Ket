@@ -26,7 +26,6 @@
 		58C3812D1705BBE9001FF665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58C3812B1705BBE9001FF665 /* InfoPlist.strings */; };
 		58C381301705BBE9001FF665 /* KetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3812F1705BBE9001FF665 /* KetTests.m */; };
 		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
-		58C3814717060BB9001FF665 /* CatalogTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814617060BB9001FF665 /* CatalogTableCellView.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +76,6 @@
 		58C3812F1705BBE9001FF665 /* KetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KetTests.m; sourceTree = "<group>"; };
 		58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDelegate.h; sourceTree = "<group>"; };
 		58C3814017060059001FF665 /* CatalogTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDelegate.m; sourceTree = "<group>"; };
-		58C3814517060BB9001FF665 /* CatalogTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableCellView.h; sourceTree = "<group>"; };
-		58C3814617060BB9001FF665 /* CatalogTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableCellView.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,8 +147,6 @@
 			children = (
 				58A039A41722698400A81DEE /* CatalogDatabase.h */,
 				58A039A51722698400A81DEE /* CatalogDatabase.m */,
-				58C3814517060BB9001FF665 /* CatalogTableCellView.h */,
-				58C3814617060BB9001FF665 /* CatalogTableCellView.m */,
 				58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */,
 				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
 				58A039A61722698400A81DEE /* Circle.h */,
@@ -333,7 +328,6 @@
 				58C3810F1705BBE9001FF665 /* main.m in Sources */,
 				58C381161705BBE9001FF665 /* Document.m in Sources */,
 				58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */,
-				58C3814717060BB9001FF665 /* CatalogTableCellView.m in Sources */,
 				58A039A81722698500A81DEE /* CircleCutArchive.m in Sources */,
 				58A039A91722698500A81DEE /* CatalogDatabase.m in Sources */,
 				58A039AA1722698500A81DEE /* Circle.m in Sources */,

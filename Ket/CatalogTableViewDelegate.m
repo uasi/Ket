@@ -1,5 +1,4 @@
 #import "CatalogTableViewDelegate.h"
-#import "CatalogTableCellView.h"
 #import "CatalogDatabase.h"
 #import "CircleCutArchive.h"
 #import "CircleCutCell.h"

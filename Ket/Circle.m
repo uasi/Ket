@@ -3,12 +3,12 @@
 
 @interface Circle ()
 
-@property (readwrite, assign, nonatomic) NSUInteger identifier;
-@property (readwrite, assign, nonatomic) NSUInteger page;
-@property (readwrite, assign, nonatomic) NSUInteger cutIndex;
-@property (readwrite, assign, nonatomic) NSUInteger space;
-@property (readwrite, assign, nonatomic) NSUInteger blockID;
-@property (readwrite, assign, nonatomic) CircleSpaceSub spaceSub;
+@property (nonatomic, readwrite, assign) NSUInteger identifier;
+@property (nonatomic, readwrite, assign) NSUInteger page;
+@property (nonatomic, readwrite, assign) NSUInteger cutIndex;
+@property (nonatomic, readwrite, assign) NSUInteger space;
+@property (nonatomic, readwrite, assign) NSUInteger blockID;
+@property (nonatomic, readwrite, assign) CircleSpaceSub spaceSub;
 
 @end
 

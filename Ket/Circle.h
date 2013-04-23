@@ -9,13 +9,13 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
 
 @interface Circle : NSObject
 
-@property (readonly, assign, nonatomic) NSUInteger identifier;
-@property (readonly, assign, nonatomic) NSUInteger page;
-@property (readonly, assign, nonatomic) NSUInteger cutIndex; // in [1, 36].
-@property (readonly, assign, nonatomic) NSUInteger space;
-@property (readonly, assign, nonatomic) CircleSpaceSub spaceSub;
-@property (readonly, assign, nonatomic) NSUInteger blockID;
-@property (readonly, nonatomic) NSString *spaceString;
+@property (nonatomic, readonly, assign) NSUInteger identifier;
+@property (nonatomic, readonly, assign) NSUInteger page;
+@property (nonatomic, readonly, assign) NSUInteger cutIndex; // in [1, 36].
+@property (nonatomic, readonly, assign) NSUInteger space;
+@property (nonatomic, readonly, assign) CircleSpaceSub spaceSub;
+@property (nonatomic, readonly, assign) NSUInteger blockID;
+@property (nonatomic, readonly) NSString *spaceString;
 
 + (instancetype)circleWithResultSet:(FMResultSet *)result;
 

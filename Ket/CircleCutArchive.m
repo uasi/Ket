@@ -4,12 +4,12 @@
 
 @interface CircleCutArchive ()
 
-@property (readwrite, assign, nonatomic) NSUInteger comiketNo;
-@property (readwrite, assign, nonatomic) NSSize cutSize;
+@property (nonatomic, readwrite, assign) NSUInteger comiketNo;
+@property (nonatomic, readwrite, assign) NSSize cutSize;
 
-@property (strong, nonatomic) ZZArchive *archive;
-@property (copy, nonatomic) NSDictionary *fileNameToEntry;
-@property (assign, nonatomic) NSUInteger indexOfFirstCircleCutEntry;
+@property (nonatomic) ZZArchive *archive;
+@property (nonatomic, copy) NSDictionary *fileNameToEntry;
+@property (nonatomic, assign) NSUInteger indexOfFirstCircleCutEntry;
 
 @end
 

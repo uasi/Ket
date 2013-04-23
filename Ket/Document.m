@@ -3,7 +3,7 @@
 
 @interface Document ()
 
-@property (strong, nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
+@property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
 
 @end
 

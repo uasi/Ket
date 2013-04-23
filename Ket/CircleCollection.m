@@ -3,8 +3,8 @@
 
 @interface CircleCollection ()
 
-@property (readwrite, copy, nonatomic) NSArray *circles;
-@property (readwrite, copy, nonatomic) NSArray *circlesPaddedWithNull;
+@property (nonatomic, readwrite, copy) NSArray *circles;
+@property (nonatomic, readwrite, copy) NSArray *circlesPaddedWithNull;
 
 @end
 

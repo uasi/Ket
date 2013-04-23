@@ -2,8 +2,8 @@
 
 @interface CircleCutArchive : NSObject
 
-@property (readonly, assign, nonatomic) NSUInteger comiketNo;
-@property (readonly, assign, nonatomic) NSSize cutSize;
+@property (nonatomic, readonly, assign) NSUInteger comiketNo;
+@property (nonatomic, readonly, assign) NSSize cutSize;
 
 + (CircleCutArchive *)archiveWithContentsOfURL:(NSURL *)URL;
 

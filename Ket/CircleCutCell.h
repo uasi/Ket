@@ -2,7 +2,7 @@
 
 @interface CircleCutCell : NSImageCell
 
-@property (strong, nonatomic) Circle *circle;
-@property (assign, nonatomic) NSSize cutSize;
+@property (nonatomic) Circle *circle;
+@property (nonatomic, assign) NSSize cutSize;
 
 @end

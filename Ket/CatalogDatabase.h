@@ -2,12 +2,12 @@
 
 @interface CatalogDatabase : NSObject
 
-@property (readonly, nonatomic) NSInteger comiketNo;
-@property (readonly, nonatomic) NSSize cutSize;
-@property (readonly, nonatomic) NSPoint cutOrigin;
-@property (readonly, nonatomic) NSUInteger numberOfCutsInRow;
-@property (readonly, nonatomic) NSUInteger numberOfCutsInColumn;
-@property (readonly, strong, nonatomic) NSIndexSet *pageNoIndexSet;
+@property (nonatomic, readonly) NSInteger comiketNo;
+@property (nonatomic, readonly) NSSize cutSize;
+@property (nonatomic, readonly) NSPoint cutOrigin;
+@property (nonatomic, readonly) NSUInteger numberOfCutsInRow;
+@property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
+@property (nonatomic, readonly) NSIndexSet *pageNoIndexSet;
 
 + (CatalogDatabase *)databaseWithContentsOfFile:(NSString *)file;
 

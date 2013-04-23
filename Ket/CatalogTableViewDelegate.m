@@ -11,9 +11,9 @@
 
 @interface CatalogTableViewDelegate ()
 
-@property (strong, nonatomic) CatalogDatabase *database;
-@property (strong, nonatomic) CircleCutArchive *archive;
-@property (strong, nonatomic) RACSubject *tableViewColumnDidResizeSignal;
+@property (nonatomic) CatalogDatabase *database;
+@property (nonatomic) CircleCutArchive *archive;
+@property (nonatomic) RACSubject *tableViewColumnDidResizeSignal;
 
 @end
 

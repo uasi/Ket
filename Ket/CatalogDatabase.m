@@ -12,7 +12,7 @@
 
 @interface CatalogDatabase ()
 
-@property (strong, nonatomic) FMDatabase *database;
+@property (nonatomic) FMDatabase *database;
 
 @end
 

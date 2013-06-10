@@ -1,4 +1,5 @@
 #import "CircleCutCell.h"
+
 #import "Circle.h"
 
 #define CUT_SHOULDER_RECT_FOR_CUT_OF_210x300 NSMakeRect(7, 7, 49, 49)

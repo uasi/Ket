@@ -1,4 +1,5 @@
 #import "Circle.h"
+
 #import <FMDB/FMResultSet.h>
 
 @interface Circle ()

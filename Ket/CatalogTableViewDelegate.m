@@ -1,10 +1,11 @@
 #import "CatalogTableViewDelegate.h"
+
 #import "CatalogDatabase.h"
+#import "Circle.h"
+#import "CircleCollection.h"
 #import "CircleCutArchive.h"
 #import "CircleCutCell.h"
 #import "CircleCutMatrix.h"
-#import "Circle.h"
-#import "CircleCollection.h"
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
 static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;

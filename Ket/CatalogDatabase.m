@@ -1,10 +1,11 @@
 #import "CatalogDatabase.h"
+
 #import "Circle.h"
 #import "CircleCollection.h"
-#import <sqlite3.h>
 #import <FMDB/FMDatabase.h>
 #import <FMDB/FMDatabaseAdditions.h>
 #import <FMDB/FMResultSet.h>
+#import <sqlite3.h>
 
 static const NSUInteger NUMBER_OF_CUTS_IN_ROW = 6;
 static const NSUInteger NUMBER_OF_CUTS_IN_COLUMN = 6;

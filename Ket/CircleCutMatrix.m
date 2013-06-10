@@ -2,7 +2,7 @@
 #import "CircleCutCell.h"
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
-NSString *CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidSelectCellNotification";
+NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidSelectCellNotification";
 
 @implementation CircleCutMatrix
 

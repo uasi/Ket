@@ -6,9 +6,9 @@
 #import <FMDB/FMDatabaseAdditions.h>
 #import <FMDB/FMResultSet.h>
 
-#define NUMBER_OF_CUTS_IN_ROW 6
-#define NUMBER_OF_CUTS_IN_COLUMN 6
-#define CUT_COUNT_PER_PAGE (NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN)
+static const NSUInteger NUMBER_OF_CUTS_IN_ROW = 6;
+static const NSUInteger NUMBER_OF_CUTS_IN_COLUMN = 6;
+static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN;
 
 @interface CatalogDatabase ()
 

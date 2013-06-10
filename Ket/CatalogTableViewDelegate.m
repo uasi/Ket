@@ -7,7 +7,7 @@
 #import "CircleCollection.h"
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
-#define RELOAD_DATA_ON_RESIZING_THROTTOLE 0.1
+static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
 @interface CatalogTableViewDelegate ()
 
@@ -25,7 +25,7 @@
   self.archive = [CircleCutArchive archiveWithContentsOfURL:[NSURL URLWithString:@"file://localhost/Users/uasi/tmp/C079CUTH.CCZ"]];
 
   self.tableViewColumnDidResizeSignal = [RACSubject subject];
-  [[self.tableViewColumnDidResizeSignal throttle:RELOAD_DATA_ON_RESIZING_THROTTOLE] subscribeNext:^(NSTableView *tableView) {
+  [[self.tableViewColumnDidResizeSignal throttle:ThrottleForReloadingDataOnResizing] subscribeNext:^(NSTableView *tableView) {
     [tableView reloadData];
   }];
 

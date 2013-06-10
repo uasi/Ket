@@ -6,6 +6,8 @@
 
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
 
+@property (nonatomic, readwrite) NSMutableDictionary *bookmarks;
+
 @end
 
 @implementation Document
@@ -14,6 +16,9 @@
 {
   self = [super init];
   if (!self) return nil;
+
+  self.bookmarks = [NSMutableDictionary dictionary];
+
   return self;
 }
 
@@ -35,20 +40,19 @@
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-  // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-  // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-  NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-  @throw exception;
-  return nil;
+  return [NSKeyedArchiver archivedDataWithRootObject:@{
+          @"bookmarks": self.bookmarks,
+          }];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-  // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-  // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-  // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-  NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-  @throw exception;
+  NSDictionary *properties = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+  if (!properties && outError) {
+    *outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
+    return NO;
+  }
+  self.bookmarks = properties[@"bookmarks"];
   return YES;
 }
 

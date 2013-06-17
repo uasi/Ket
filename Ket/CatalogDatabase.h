@@ -9,7 +9,7 @@
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
 @property (nonatomic, readonly) NSIndexSet *pageNoIndexSet;
 
-+ (CatalogDatabase *)databaseWithContentsOfFile:(NSString *)file;
++ (CatalogDatabase *)databaseWithContentsOfURL:(NSURL *)URL;
 
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page;
 

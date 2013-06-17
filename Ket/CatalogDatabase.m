@@ -26,17 +26,17 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 @dynamic numberOfCutsInColumn;
 @synthesize pageNoIndexSet = _pageNoIndexSet;
 
-+ (CatalogDatabase *)databaseWithContentsOfFile:(NSString *)file
++ (CatalogDatabase *)databaseWithContentsOfURL:(NSURL *)URL
 {
-  return [[[self class] alloc] initWithContentsOfFile:file];
+  return [[[self class] alloc] initWithContentsOfURL:URL];
 }
 
-- (instancetype)initWithContentsOfFile:(NSString *)file
+- (instancetype)initWithContentsOfURL:(NSURL *)URL
 {
   self = [super init];
   if (!self) return nil;
 
-  self.database = [FMDatabase databaseWithPath:file];
+  self.database = [FMDatabase databaseWithPath:URL.path];
   if (![self.database openWithFlags:SQLITE_OPEN_READONLY]) return nil;
 
   return self;

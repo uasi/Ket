@@ -25,7 +25,7 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
 - (void)awakeFromNib
 {
-  self.database = [CatalogDatabase databaseWithContentsOfFile:CatalogDatabaseURLWithComiketID(@"C079").path];
+  self.database = [CatalogDatabase databaseWithContentsOfURL:CatalogDatabaseURLWithComiketID(@"C079")];
   self.archive = [CircleCutArchive archiveWithContentsOfURL:CircleCutArchiveURLWithComiketID(@"C079")];
 
   self.tableViewColumnDidResizeSignal = [RACSubject subject];

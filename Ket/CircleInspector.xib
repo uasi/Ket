@@ -48,16 +48,15 @@
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
-						<object class="NSTextField" id="637553691">
+						<object class="NSTextField" id="881857486">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 233}, {446, 17}}</string>
 							<reference key="NSSuperview" ref="1006"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:1535</string>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="760867689">
+							<object class="NSTextFieldCell" key="NSCell" id="373200865">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents">Title</string>
@@ -67,7 +66,7 @@
 									<int key="NSfFlags">1044</int>
 								</object>
 								<string key="NSCellIdentifier">_NS:1535</string>
-								<reference key="NSControlView" ref="637553691"/>
+								<reference key="NSControlView" ref="881857486"/>
 								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
@@ -92,8 +91,7 @@
 					</array>
 					<string key="NSFrameSize">{480, 270}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="637553691"/>
+					<reference key="NSNextKeyView" ref="881857486"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
@@ -137,10 +135,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: self.document.selectedCircle.description</string>
-						<reference key="source" ref="760867689"/>
+						<reference key="source" ref="373200865"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="760867689"/>
+							<reference key="NSSource" ref="373200865"/>
 							<reference key="NSDestination" ref="1001"/>
 							<string key="NSLabel">value: self.document.selectedCircle.description</string>
 							<string key="NSBinding">value</string>
@@ -189,12 +187,12 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="1006"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="637553691"/>
-							<object class="IBNSLayoutConstraint" id="1002159890">
+							<reference ref="881857486"/>
+							<object class="IBNSLayoutConstraint" id="8749404">
 								<reference key="firstItem" ref="1006"/>
 								<int key="firstAttribute">6</int>
 								<int key="relation">0</int>
-								<reference key="secondItem" ref="637553691"/>
+								<reference key="secondItem" ref="881857486"/>
 								<int key="secondAttribute">6</int>
 								<float key="multiplier">1</float>
 								<object class="IBNSLayoutSymbolicConstant" key="constant">
@@ -206,8 +204,8 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="916097541">
-								<reference key="firstItem" ref="637553691"/>
+							<object class="IBNSLayoutConstraint" id="911984040">
+								<reference key="firstItem" ref="881857486"/>
 								<int key="firstAttribute">3</int>
 								<int key="relation">0</int>
 								<reference key="secondItem" ref="1006"/>
@@ -222,8 +220,8 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="666562971">
-								<reference key="firstItem" ref="637553691"/>
+							<object class="IBNSLayoutConstraint" id="199789249">
+								<reference key="firstItem" ref="881857486"/>
 								<int key="firstAttribute">5</int>
 								<int key="relation">0</int>
 								<reference key="secondItem" ref="1006"/>
@@ -243,31 +241,31 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
-						<reference key="object" ref="637553691"/>
+						<reference key="object" ref="881857486"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="760867689"/>
+							<reference ref="373200865"/>
 						</array>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
-						<reference key="object" ref="1002159890"/>
+						<reference key="object" ref="8749404"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
-						<reference key="object" ref="916097541"/>
+						<reference key="object" ref="911984040"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
-						<reference key="object" ref="666562971"/>
+						<reference key="object" ref="199789249"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
-						<reference key="object" ref="760867689"/>
-						<reference key="parent" ref="637553691"/>
+						<reference key="object" ref="373200865"/>
+						<reference key="parent" ref="881857486"/>
 					</object>
 				</array>
 			</object>
@@ -279,9 +277,9 @@
 				<string key="1.IBWindowTemplateEditedContentRect">{{357, 418}, {480, 270}}</string>
 				<boolean value="NO" key="1.NSWindowTemplate.visibleAtLaunch"/>
 				<array key="2.IBNSViewMetadataConstraints">
-					<reference ref="666562971"/>
-					<reference ref="916097541"/>
-					<reference ref="1002159890"/>
+					<reference ref="199789249"/>
+					<reference ref="911984040"/>
+					<reference ref="8749404"/>
 				</array>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="5.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>

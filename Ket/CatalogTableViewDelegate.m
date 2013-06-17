@@ -40,8 +40,7 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
   }];
 }
 
-#pragma mark -
-#pragma mark NSTableViewDelegate
+#pragma mark -  NSTableViewDelegate
 
 - (NSSize)cellSizeForTableView:(NSTableView *)tableView
 {
@@ -140,8 +139,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   return row % 2 == 0;
 }
 
-#pragma mark -
-#pragma mark NSTableViewDataSource
+#pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {

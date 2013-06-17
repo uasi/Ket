@@ -5,10 +5,11 @@
 
 @interface Document ()
 
+@property (nonatomic, readwrite) NSMutableDictionary *bookmarks;
+@property (nonatomic, readwrite) Circle *selectedCircle;
+
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
 @property (nonatomic, weak) CircleInspectorController *circleInspectorController;
-
-@property (nonatomic, readwrite) NSMutableDictionary *bookmarks;
 
 @end
 
@@ -40,7 +41,7 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
   [super windowControllerDidLoadNib:aController];
-  // Add any code here that needs to be executed once the windowController has loaded the document's window.
+  RACBind(selectedCircle) = RACBind(self.tableViewDelegate, selectedCircle);
 }
 
 + (BOOL)autosavesInPlace

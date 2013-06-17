@@ -5,6 +5,12 @@
 
 NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidSelectCellNotification";
 
+@interface CircleCutMatrix ()
+
+@property (nonatomic, readwrite) CircleCutCell *highlightedCircleCutCell;
+
+@end
+
 @implementation CircleCutMatrix
 
 - (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode prototype:(NSCell *)aCell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide
@@ -38,6 +44,7 @@ NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidS
   [self unhighlightAllCells];
   CircleCutCell *cell = [self cellAtRow:row column:column];
   [cell setHighlighted:!cell.isHighlighted];
+  self.highlightedCircleCutCell = cell;
 
   // Post a notification to tell other matrices to unhighlight cells.
   NSDictionary *userInfo =
@@ -51,6 +58,7 @@ NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidS
   for (CircleCutCell *cell in self.cells) {
     [cell setHighlighted:NO];
   }
+  self.highlightedCircleCutCell = nil;
 }
 
 @end

@@ -12,6 +12,8 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
 @interface CatalogTableViewDelegate ()
 
+@property (nonatomic, readwrite) Circle *selectedCircle;
+
 @property (nonatomic) CatalogDatabase *database;
 @property (nonatomic) CircleCutArchive *archive;
 @property (nonatomic) RACSubject *tableViewColumnDidResizeSignal;
@@ -32,6 +34,7 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
   [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
     CircleCutCell *cell = notification.userInfo[@"cell"];
+    self.selectedCircle = cell.circle;
     NSString *blockName = [self.database blockNameForID:cell.circle.blockID];
     NSLog(@"Sender=%@, selected circle block name=%@",notification.object ,blockName);
   }];

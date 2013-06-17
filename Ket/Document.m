@@ -1,10 +1,12 @@
 #import "Document.h"
 
 #import "CatalogTableViewDelegate.h"
+#import "CircleInspectorController.h"
 
 @interface Document ()
 
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
+@property (nonatomic, weak) CircleInspectorController *circleInspectorController;
 
 @property (nonatomic, readwrite) NSMutableDictionary *bookmarks;
 
@@ -25,6 +27,14 @@
 - (NSString *)windowNibName
 {
   return @"Document";
+}
+
+- (void)makeWindowControllers
+{
+  [super makeWindowControllers];
+  CircleInspectorController *controller = [[CircleInspectorController alloc] initWithWindowNibName:@"CircleInspector"];
+  [self addWindowController:controller];
+  self.circleInspectorController = controller;
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -54,6 +64,11 @@
   }
   self.bookmarks = properties[@"bookmarks"];
   return YES;
+}
+
+- (IBAction)showCircleInspector:(id)sender
+{
+  [self.circleInspectorController showWindow:self];
 }
 
 @end

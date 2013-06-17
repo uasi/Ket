@@ -2,6 +2,7 @@
 
 #import "CatalogTableViewDelegate.h"
 #import "CircleInspectorController.h"
+#import "PathUtils.h"
 
 @interface Document ()
 
@@ -42,6 +43,7 @@
 {
   [super windowControllerDidLoadNib:aController];
   RACBind(selectedCircle) = RACBind(self.tableViewDelegate, selectedCircle);
+  EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketID(@"C079"));
 }
 
 + (BOOL)autosavesInPlace

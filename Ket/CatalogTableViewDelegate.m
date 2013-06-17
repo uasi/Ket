@@ -6,6 +6,7 @@
 #import "CircleCutArchive.h"
 #import "CircleCutCell.h"
 #import "CircleCutMatrix.h"
+#import "PathUtils.h"
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
 static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
@@ -24,8 +25,8 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
 - (void)awakeFromNib
 {
-  self.database = [CatalogDatabase databaseWithContentsOfFile:@"/Users/uasi/tmp/CCATALOG79.sqlite3"];
-  self.archive = [CircleCutArchive archiveWithContentsOfURL:[NSURL URLWithString:@"file://localhost/Users/uasi/tmp/C079CUTH.CCZ"]];
+  self.database = [CatalogDatabase databaseWithContentsOfFile:CatalogDatabaseURLWithComiketID(@"C079").path];
+  self.archive = [CircleCutArchive archiveWithContentsOfURL:CircleCutArchiveURLWithComiketID(@"C079")];
 
   self.tableViewColumnDidResizeSignal = [RACSubject subject];
   [[self.tableViewColumnDidResizeSignal throttle:ThrottleForReloadingDataOnResizing] subscribeNext:^(NSTableView *tableView) {

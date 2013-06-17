@@ -4,6 +4,6 @@ extern NSString *const CircleCutMatrixDidSelectCellNotification;
 
 @interface CircleCutMatrix : NSMatrix
 
-@property (nonatomic, readonly) CircleCutCell *highlightedCircleCutCell;
+- (void)unhighlightAllCells;
 
 @end

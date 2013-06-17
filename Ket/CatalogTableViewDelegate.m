@@ -82,7 +82,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   }
 
   NSString *identifier = NSStringFromClass([NSMatrix class]);
-  NSMatrix *view = [tableView makeViewWithIdentifier:identifier owner:nil];
+  CircleCutMatrix *view = [tableView makeViewWithIdentifier:identifier owner:nil];
 
   NSUInteger rows = self.database.numberOfCutsInRow;
   NSUInteger columns = self.database.numberOfCutsInColumn;
@@ -96,6 +96,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     view.intercellSpacing = NSMakeSize(0, 0);
   }
 
+  [view unhighlightAllCells];
   [view setBoundsSize:NSMakeSize(self.archive.cutSize.width * columns, self.archive.cutSize.height * rows)];
   view.cellSize = [self cellSizeForTableView:tableView];
 
@@ -113,7 +114,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
       cell.circle = circle;
     }
   }
-  
+
   return view;
 }
 

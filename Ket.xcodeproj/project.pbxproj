@@ -14,6 +14,7 @@
 		5870B4F6176E9DEC00B449DA /* CircleInspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */; };
 		5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5870B4F5176E9DEC00B449DA /* CircleInspector.xib */; };
 		5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FA176ECBE800B449DA /* PathUtils.m */; };
+		5870B4FE176EF41800B449DA /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FD176EF41700B449DA /* Checklist.m */; };
 		58A039A81722698500A81DEE /* CircleCutArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A31722698400A81DEE /* CircleCutArchive.m */; };
 		58A039A91722698500A81DEE /* CatalogDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A51722698400A81DEE /* CatalogDatabase.m */; };
 		58A039AA1722698500A81DEE /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A71722698500A81DEE /* Circle.m */; };
@@ -56,6 +57,8 @@
 		5870B4F5176E9DEC00B449DA /* CircleInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleInspector.xib; sourceTree = "<group>"; };
 		5870B4F9176ECBE700B449DA /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtils.h; sourceTree = "<group>"; };
 		5870B4FA176ECBE800B449DA /* PathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtils.m; sourceTree = "<group>"; };
+		5870B4FC176EF41700B449DA /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
+		5870B4FD176EF41700B449DA /* Checklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checklist.m; sourceTree = "<group>"; };
 		58A039A21722698300A81DEE /* CircleCutArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutArchive.h; sourceTree = "<group>"; };
 		58A039A31722698400A81DEE /* CircleCutArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutArchive.m; sourceTree = "<group>"; };
 		58A039A41722698400A81DEE /* CatalogDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogDatabase.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				58A039A51722698400A81DEE /* CatalogDatabase.m */,
 				58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */,
 				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
+				5870B4FC176EF41700B449DA /* Checklist.h */,
+				5870B4FD176EF41700B449DA /* Checklist.m */,
 				58A039A61722698400A81DEE /* Circle.h */,
 				58A039A71722698500A81DEE /* Circle.m */,
 				58553FD01724DA6400D8387C /* CircleCollection.h */,
@@ -182,9 +187,9 @@
 				58C381141705BBE9001FF665 /* Document.h */,
 				58C381151705BBE9001FF665 /* Document.m */,
 				5870B4F8176EABB700B449DA /* NIBs */,
-				58C381091705BBE9001FF665 /* Supporting Files */,
 				5870B4F9176ECBE700B449DA /* PathUtils.h */,
 				5870B4FA176ECBE800B449DA /* PathUtils.m */,
+				58C381091705BBE9001FF665 /* Supporting Files */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				58553FD21724DA6400D8387C /* CircleCollection.m in Sources */,
 				5870B4F6176E9DEC00B449DA /* CircleInspectorController.m in Sources */,
 				5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */,
+				5870B4FE176EF41800B449DA /* Checklist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

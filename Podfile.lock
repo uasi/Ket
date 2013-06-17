@@ -93,6 +93,9 @@ PODS:
   - libextobjc/RuntimeExtensions (0.2.5)
   - libextobjc/UmbrellaHeader (0.2.5)
   - libffi (3.0.13)
+  - Mantle (1.1):
+    - libextobjc/EXTKeyPathCoding
+    - libextobjc/EXTScope
   - ReactiveCocoa (1.8.1):
     - ReactiveCocoa/Core
     - ReactiveCocoa/RACExtensions
@@ -110,6 +113,7 @@ DEPENDENCIES:
   - CocoaLumberjack
   - FMDB
   - libextobjc
+  - Mantle
   - ReactiveCocoa
   - zipzap (from `https://github.com/uasi/zipzap.git`, branch `support-osx`)
 
@@ -125,6 +129,7 @@ SPEC CHECKSUMS:
   JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
   libextobjc: 2cbc74caf8bdc74a86fdf24673f773c83424ea98
   libffi: d9cf374b6b464c3ea53b13219536fad3bfb06e84
+  Mantle: aba2facc6ee8f97512a94768dc57c82b7802948c
   ReactiveCocoa: 396e260e68f7a6ba3855b4486009381e0dc02cc3
   zipzap: 2cf055aceb34521032823b0464402956f48b96aa
 

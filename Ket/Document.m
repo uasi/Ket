@@ -6,7 +6,7 @@
 @interface Document ()
 
 @property (nonatomic, readwrite) NSMutableDictionary *bookmarks;
-@property (nonatomic, readwrite) Circle *selectedCircle;
+@property (nonatomic, readwrite) Circle *selectedCircle; // bound to self.tableViewDelegate.selectedCircle.
 
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
 @property (nonatomic, weak) CircleInspectorController *circleInspectorController;

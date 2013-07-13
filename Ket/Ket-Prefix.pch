@@ -5,6 +5,8 @@
   #import <BlocksKit/BlocksKit.h>
   #import <CocoaLumberjack/DDLog.h>
   #import <ReactiveCocoa/ReactiveCocoa.h>
+
+  #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 #endif
 
 extern int ddLogLevel;

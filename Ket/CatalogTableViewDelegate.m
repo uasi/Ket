@@ -7,7 +7,6 @@
 #import "CircleCutCell.h"
 #import "CircleCutMatrix.h"
 #import "PathUtils.h"
-#import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
 static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 

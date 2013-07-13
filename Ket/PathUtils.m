@@ -1,5 +1,11 @@
 #import "PathUtils.h"
 
+NSString *ComiketIDFromComiketNo(NSUInteger comiketNo)
+{
+  NSCAssert(1 <= comiketNo && comiketNo <= 999, @"comiketNo must be in [1, 999]");
+  return [NSString stringWithFormat:@"C%03d", (int)comiketNo];
+}
+
 NSURL *KetSupportDirectoryURL(void)
 {
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);

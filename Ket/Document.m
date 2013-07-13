@@ -1,5 +1,6 @@
 #import "Document.h"
 
+#import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
 #import "CircleInspectorController.h"
 #import "PathUtils.h"
@@ -34,9 +35,12 @@
 - (void)makeWindowControllers
 {
   [super makeWindowControllers];
-  CircleInspectorController *controller = [[CircleInspectorController alloc] initWithWindowNibName:@"CircleInspector"];
+  id controller = [[CircleInspectorController alloc] initWithWindowNibName:@"CircleInspector"];
   [self addWindowController:controller];
   self.circleInspectorController = controller;
+  controller = [[CatalogImportWindowController alloc] initWithWindowNibName:@"CatalogImportWindow"];
+  [self addWindowController:controller];
+  [(NSWindowController *)controller showWindow:self];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController

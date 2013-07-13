@@ -15,6 +15,7 @@
 		5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5870B4F5176E9DEC00B449DA /* CircleInspector.xib */; };
 		5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FA176ECBE800B449DA /* PathUtils.m */; };
 		5870B4FE176EF41800B449DA /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FD176EF41700B449DA /* Checklist.m */; };
+		588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */ = {isa = PBXBuildFile; fileRef = 588F563F1791A8C900219BA6 /* sqlite-wrapper */; };
 		58A039A81722698500A81DEE /* CircleCutArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A31722698400A81DEE /* CircleCutArchive.m */; };
 		58A039A91722698500A81DEE /* CatalogDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A51722698400A81DEE /* CatalogDatabase.m */; };
 		58A039AA1722698500A81DEE /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A71722698500A81DEE /* Circle.m */; };
@@ -43,6 +44,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		588F56411791A99800219BA6 /* Copy Binaries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */,
+			);
+			name = "Copy Binaries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0D255A44D37B47C1AD9EB543 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		5823A3871722F30100B2A946 /* Placeholder210x300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder210x300.png; sourceTree = "<group>"; };
@@ -59,6 +74,7 @@
 		5870B4FA176ECBE800B449DA /* PathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtils.m; sourceTree = "<group>"; };
 		5870B4FC176EF41700B449DA /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
 		5870B4FD176EF41700B449DA /* Checklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checklist.m; sourceTree = "<group>"; };
+		588F563F1791A8C900219BA6 /* sqlite-wrapper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sqlite-wrapper"; sourceTree = "<group>"; };
 		58A039A21722698300A81DEE /* CircleCutArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutArchive.h; sourceTree = "<group>"; };
 		58A039A31722698400A81DEE /* CircleCutArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutArchive.m; sourceTree = "<group>"; };
 		58A039A41722698400A81DEE /* CatalogDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogDatabase.h; sourceTree = "<group>"; };
@@ -197,6 +213,7 @@
 		58C381091705BBE9001FF665 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				588F563F1791A8C900219BA6 /* sqlite-wrapper */,
 				5823A3871722F30100B2A946 /* Placeholder210x300.png */,
 				58C3810A1705BBE9001FF665 /* Ket-Info.plist */,
 				58C3810B1705BBE9001FF665 /* InfoPlist.strings */,
@@ -236,7 +253,10 @@
 				58C380FB1705BBE9001FF665 /* Sources */,
 				58C380FC1705BBE9001FF665 /* Frameworks */,
 				58C380FD1705BBE9001FF665 /* Resources */,
+				588F56411791A99800219BA6 /* Copy Binaries */,
 				21877FCBDDFC4FF8843AAB13 /* Copy Pods Resources */,
+				588F563D1791A5BD00219BA6 /* Build SQLite2 */,
+				588F56431791AD0200219BA6 /* Copy SQLite2 Binaries */,
 			);
 			buildRules = (
 			);
@@ -331,6 +351,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		588F563D1791A5BD00219BA6 /* Build SQLite2 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build SQLite2";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${SRCROOT}/Externals/sqlite-2.8.17\"\nif [ ! -e .libs/sqlite ]; then\n    ./configure --enable-utf8\n    make\nfi";
+		};
+		588F56431791AD0200219BA6 /* Copy SQLite2 Binaries */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy SQLite2 Binaries";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${SRCROOT}/Externals/sqlite-2.8.17/.libs\"\ncp {sqlite,libsqlite.0.dylib} \"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_FOLDER_PATH}\"";
 		};
 		58C381201705BBE9001FF665 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

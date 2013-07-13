@@ -6,3 +6,5 @@
   #import <CocoaLumberjack/DDLog.h>
   #import <ReactiveCocoa/ReactiveCocoa.h>
 #endif
+
+extern int ddLogLevel;

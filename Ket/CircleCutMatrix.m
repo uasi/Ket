@@ -7,8 +7,6 @@ NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidS
 
 @interface CircleCutMatrix ()
 
-@property (nonatomic, weak, readwrite) CircleCutCell *highlightedCircleCutCell;
-
 @end
 
 @implementation CircleCutMatrix

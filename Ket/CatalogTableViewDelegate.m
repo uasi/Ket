@@ -41,7 +41,7 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
   }];
 }
 
-#pragma mark -  NSTableViewDelegate
+#pragma mark - NSTableViewDelegate
 
 - (NSSize)cellSizeForTableView:(NSTableView *)tableView
 {
@@ -96,9 +96,9 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     view.intercellSpacing = NSMakeSize(0, 0);
   }
 
-  [view unhighlightAllCells];
   [view setBoundsSize:NSMakeSize(self.archive.cutSize.width * columns, self.archive.cutSize.height * rows)];
   view.cellSize = [self cellSizeForTableView:tableView];
+  view.highlightedCircleCutCell = nil;
 
   NSArray *circles = [self.database circleCollectionForPage:page].circlesPaddedWithNull;
 
@@ -110,6 +110,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
       cell.circle = nil;
     }
     else {
+      if (circle == self.selectedCircle) view.highlightedCircleCutCell = cell;
       cell.image = [self.archive imageForCircle:circle];
       cell.circle = circle;
     }

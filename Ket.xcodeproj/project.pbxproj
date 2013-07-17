@@ -225,13 +225,13 @@
 				588F56491791D26600219BA6 /* DocumentController.h */,
 				588F564A1791D26600219BA6 /* DocumentController.m */,
 				5870B4F8176EABB700B449DA /* NIBs */,
+				588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */,
+				588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */,
 				5870B4F9176ECBE700B449DA /* PathUtils.h */,
 				5870B4FA176ECBE800B449DA /* PathUtils.m */,
 				58C381091705BBE9001FF665 /* Supporting Files */,
 				588F564C179697AB00219BA6 /* WelcomeWindowController.h */,
 				588F564D179697AB00219BA6 /* WelcomeWindowController.m */,
-				588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */,
-				588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";

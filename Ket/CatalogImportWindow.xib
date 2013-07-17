@@ -42,7 +42,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{196, 240}, {480, 123}}</string>
 				<int key="NSWTFlags">544735232</int>
-				<string key="NSWindowTitle">Import Catalog Data</string>
+				<string key="NSWindowTitle">Import Catalog</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
@@ -122,6 +122,7 @@
 							<string key="NSFrame">{{383, 13}, {83, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="191774111">
@@ -494,17 +495,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CatalogImportWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">performImport:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">performImport:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">performImport:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="archivePathTextField">NSTextField</string>
 						<string key="databasePathTextField">NSTextField</string>

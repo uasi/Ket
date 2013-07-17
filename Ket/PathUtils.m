@@ -6,6 +6,21 @@ NSString *ComiketIDFromComiketNo(NSUInteger comiketNo)
   return [NSString stringWithFormat:@"C%03d", (int)comiketNo];
 }
 
+NSString *ComiketNameFromComiketNo(NSUInteger comiketNo)
+{
+  NSCAssert(1 <= comiketNo && comiketNo <= 999, @"comiketNo must be in [1, 999]");
+  return [NSString stringWithFormat:@"C%02d", (int)comiketNo];
+}
+
+NSUInteger ComiketNoFromString(NSString *comiketNameOrID)
+{
+  NSInteger comiketNo;
+  NSScanner *scanner = [NSScanner scannerWithString:comiketNameOrID];
+  scanner.charactersToBeSkipped = [NSCharacterSet characterSetWithCharactersInString:@"Cc"];
+  BOOL ok = [scanner scanInteger:&comiketNo];
+  return (NSUInteger)(ok ? comiketNo : 0);
+}
+
 NSURL *KetSupportDirectoryURL(void)
 {
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);

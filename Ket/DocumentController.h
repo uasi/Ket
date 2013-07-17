@@ -1,0 +1,3 @@
+@interface DocumentController : NSDocumentController
+
+@end

@@ -18,6 +18,10 @@
 		588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */ = {isa = PBXBuildFile; fileRef = 588F563F1791A8C900219BA6 /* sqlite-wrapper */; };
 		588F56471791B31E00219BA6 /* CatalogImportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56451791B31E00219BA6 /* CatalogImportWindowController.m */; };
 		588F56481791B31E00219BA6 /* CatalogImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588F56461791B31E00219BA6 /* CatalogImportWindow.xib */; };
+		588F564B1791D26600219BA6 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F564A1791D26600219BA6 /* DocumentController.m */; };
+		588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F564D179697AB00219BA6 /* WelcomeWindowController.m */; };
+		588F5650179697AB00219BA6 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588F564E179697AB00219BA6 /* WelcomeWindow.xib */; };
+		588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */; };
 		58A039A81722698500A81DEE /* CircleCutArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A31722698400A81DEE /* CircleCutArchive.m */; };
 		58A039A91722698500A81DEE /* CatalogDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A51722698400A81DEE /* CatalogDatabase.m */; };
 		58A039AA1722698500A81DEE /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A71722698500A81DEE /* Circle.m */; };
@@ -80,6 +84,13 @@
 		588F56441791B31D00219BA6 /* CatalogImportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogImportWindowController.h; sourceTree = "<group>"; };
 		588F56451791B31E00219BA6 /* CatalogImportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogImportWindowController.m; sourceTree = "<group>"; };
 		588F56461791B31E00219BA6 /* CatalogImportWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatalogImportWindow.xib; sourceTree = "<group>"; };
+		588F56491791D26600219BA6 /* DocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentController.h; sourceTree = "<group>"; };
+		588F564A1791D26600219BA6 /* DocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentController.m; sourceTree = "<group>"; };
+		588F564C179697AB00219BA6 /* WelcomeWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeWindowController.h; sourceTree = "<group>"; };
+		588F564D179697AB00219BA6 /* WelcomeWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeWindowController.m; sourceTree = "<group>"; };
+		588F564E179697AB00219BA6 /* WelcomeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeWindow.xib; sourceTree = "<group>"; };
+		588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Extensions.h"; sourceTree = "<group>"; };
+		588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+Extensions.m"; sourceTree = "<group>"; };
 		58A039A21722698300A81DEE /* CircleCutArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutArchive.h; sourceTree = "<group>"; };
 		58A039A31722698400A81DEE /* CircleCutArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutArchive.m; sourceTree = "<group>"; };
 		58A039A41722698400A81DEE /* CatalogDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogDatabase.h; sourceTree = "<group>"; };
@@ -140,6 +151,7 @@
 				5870B4F5176E9DEC00B449DA /* CircleInspector.xib */,
 				58C381171705BBE9001FF665 /* Document.xib */,
 				58C3811A1705BBE9001FF665 /* MainMenu.xib */,
+				588F564E179697AB00219BA6 /* WelcomeWindow.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -210,10 +222,16 @@
 				5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */,
 				58C381141705BBE9001FF665 /* Document.h */,
 				58C381151705BBE9001FF665 /* Document.m */,
+				588F56491791D26600219BA6 /* DocumentController.h */,
+				588F564A1791D26600219BA6 /* DocumentController.m */,
 				5870B4F8176EABB700B449DA /* NIBs */,
 				5870B4F9176ECBE700B449DA /* PathUtils.h */,
 				5870B4FA176ECBE800B449DA /* PathUtils.m */,
 				58C381091705BBE9001FF665 /* Supporting Files */,
+				588F564C179697AB00219BA6 /* WelcomeWindowController.h */,
+				588F564D179697AB00219BA6 /* WelcomeWindowController.m */,
+				588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */,
+				588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -333,6 +351,7 @@
 				5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */,
 				5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */,
 				588F56481791B31E00219BA6 /* CatalogImportWindow.xib in Resources */,
+				588F5650179697AB00219BA6 /* WelcomeWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +441,9 @@
 				5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */,
 				5870B4FE176EF41800B449DA /* Checklist.m in Sources */,
 				588F56471791B31E00219BA6 /* CatalogImportWindowController.m in Sources */,
+				588F564B1791D26600219BA6 /* DocumentController.m in Sources */,
+				588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */,
+				588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

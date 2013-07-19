@@ -38,9 +38,6 @@
   id controller = [[CircleInspectorController alloc] initWithWindowNibName:@"CircleInspector"];
   [self addWindowController:controller];
   self.circleInspectorController = controller;
-  controller = [[CatalogImportWindowController alloc] initWithWindowNibName:@"CatalogImportWindow"];
-  [self addWindowController:controller];
-  [(NSWindowController *)controller showWindow:self];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController

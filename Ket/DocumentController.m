@@ -1,22 +1,32 @@
 #import "DocumentController.h"
 
+#import "CatalogImportWindowController.h"
 #import "WelcomeWindowController.h"
 
 @interface DocumentController ()
 
-@property (nonatomic) NSMutableSet *wcPool;
+@property (nonatomic, readwrite) CatalogImportWindowController *catalogImportWindowController;
+@property (nonatomic, readwrite) WelcomeWindowController *welcomeWindowController;
 
 @end
 
 @implementation DocumentController
 
+- (instancetype)init
+{
+  self = [super init];
+  if (!self) return nil;
+
+  self.catalogImportWindowController = [[CatalogImportWindowController alloc] initWithWindowNibName:@"CatalogImportWindow"];
+  self.welcomeWindowController = [[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
+
+  return self;
+}
+
 // XXX: Temporary
 - (void)newDocument:(id)sender
 {
-  if (!self.wcPool) self.wcPool = [NSMutableSet set];
-  NSWindowController *wc = [[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
-  [self.wcPool addObject:wc];
-  [wc showWindow:self];
+  [self.welcomeWindowController showWindow:self];
 }
 
 @end

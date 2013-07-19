@@ -1,5 +1,8 @@
 #import "WelcomeWindowController.h"
 
+#import "CatalogImportWindowController.h"
+#import "DocumentController.h"
+#import "NSObject+Mortality.h"
 #import "NSRegularExpression+Extensions.h"
 #import "PathUtils.h"
 
@@ -49,20 +52,35 @@
   }] array];
 }
 
+#pragma mark - Actions
+
+- (IBAction)performOpen:(id)sender
+{
+  NSInteger row = self.catalogListTableView.selectedRow;
+  if (row < 0) return;
+  NSTableCellView *view = (NSTableCellView *)[self tableView:self.catalogListTableView viewForTableColumn:nil row:row];
+  if ([view.identifier isEqualToString:@"CatalogListItemCell"]) {
+    NSUInteger comiketNo = ComiketNoFromString(view.objectValue);
+    (void)(comiketNo); // Open Document
+  } else {
+    [[DocumentController sharedDocumentController].catalogImportWindowController showWindow:self];
+  }
+}
+
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-  return self.cachedCatalogNames.count + 1;
+  return MAX(1, self.cachedCatalogNames.count);
 }
 
 #pragma mark - NSTableViewDelegate
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-  NSString *identifier = (row < [self numberOfRowsInTableView:tableView] - 1 ?
+  NSString *identifier = (self.cachedCatalogNames.count > 0 ?
                           @"CatalogListItemCell" :
-                          @"CatalogListImportCell");
+                          @"CatalogListPlaceholderCell");
   NSTableCellView *view = [tableView makeViewWithIdentifier:identifier owner:nil];
   if ([identifier isEqualToString:@"CatalogListItemCell"]) {
     view.textField.stringValue = self.cachedCatalogNames[row];

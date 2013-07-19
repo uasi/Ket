@@ -4,13 +4,13 @@
 // Comiket name for file name etc.
 NSString *ComiketIDFromComiketNo(NSUInteger comiketNo);
 
-// Returns "Cxx" where xx is a given Comiket number
+// Returns "Cxx" where xx is a given Comiket number, two- or three-digit
 //
 // Comiket name is a conventional representation of Comiket number. Prefer it to
 // Comiket ID for UI use.
 NSString *ComiketNameFromComiketNo(NSUInteger comiketNo);
 
-// Returns a Comiket number by parsing a given Comiket Name or Comiket ID
+// Returns a Comiket number by parsing a given Comiket name or Comiket ID
 NSUInteger ComiketNoFromString(NSString *comiketNameOrID);
 
 // Returns a URL that points to "<Home directory>/Application Support/Ket"

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58160537179908540039AAAB /* NSObject+Mortality.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160536179908540039AAAB /* NSObject+Mortality.m */; };
 		5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */ = {isa = PBXBuildFile; fileRef = 5823A3871722F30100B2A946 /* Placeholder210x300.png */; };
 		5823A38B1722F43200B2A946 /* CircleCutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38A1722F43200B2A946 /* CircleCutCell.m */; };
 		5823A38E1723D65200B2A946 /* CircleCutMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38D1723D65200B2A946 /* CircleCutMatrix.m */; };
@@ -66,6 +67,8 @@
 
 /* Begin PBXFileReference section */
 		0D255A44D37B47C1AD9EB543 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		58160535179908540039AAAB /* NSObject+Mortality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Mortality.h"; sourceTree = "<group>"; };
+		58160536179908540039AAAB /* NSObject+Mortality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Mortality.m"; sourceTree = "<group>"; };
 		5823A3871722F30100B2A946 /* Placeholder210x300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder210x300.png; sourceTree = "<group>"; };
 		5823A3891722F43100B2A946 /* CircleCutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutCell.h; sourceTree = "<group>"; };
 		5823A38A1722F43200B2A946 /* CircleCutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutCell.m; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				58C381091705BBE9001FF665 /* Supporting Files */,
 				588F564C179697AB00219BA6 /* WelcomeWindowController.h */,
 				588F564D179697AB00219BA6 /* WelcomeWindowController.m */,
+				58160535179908540039AAAB /* NSObject+Mortality.h */,
+				58160536179908540039AAAB /* NSObject+Mortality.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				588F564B1791D26600219BA6 /* DocumentController.m in Sources */,
 				588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */,
 				588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */,
+				58160537179908540039AAAB /* NSObject+Mortality.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

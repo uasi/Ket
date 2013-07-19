@@ -5,14 +5,19 @@
 
 static const char *kImportQueueLabel = "org.exsen.Ket.CatalogImportController.ImportQueue";
 
+typedef NS_OPTIONS(NSUInteger, ImportResult) {
+  kImportResultOK = 0,
+  kImportResultFlagCouldNotLoadDB = 1 << 0,
+  kImportResultFlagCouldNotDumpDB = 1 << 1,
+  kImportResultFlagCouldNotCopyArchive = 1 << 2,
+};
+
 @interface CatalogImportWindowController ()
 
 @property (nonatomic) IBOutlet NSTextField *databasePathTextField;
 @property (nonatomic) IBOutlet NSTextField *archivePathTextField;
 @property (nonatomic) IBOutlet NSButton *importButton;
 @property (nonatomic) IBOutlet NSProgressIndicator *importProgressIndicator;
-
-@property (nonatomic) BOOL isImportSuccess;
 
 @end
 
@@ -63,17 +68,21 @@ static inline NSString *sqlitePath() {
   [self.importProgressIndicator startAnimation:self];
 
   dispatch_queue_t importQueue = dispatch_queue_create(kImportQueueLabel, DISPATCH_QUEUE_CONCURRENT);
-  self.isImportSuccess = YES;
+  __block ImportResult result = kImportResultOK;
 
-  // Launch convert tasks in the import queue. Each task will turn off
-  // isImportSuccess if it fails.
+  // Run asyncronous convert tasks in the import queue. Note that each task
+  // sets the result flag asyncronously.
   NSURL *newDatabaseURL = CatalogDatabaseURLWithComiketNo(comiketNo);
-  [self convertDBv2AtURL:databaseURL toDBv3AtURL:newDatabaseURL withQueue:importQueue];
+  [self convertDBv2AtURL:databaseURL toDBv3AtURL:newDatabaseURL withQueue:importQueue asyncResult:&result];
 
   dispatch_async(importQueue, ^{
     NSURL *newArchiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
     BOOL ok = [[NSFileManager defaultManager] copyItemAtURL:archiveURL toURL:newArchiveURL error:NULL];
-    if (!ok) self.isImportSuccess = NO;
+    if (!ok) {
+      @synchronized (self) {
+        result = result | kImportResultFlagCouldNotCopyArchive;
+      }
+    }
   });
 
   dispatch_barrier_async(importQueue, ^{
@@ -81,18 +90,18 @@ static inline NSString *sqlitePath() {
       self.importButton.enabled = YES;
       [self.importProgressIndicator stopAnimation:self];
       NSString *messageText;
-      if (self.isImportSuccess) {
-        messageText = [NSString stringWithFormat:@"Could not import %@ catalog",ComiketNameFromComiketNo(comiketNo)];
+      if (result == kImportResultOK) {
+        messageText = [NSString stringWithFormat:@"Imported %@ catalog successfully!", ComiketNameFromComiketNo(comiketNo)];
       }
       else {
-        messageText = [NSString stringWithFormat:@"Imported %@ catalog successfully!", ComiketNameFromComiketNo(comiketNo)];
+        messageText = [NSString stringWithFormat:@"Could not import %@ catalog",ComiketNameFromComiketNo(comiketNo)];
       }
       [[NSAlert alertWithMessageText:messageText defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@""] runModal];
     });
   });
 }
 
-- (void)convertDBv2AtURL:(NSURL *)v2URL toDBv3AtURL:(NSURL *)v3URL withQueue:(dispatch_queue_t)queue
+- (void)convertDBv2AtURL:(NSURL *)v2URL toDBv3AtURL:(NSURL *)v3URL withQueue:(dispatch_queue_t)queue asyncResult:(ImportResult *)result
 {
   dispatch_semaphore_t dumpTaskSema = dispatch_semaphore_create(0);
   dispatch_semaphore_t loadTaskSema = dispatch_semaphore_create(0);
@@ -120,12 +129,20 @@ static inline NSString *sqlitePath() {
 
   dumpTask.terminationHandler = ^(NSTask *dumpTask) {
     NSLog(@"Dump task completed with status %d", dumpTask.terminationStatus);
-    if (dumpTask.terminationStatus != 0) self.isImportSuccess = NO;
+    if (dumpTask.terminationStatus != 0 && result != NULL) {
+      @synchronized (self) {
+        *result = *result | kImportResultFlagCouldNotDumpDB;
+      }
+    }
     dispatch_semaphore_signal(dumpTaskSema);
   };
   loadTask.terminationHandler = ^(NSTask *loadTask) {
     NSLog(@"Load task completed with status %d", loadTask.terminationStatus);
-    if (loadTask.terminationStatus != 0) self.isImportSuccess = NO;
+    if (loadTask.terminationStatus != 0 && result != NULL) {
+      @synchronized (self) {
+        *result = *result | kImportResultFlagCouldNotLoadDB;
+      }
+    }
     dispatch_semaphore_signal(loadTaskSema);
   };
 

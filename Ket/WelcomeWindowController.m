@@ -61,9 +61,15 @@
   if ([view.identifier isEqualToString:@"CatalogListItemCell"]) {
     NSUInteger comiketNo = ComiketNoFromString(view.objectValue);
     (void)(comiketNo); // Open Document
-  } else {
-    [[DocumentController sharedDocumentController].catalogImportWindowController showWindow:self];
   }
+  else {
+    [self performImportCatalog:self];
+  }
+}
+
+- (IBAction)performImportCatalog:(id)sender
+{
+  [[DocumentController sharedDocumentController].catalogImportWindowController showWindow:self];
 }
 
 #pragma mark - NSTableViewDataSource

@@ -128,7 +128,7 @@ static inline NSString *sqlitePath() {
   loadTask.standardInput = pipe;
 
   dumpTask.terminationHandler = ^(NSTask *dumpTask) {
-    NSLog(@"Dump task completed with status %d", dumpTask.terminationStatus);
+    DDLogInfo(@"Dump task completed with status %d", dumpTask.terminationStatus);
     if (dumpTask.terminationStatus != 0 && result != NULL) {
       @synchronized (self) {
         *result = *result | kImportResultFlagCouldNotDumpDB;
@@ -137,7 +137,7 @@ static inline NSString *sqlitePath() {
     dispatch_semaphore_signal(dumpTaskSema);
   };
   loadTask.terminationHandler = ^(NSTask *loadTask) {
-    NSLog(@"Load task completed with status %d", loadTask.terminationStatus);
+    DDLogInfo(@"Load task completed with status %d", loadTask.terminationStatus);
     if (loadTask.terminationStatus != 0 && result != NULL) {
       @synchronized (self) {
         *result = *result | kImportResultFlagCouldNotLoadDB;

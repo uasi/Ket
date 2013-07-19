@@ -2,7 +2,6 @@
 
 #import "CatalogImportWindowController.h"
 #import "DocumentController.h"
-#import "NSObject+Mortality.h"
 #import "NSRegularExpression+Extensions.h"
 #import "PathUtils.h"
 

@@ -1,7 +1,6 @@
 #import "CatalogImportWindowController.h"
 
 #import "CircleCutArchive.h"
-#import "NSObject+Mortality.h"
 #import "PathUtils.h"
 
 static const char *kImportQueueLabel = "org.exsen.Ket.CatalogImportController.ImportQueue";
@@ -162,7 +161,7 @@ static inline NSString *sqlitePath() {
   }];
 }
 
-#pragma mark - Actions
+#pragma mark Actions
 
 static void fail(NSString *messageText)
 {

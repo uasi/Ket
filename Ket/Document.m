@@ -44,7 +44,7 @@
 {
   [super windowControllerDidLoadNib:aController];
   RACBind(selectedCircle) = RACBind(self.tableViewDelegate, selectedCircle);
-  EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketID(@"C079"));
+  EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(79));
 }
 
 + (BOOL)autosavesInPlace

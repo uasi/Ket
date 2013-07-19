@@ -32,21 +32,21 @@ NSURL *CatalogsDirectoryURL(void)
   return [KetSupportDirectoryURL() URLByAppendingPathComponent:@"Catalogs"];
 }
 
-NSURL *CatalogDirectoryURLWithComiketID(NSString *comiketID)
+NSURL *CatalogDirectoryURLWithComiketNo(NSUInteger comiketNo)
 {
-  return [CatalogsDirectoryURL() URLByAppendingPathComponent:comiketID];
+  return [CatalogsDirectoryURL() URLByAppendingPathComponent:ComiketIDFromComiketNo(comiketNo)];
 }
 
-NSURL *CatalogDatabaseURLWithComiketID(NSString *comiketID)
+NSURL *CatalogDatabaseURLWithComiketNo(NSUInteger comiketNo)
 {
-  NSString *databaseName = [NSString stringWithFormat:@"%@.sqlite3", comiketID];
-  return [CatalogDirectoryURLWithComiketID(comiketID) URLByAppendingPathComponent:databaseName];
+  NSString *databaseName = [NSString stringWithFormat:@"%@.sqlite3", ComiketIDFromComiketNo(comiketNo)];
+  return [CatalogDirectoryURLWithComiketNo(comiketNo) URLByAppendingPathComponent:databaseName];
 }
 
-NSURL *CircleCutArchiveURLWithComiketID(NSString *comiketID)
+NSURL *CircleCutArchiveURLWithComiketNo(NSUInteger comiketNo)
 {
-  NSString *archiveName = [NSString stringWithFormat:@"%@CUTH.CCZ", comiketID];
-  return [CatalogDirectoryURLWithComiketID(comiketID) URLByAppendingPathComponent:archiveName];
+  NSString *archiveName = [NSString stringWithFormat:@"%@CUTH.CCZ", ComiketIDFromComiketNo(comiketNo)];
+  return [CatalogDirectoryURLWithComiketNo(comiketNo) URLByAppendingPathComponent:archiveName];
 }
 
 BOOL EnsureDirectoryExistsAtURL(NSURL *URL)

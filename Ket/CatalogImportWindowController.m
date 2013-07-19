@@ -65,15 +65,13 @@ static inline NSString *sqlitePath() {
   dispatch_queue_t importQueue = dispatch_queue_create(kImportQueueLabel, DISPATCH_QUEUE_CONCURRENT);
   self.isImportSuccess = YES;
 
-  NSString *comiketID = ComiketIDFromComiketNo(comiketNo);
-
   // Launch convert tasks in the import queue. Each task will turn off
   // isImportSuccess if it fails.
-  NSURL *newDatabaseURL = CatalogDatabaseURLWithComiketID(comiketID);
+  NSURL *newDatabaseURL = CatalogDatabaseURLWithComiketNo(comiketNo);
   [self convertDBv2AtURL:databaseURL toDBv3AtURL:newDatabaseURL withQueue:importQueue];
 
   dispatch_async(importQueue, ^{
-    NSURL *newArchiveURL = CircleCutArchiveURLWithComiketID(comiketID);
+    NSURL *newArchiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
     BOOL ok = [[NSFileManager defaultManager] copyItemAtURL:archiveURL toURL:newArchiveURL error:NULL];
     if (!ok) self.isImportSuccess = NO;
   });

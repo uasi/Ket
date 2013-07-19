@@ -20,13 +20,13 @@ NSURL *KetSupportDirectoryURL(void);
 NSURL *CatalogsDirectoryURL(void);
 
 // Returns a URL that points to "<Catalogs directory>/<Comiket ID>"
-NSURL *CatalogDirectoryURLWithComiketID(NSString *comiketID);
+NSURL *CatalogDirectoryURLWithComiketNo(NSUInteger comiketNo);
 
 // Returns a URL that points to "<Catalog directory>/<Comiket ID>.sqlite3"
-NSURL *CatalogDatabaseURLWithComiketID(NSString *comiketID);
+NSURL *CatalogDatabaseURLWithComiketNo(NSUInteger comiketNo);
 
 // Returns a URL that points to "<Catalog directory>/<Comiket ID>CUTH.CCZ"
-NSURL *CircleCutArchiveURLWithComiketID(NSString *comiketID);
+NSURL *CircleCutArchiveURLWithComiketNo(NSUInteger comiketNo);
 
 // Ensure a directory exists at a given URL
 //

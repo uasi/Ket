@@ -189,11 +189,11 @@ static void fail(NSString *messageText)
   NSURL *archiveURL = [NSURL fileURLWithPath:self.archivePathTextField.stringValue];
 
   if (!databaseURL) {
-    fail(@"Invalid path to database");
+    fail(@"Could not find database");
     return;
   }
   if (!archiveURL) {
-    fail(@"Invalid path to archive");
+    fail(@"Could not find archive");
     return;
   }
 
@@ -201,11 +201,11 @@ static void fail(NSString *messageText)
   NSUInteger archiveComiketNo = [self comiketNoOfArchiveAtURL:archiveURL];
 
   if (databaseComiketNo == 0) {
-    fail(@"Could not load database");
+    fail(@"Could not open database");
     return;
   }
   if (archiveComiketNo == 0) {
-    fail(@"Could not load archive");
+    fail(@"Could not open archive");
     return;
   }
   if (databaseComiketNo != archiveComiketNo) {

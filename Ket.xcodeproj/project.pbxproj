@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160539179B0F460039AAAB /* SearchPanelController.m */; };
+		5816053C179B0F460039AAAB /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5816053A179B0F460039AAAB /* SearchPanel.xib */; };
+		5816053F179B12800039AAAB /* DocumentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5816053E179B12800039AAAB /* DocumentWindow.m */; };
 		5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */ = {isa = PBXBuildFile; fileRef = 5823A3871722F30100B2A946 /* Placeholder210x300.png */; };
 		5823A38B1722F43200B2A946 /* CircleCutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38A1722F43200B2A946 /* CircleCutCell.m */; };
 		5823A38E1723D65200B2A946 /* CircleCutMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38D1723D65200B2A946 /* CircleCutMatrix.m */; };
@@ -66,6 +69,11 @@
 
 /* Begin PBXFileReference section */
 		0D255A44D37B47C1AD9EB543 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		58160538179B0F450039AAAB /* SearchPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPanelController.h; sourceTree = "<group>"; };
+		58160539179B0F460039AAAB /* SearchPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPanelController.m; sourceTree = "<group>"; };
+		5816053A179B0F460039AAAB /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
+		5816053D179B127F0039AAAB /* DocumentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindow.h; sourceTree = "<group>"; };
+		5816053E179B12800039AAAB /* DocumentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindow.m; sourceTree = "<group>"; };
 		5823A3871722F30100B2A946 /* Placeholder210x300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder210x300.png; sourceTree = "<group>"; };
 		5823A3891722F43100B2A946 /* CircleCutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutCell.h; sourceTree = "<group>"; };
 		5823A38A1722F43200B2A946 /* CircleCutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutCell.m; sourceTree = "<group>"; };
@@ -151,6 +159,7 @@
 				5870B4F5176E9DEC00B449DA /* CircleInspector.xib */,
 				58C381171705BBE9001FF665 /* Document.xib */,
 				58C3811A1705BBE9001FF665 /* MainMenu.xib */,
+				5816053A179B0F460039AAAB /* SearchPanel.xib */,
 				588F564E179697AB00219BA6 /* WelcomeWindow.xib */,
 			);
 			name = NIBs;
@@ -224,11 +233,15 @@
 				58C381151705BBE9001FF665 /* Document.m */,
 				588F56491791D26600219BA6 /* DocumentController.h */,
 				588F564A1791D26600219BA6 /* DocumentController.m */,
+				5816053D179B127F0039AAAB /* DocumentWindow.h */,
+				5816053E179B12800039AAAB /* DocumentWindow.m */,
 				5870B4F8176EABB700B449DA /* NIBs */,
 				588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */,
 				588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */,
 				5870B4F9176ECBE700B449DA /* PathUtils.h */,
 				5870B4FA176ECBE800B449DA /* PathUtils.m */,
+				58160538179B0F450039AAAB /* SearchPanelController.h */,
+				58160539179B0F460039AAAB /* SearchPanelController.m */,
 				58C381091705BBE9001FF665 /* Supporting Files */,
 				588F564C179697AB00219BA6 /* WelcomeWindowController.h */,
 				588F564D179697AB00219BA6 /* WelcomeWindowController.m */,
@@ -352,6 +365,7 @@
 				5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */,
 				588F56481791B31E00219BA6 /* CatalogImportWindow.xib in Resources */,
 				588F5650179697AB00219BA6 /* WelcomeWindow.xib in Resources */,
+				5816053C179B0F460039AAAB /* SearchPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +458,8 @@
 				588F564B1791D26600219BA6 /* DocumentController.m in Sources */,
 				588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */,
 				588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */,
+				5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */,
+				5816053F179B12800039AAAB /* DocumentWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

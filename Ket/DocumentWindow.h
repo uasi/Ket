@@ -1,0 +1,3 @@
+@interface DocumentWindow : NSWindow
+
+@end

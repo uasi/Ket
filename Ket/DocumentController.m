@@ -2,11 +2,13 @@
 
 #import "CatalogImportWindowController.h"
 #import "Document.h"
+#import "SearchPanelController.h"
 #import "WelcomeWindowController.h"
 
 @interface DocumentController ()
 
 @property (nonatomic, readwrite) CatalogImportWindowController *catalogImportWindowController;
+@property (nonatomic, readwrite) SearchPanelController *searchPanelController;
 @property (nonatomic, readwrite) WelcomeWindowController *welcomeWindowController;
 
 @end
@@ -19,6 +21,7 @@
   if (!self) return nil;
 
   self.catalogImportWindowController = [[CatalogImportWindowController alloc] initWithWindowNibName:@"CatalogImportWindow"];
+  self.searchPanelController = [[SearchPanelController alloc] initWithWindowNibName:@"SearchPanel"];
   self.welcomeWindowController = [[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
 
   return self;
@@ -44,6 +47,11 @@
     [document showWindows];
   }
   return document;
+}
+
+- (void)openSearchPanel
+{
+  [self.searchPanelController showWindow:self];
 }
 
 @end

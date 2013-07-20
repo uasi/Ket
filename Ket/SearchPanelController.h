@@ -1,0 +1,3 @@
+@interface SearchPanelController : NSWindowController
+
+@end

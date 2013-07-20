@@ -6,11 +6,14 @@
 #import "CircleCutArchive.h"
 #import "CircleCutCell.h"
 #import "CircleCutMatrix.h"
+#import "Document.h"
 #import "PathUtils.h"
 
 static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
 @interface CatalogTableViewDelegate ()
+
+@property (nonatomic, weak) IBOutlet Document *document;
 
 @property (nonatomic, readwrite) Circle *selectedCircle;
 
@@ -24,8 +27,8 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
 
 - (void)awakeFromNib
 {
-  self.database = [CatalogDatabase databaseWithContentsOfURL:CatalogDatabaseURLWithComiketNo(79)];
-  self.archive = [CircleCutArchive archiveWithContentsOfURL:CircleCutArchiveURLWithComiketNo(79)];
+  self.database = [CatalogDatabase databaseWithContentsOfURL:CatalogDatabaseURLWithComiketNo(self.document.comiketNo)];
+  self.archive = [CircleCutArchive archiveWithContentsOfURL:CircleCutArchiveURLWithComiketNo(self.document.comiketNo)];
 
   self.tableViewColumnDidResizeSignal = [RACSubject subject];
   [[self.tableViewColumnDidResizeSignal throttle:ThrottleForReloadingDataOnResizing] subscribeNext:^(NSTableView *tableView) {

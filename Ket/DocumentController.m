@@ -1,6 +1,7 @@
 #import "DocumentController.h"
 
 #import "CatalogImportWindowController.h"
+#import "Document.h"
 #import "WelcomeWindowController.h"
 
 @interface DocumentController ()
@@ -23,10 +24,26 @@
   return self;
 }
 
-// XXX: Temporary
 - (void)newDocument:(id)sender
 {
   [self.welcomeWindowController showWindow:self];
+}
+
+- (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument error:(NSError **)outError
+{
+  return [self openUntitledDocumentAndDisplay:displayDocument withComiketNo:79 error:outError];
+}
+
+- (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withComiketNo:(NSUInteger)comiketNo error:(NSError **)outError
+{
+  Document *document = [super openUntitledDocumentAndDisplay:NO error:outError];
+  if (!document) return nil;
+  [document prepareDocumentWithComiketNo:comiketNo];
+  if (displayDocument) {
+    [document makeWindowControllers];
+    [document showWindows];
+  }
+  return document;
 }
 
 @end

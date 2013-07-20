@@ -23,11 +23,13 @@
   return self;
 }
 
+// TODO: refresh table view when window becomes main
+
 - (NSArray *)catalogURLs
 {
   NSArray *URLs = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:CatalogsDirectoryURL() includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:0 error:NULL];
   if (!URLs) {
-    DDLogError(@"Could not list imported catalogs");
+    DDLogWarn(@"Could not list imported catalogs");
     return @[];
   }
   NSMutableArray *catalogURLs = [NSMutableArray array];
@@ -60,7 +62,7 @@
   NSTableCellView *view = (NSTableCellView *)[self tableView:self.catalogListTableView viewForTableColumn:nil row:row];
   if ([view.identifier isEqualToString:@"CatalogListItemCell"]) {
     NSUInteger comiketNo = ComiketNoFromString(view.objectValue);
-    (void)(comiketNo); // Open Document
+    [[DocumentController sharedDocumentController] openUntitledDocumentAndDisplay:YES withComiketNo:comiketNo error:NULL];
   }
   else {
     [self performImportCatalog:self];

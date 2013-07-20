@@ -32,6 +32,12 @@
   return @"Document";
 }
 
+- (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo
+{
+  _comiketNo = comiketNo;
+  EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
+}
+
 - (void)makeWindowControllers
 {
   [super makeWindowControllers];
@@ -44,7 +50,6 @@
 {
   [super windowControllerDidLoadNib:aController];
   RACBind(selectedCircle) = RACBind(self.tableViewDelegate, selectedCircle);
-  EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(79));
 }
 
 + (BOOL)autosavesInPlace

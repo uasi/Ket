@@ -92,6 +92,8 @@ static inline NSString *sqlitePath() {
       NSString *messageText;
       if (result == kImportResultOK) {
         messageText = [NSString stringWithFormat:@"Imported %@ catalog successfully!", ComiketNameFromComiketNo(comiketNo)];
+        // TODO: close the window
+        // TODO: refresh the table view in the welcome window
       }
       else {
         messageText = [NSString stringWithFormat:@"Could not import %@ catalog",ComiketNameFromComiketNo(comiketNo)];
@@ -212,6 +214,8 @@ static void fail(NSString *messageText)
     fail(@"Comiket number not matched");
     return;
   }
+
+  // TODO: check circle cut resolution
 
   [self importDBv2AtURL:databaseURL andArchiveAtURL:archiveURL ofComiketNo:databaseComiketNo];
 }

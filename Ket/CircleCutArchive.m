@@ -16,12 +16,7 @@
 
 @implementation CircleCutArchive
 
-+ (CircleCutArchive *)archiveWithContentsOfURL:(NSURL *)URL
-{
-  return [[[self class] alloc] initWithContentsOfURL:URL];
-}
-
-- (instancetype)initWithContentsOfURL:(NSURL *)URL
+- (instancetype)initWithURL:(NSURL *)URL
 {
   self = [super init];
   if (!self) return nil;

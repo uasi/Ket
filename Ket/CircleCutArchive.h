@@ -5,7 +5,7 @@
 @property (nonatomic, readonly) NSUInteger comiketNo;
 @property (nonatomic, readonly) NSSize cutSize;
 
-+ (CircleCutArchive *)archiveWithContentsOfURL:(NSURL *)URL;
+- (instancetype)initWithURL:(NSURL *)URL;
 
 - (NSImage *)imageForCircle:(Circle *)circle;
 

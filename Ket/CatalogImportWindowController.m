@@ -57,7 +57,7 @@ static inline NSString *sqlitePath() {
 
 - (NSUInteger)comiketNoOfArchiveAtURL:(NSURL *)URL
 {
-  CircleCutArchive *archive = [CircleCutArchive archiveWithContentsOfURL:URL];
+  CircleCutArchive *archive = [[CircleCutArchive alloc] initWithURL:URL];
   if (!archive) return 0;
   return archive.comiketNo;
 }

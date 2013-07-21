@@ -26,12 +26,7 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 @dynamic numberOfCutsInColumn;
 @synthesize pageNoIndexSet = _pageNoIndexSet;
 
-+ (CatalogDatabase *)databaseWithContentsOfURL:(NSURL *)URL
-{
-  return [[[self class] alloc] initWithContentsOfURL:URL];
-}
-
-- (instancetype)initWithContentsOfURL:(NSURL *)URL
+- (instancetype)initWithURL:(NSURL *)URL
 {
   self = [super init];
   if (!self) return nil;

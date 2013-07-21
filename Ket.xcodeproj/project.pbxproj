@@ -10,6 +10,7 @@
 		5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160539179B0F460039AAAB /* SearchPanelController.m */; };
 		5816053C179B0F460039AAAB /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5816053A179B0F460039AAAB /* SearchPanel.xib */; };
 		5816053F179B12800039AAAB /* DocumentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5816053E179B12800039AAAB /* DocumentWindow.m */; };
+		58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160541179BD9B80039AAAB /* CircleDataProvider.m */; };
 		5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */ = {isa = PBXBuildFile; fileRef = 5823A3871722F30100B2A946 /* Placeholder210x300.png */; };
 		5823A38B1722F43200B2A946 /* CircleCutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38A1722F43200B2A946 /* CircleCutCell.m */; };
 		5823A38E1723D65200B2A946 /* CircleCutMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38D1723D65200B2A946 /* CircleCutMatrix.m */; };
@@ -74,6 +75,8 @@
 		5816053A179B0F460039AAAB /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
 		5816053D179B127F0039AAAB /* DocumentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindow.h; sourceTree = "<group>"; };
 		5816053E179B12800039AAAB /* DocumentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindow.m; sourceTree = "<group>"; };
+		58160540179BD9B80039AAAB /* CircleDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDataProvider.h; sourceTree = "<group>"; };
+		58160541179BD9B80039AAAB /* CircleDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDataProvider.m; sourceTree = "<group>"; };
 		5823A3871722F30100B2A946 /* Placeholder210x300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder210x300.png; sourceTree = "<group>"; };
 		5823A3891722F43100B2A946 /* CircleCutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutCell.h; sourceTree = "<group>"; };
 		5823A38A1722F43200B2A946 /* CircleCutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutCell.m; sourceTree = "<group>"; };
@@ -227,6 +230,8 @@
 				5823A38A1722F43200B2A946 /* CircleCutCell.m */,
 				5823A38C1723D65200B2A946 /* CircleCutMatrix.h */,
 				5823A38D1723D65200B2A946 /* CircleCutMatrix.m */,
+				58160540179BD9B80039AAAB /* CircleDataProvider.h */,
+				58160541179BD9B80039AAAB /* CircleDataProvider.m */,
 				5870B4F3176E9DEC00B449DA /* CircleInspectorController.h */,
 				5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */,
 				58C381141705BBE9001FF665 /* Document.h */,
@@ -460,6 +465,7 @@
 				588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */,
 				5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */,
 				5816053F179B12800039AAAB /* DocumentWindow.m in Sources */,
+				58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

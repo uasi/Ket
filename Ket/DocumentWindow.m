@@ -9,7 +9,7 @@
   BOOL isSlash = [event.charactersIgnoringModifiers isEqualToString:@"/"];
   BOOL noModKeyPressed = (event.modifierFlags & NSDeviceIndependentModifierFlagsMask) == 0;
   if (isSlash && noModKeyPressed) {
-    [[DocumentController sharedDocumentController] openSearchPanel:self];
+    [[DocumentController sharedDocumentController] showSearchPanel:self];
   }
   else {
     [super keyDown:event];

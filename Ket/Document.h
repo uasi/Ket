@@ -8,8 +8,5 @@
 
 - (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo;
 
-// May receive this message as the first responder.
-- (IBAction)showCircleInspector:(id)sender;
-
 @end
 

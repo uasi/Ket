@@ -1,6 +1,7 @@
 #import "CircleInspectorController.h"
 
 #import "Document.h"
+#import "DocumentController.h"
 
 @interface CircleInspectorController ()
 
@@ -21,6 +22,13 @@
 {
   self = [super initWithWindow:window];
   if (!self) return nil;
+
+  [RACAble([NSApplication sharedApplication], mainWindow) subscribeNext:^(NSWindow *window) {
+    if (self.window.isVisible) {
+      self.document = [[DocumentController sharedDocumentController] documentForWindow:window];
+    }
+  }];
+
   return self;
 }
 
@@ -38,13 +46,6 @@
 {
   [super windowDidLoad];
   self.window.delegate = self;
-}
-
-// Makes the window never close, just hide.
-- (BOOL)windowShouldClose:(id)sender
-{
-  [self.window orderOut:sender];
-  return NO;
 }
 
 #pragma mark - Accessors

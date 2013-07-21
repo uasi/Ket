@@ -2,7 +2,7 @@
 
 #import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
-#import "CircleInspectorController.h"
+#import "DocumentController.h"
 #import "PathUtils.h"
 
 @interface Document ()
@@ -11,7 +11,6 @@
 @property (nonatomic, readwrite) Circle *selectedCircle; // bound to self.tableViewDelegate.selectedCircle.
 
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
-@property (nonatomic, weak) CircleInspectorController *circleInspectorController;
 
 @end
 
@@ -36,14 +35,6 @@
 {
   _comiketNo = comiketNo;
   EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
-}
-
-- (void)makeWindowControllers
-{
-  [super makeWindowControllers];
-  id controller = [[CircleInspectorController alloc] initWithWindowNibName:@"CircleInspector"];
-  [self addWindowController:controller];
-  self.circleInspectorController = controller;
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -75,9 +66,11 @@
   return YES;
 }
 
-- (IBAction)showCircleInspector:(id)sender
+#pragma mark Actions (As A Responder)
+
+- (IBAction)performFindPanelAction:(id)sender
 {
-  [self.circleInspectorController showWindow:self];
+  [[DocumentController sharedDocumentController] showSearchPanel:self];
 }
 
 @end

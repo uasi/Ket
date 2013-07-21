@@ -12,8 +12,8 @@
 
 - (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withComiketNo:(NSUInteger)comiketNo error:(NSError **)outError;
 
-- (IBAction)openCircleInspector:(id)sender;
-- (IBAction)openSearchPanel:(id)sender;
+- (IBAction)showCircleInspector:(id)sender;
+- (IBAction)showSearchPanel:(id)sender;
 
 @end
 

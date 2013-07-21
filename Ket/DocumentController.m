@@ -64,12 +64,15 @@
 
 #pragma mark Actions
 
-- (IBAction)openCircleInspector:(id)sender
+- (IBAction)showCircleInspector:(id)sender
 {
+  Document *document = [self documentForWindow:[NSApp mainWindow]];
+  self.circleInspectorController.document = document;
   [self.circleInspectorController showWindow:self];
+  // TODO: make inspector hidable
 }
 
-- (IBAction)openSearchPanel:(id)sender
+- (IBAction)showSearchPanel:(id)sender
 {
   [self.searchPanelController showWindow:self];
 }

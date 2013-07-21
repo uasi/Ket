@@ -1,13 +1,16 @@
 #import "DocumentController.h"
 
 #import "CatalogImportWindowController.h"
+#import "CircleInspectorController.h"
 #import "Document.h"
+#import "PathUtils.h"
 #import "SearchPanelController.h"
 #import "WelcomeWindowController.h"
 
 @interface DocumentController ()
 
 @property (nonatomic, readwrite) CatalogImportWindowController *catalogImportWindowController;
+@property (nonatomic, readwrite) CircleInspectorController *circleInspectorController;
 @property (nonatomic, readwrite) SearchPanelController *searchPanelController;
 @property (nonatomic, readwrite) WelcomeWindowController *welcomeWindowController;
 
@@ -21,6 +24,7 @@
   if (!self) return nil;
 
   self.catalogImportWindowController = [[CatalogImportWindowController alloc] initWithWindowNibName:@"CatalogImportWindow"];
+  self.circleInspectorController = [[CircleInspectorController alloc] initWithWindowNibName:@"CircleInspector"];
   self.searchPanelController = [[SearchPanelController alloc] initWithWindowNibName:@"SearchPanel"];
   self.welcomeWindowController = [[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
 
@@ -34,7 +38,8 @@
 
 - (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument error:(NSError **)outError
 {
-  return [self openUntitledDocumentAndDisplay:displayDocument withComiketNo:79 error:outError];
+  NSUInteger comiketNo = [self latestAvailableComiketNo];
+  return [self openUntitledDocumentAndDisplay:displayDocument withComiketNo:comiketNo error:outError];
 }
 
 - (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withComiketNo:(NSUInteger)comiketNo error:(NSError **)outError
@@ -49,7 +54,22 @@
   return document;
 }
 
-- (void)openSearchPanel
+- (NSUInteger)latestAvailableComiketNo
+{
+  NSArray *catalogURLs = CatalogDirectoryURLs();
+  if (!catalogURLs || catalogURLs.count == 0) return 0;
+  NSURL *latestCatalogURL = catalogURLs[0];
+  return ComiketNoFromString(latestCatalogURL.lastPathComponent);
+}
+
+#pragma mark Actions
+
+- (IBAction)openCircleInspector:(id)sender
+{
+  [self.circleInspectorController showWindow:self];
+}
+
+- (IBAction)openSearchPanel:(id)sender
 {
   [self.searchPanelController showWindow:self];
 }

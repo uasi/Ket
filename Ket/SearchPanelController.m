@@ -10,7 +10,7 @@
 
 - (void)searchWithQuery:(NSString *)query
 {
-  NSLog(@"query = %@", query);
+  NSLog(@"query = %@", query); // TODO: search
   [self.window orderOut:self];
   self.queryTextField.stringValue = @"";
 }

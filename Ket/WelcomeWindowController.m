@@ -47,7 +47,7 @@
 
 - (NSArray *)catalogNames
 {
-  return [[[[self catalogURLs] rac_sequence] map:^NSString *(NSURL *URL) {
+  return [[[CatalogDirectoryURLs() rac_sequence] map:^NSString *(NSURL *URL) {
     NSUInteger comiketNo = ComiketNoFromString(URL.lastPathComponent);
     return ComiketNameFromComiketNo(comiketNo);
   }] array];

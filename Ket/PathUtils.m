@@ -1,5 +1,7 @@
 #import "PathUtils.h"
 
+#import "NSRegularExpression+Extensions.h"
+
 NSString *ComiketIDFromComiketNo(NSUInteger comiketNo)
 {
   NSCAssert(1 <= comiketNo && comiketNo <= 999, @"comiketNo must be in [1, 999]");
@@ -30,6 +32,23 @@ NSURL *KetSupportDirectoryURL(void)
 NSURL *CatalogsDirectoryURL(void)
 {
   return [KetSupportDirectoryURL() URLByAppendingPathComponent:@"Catalogs"];
+}
+
+NSArray *CatalogDirectoryURLs(void)
+{
+  NSArray *URLs = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:CatalogsDirectoryURL() includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:0 error:NULL];
+  if (!URLs) return nil;
+  NSMutableArray *catalogURLs = [NSMutableArray array];
+  for (NSURL *URL in URLs) {
+    NSNumber *isDirectory;
+    [URL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:NULL];
+    BOOL hasCorrectName = [NSRegularExpression testString:URL.lastPathComponent withPattern:@"^C\\d{2,3}$"];
+    if (isDirectory.boolValue && hasCorrectName) {
+      [catalogURLs addObject:URL];
+    }
+  }
+  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastPathComponent" ascending:NO selector:@selector(localizedStandardCompare:)];
+  return [catalogURLs sortedArrayUsingDescriptors:@[descriptor]];
 }
 
 NSURL *CatalogDirectoryURLWithComiketNo(NSUInteger comiketNo)

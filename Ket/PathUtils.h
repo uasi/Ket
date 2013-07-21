@@ -19,6 +19,11 @@ NSURL *KetSupportDirectoryURL(void);
 // Returns a URL that points to "<Ket support directory>/Catalogs"
 NSURL *CatalogsDirectoryURL(void);
 
+// Returns an array of available catalog directory URLs
+//
+// URLs are sorted in descending order (latest comes first).
+NSArray *CatalogDirectoryURLs(void);
+
 // Returns a URL that points to "<Catalogs directory>/<Comiket ID>"
 NSURL *CatalogDirectoryURLWithComiketNo(NSUInteger comiketNo);
 

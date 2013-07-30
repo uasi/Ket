@@ -9,7 +9,8 @@ typedef NS_OPTIONS(NSUInteger, ImportResult) {
   kImportResultOK = 0,
   kImportResultFlagCouldNotLoadDB = 1 << 0,
   kImportResultFlagCouldNotDumpDB = 1 << 1,
-  kImportResultFlagCouldNotCopyArchive = 1 << 2,
+  kImportResultFlagCouldNotConvertEncoding = 1 << 2,
+  kImportResultFlagCouldNotCopyArchive = 1 << 3,
 };
 
 @interface CatalogImportWindowController ()
@@ -77,6 +78,7 @@ static inline NSString *sqlitePath() {
 
   dispatch_async(importQueue, ^{
     NSURL *newArchiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
+    [[NSFileManager defaultManager] removeItemAtURL:newArchiveURL error:NULL];
     BOOL ok = [[NSFileManager defaultManager] copyItemAtURL:archiveURL toURL:newArchiveURL error:NULL];
     if (!ok) {
       @synchronized (self) {
@@ -106,12 +108,16 @@ static inline NSString *sqlitePath() {
 - (void)convertDBv2AtURL:(NSURL *)v2URL toDBv3AtURL:(NSURL *)v3URL withQueue:(dispatch_queue_t)queue asyncResult:(ImportResult *)result
 {
   dispatch_semaphore_t dumpTaskSema = dispatch_semaphore_create(0);
+  dispatch_semaphore_t convTaskSema = dispatch_semaphore_create(0);
   dispatch_semaphore_t loadTaskSema = dispatch_semaphore_create(0);
 
   // Dispatch blocks that remain in the queue on behalf of the actual import
   // tasks.
   dispatch_async(queue, ^{
     dispatch_semaphore_wait(dumpTaskSema, DISPATCH_TIME_FOREVER);
+  });
+  dispatch_async(queue, ^{
+    dispatch_semaphore_wait(convTaskSema, DISPATCH_TIME_FOREVER);
   });
   dispatch_async(queue, ^{
     dispatch_semaphore_wait(loadTaskSema, DISPATCH_TIME_FOREVER);
@@ -121,13 +127,25 @@ static inline NSString *sqlitePath() {
   dumpTask.launchPath = sqlitePath();
   dumpTask.arguments = @[v2URL.path, @".dump"];
 
+  NSTask *convTask = [[NSTask alloc] init];
+  convTask.launchPath = @"/usr/bin/iconv";
+  convTask.arguments = @[@"--from-code=cp932",
+                         @"--to-code=utf-8",
+                         @"--byte-subst=\ufffd",
+                         @"--widechar-subst=\ufffd",
+                         @"--unicode-subst=\ufffd"];
+
   NSTask *loadTask = [[NSTask alloc] init];
   loadTask.launchPath = @"/usr/bin/sqlite3";
   loadTask.arguments = @[v3URL.path];
 
-  NSPipe *pipe = [NSPipe pipe];
-  dumpTask.standardOutput = pipe;
-  loadTask.standardInput = pipe;
+  NSPipe *dump2convPipe = [NSPipe pipe];
+  dumpTask.standardOutput = dump2convPipe;
+  convTask.standardInput = dump2convPipe;
+
+  NSPipe *conv2loadPipe = [NSPipe pipe];
+  convTask.standardOutput = conv2loadPipe;
+  loadTask.standardInput = conv2loadPipe;
 
   dumpTask.terminationHandler = ^(NSTask *dumpTask) {
     DDLogInfo(@"Dump task completed with status %d", dumpTask.terminationStatus);
@@ -137,6 +155,13 @@ static inline NSString *sqlitePath() {
       }
     }
     dispatch_semaphore_signal(dumpTaskSema);
+  };
+  convTask.terminationHandler = ^(NSTask *convTask) {
+    DDLogInfo(@"Conv task completed with status %d", convTask.terminationStatus);
+    if (convTask.terminationStatus != 0 && result != NULL) {
+      *result = *result | kImportResultFlagCouldNotConvertEncoding;
+    }
+    dispatch_semaphore_signal(convTaskSema);
   };
   loadTask.terminationHandler = ^(NSTask *loadTask) {
     DDLogInfo(@"Load task completed with status %d", loadTask.terminationStatus);
@@ -149,7 +174,9 @@ static inline NSString *sqlitePath() {
   };
 
   EnsureDirectoryExistsAtURL(v3URL.URLByDeletingLastPathComponent);
+  [[NSFileManager defaultManager] removeItemAtURL:v3URL error:NULL];
   [dumpTask launch];
+  [convTask launch];
   [loadTask launch];
 }
 

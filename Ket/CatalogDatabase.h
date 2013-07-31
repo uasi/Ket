@@ -12,7 +12,7 @@
 
 - (instancetype)initWithURL:(NSURL *)URL;
 
-- (CircleCollection *)circleCollectionForPage:(NSUInteger)page;
+- (NSArray *)circlesInPage:(NSUInteger)page;
 
 - (NSString *)blockNameForID:(NSInteger)blockID;
 

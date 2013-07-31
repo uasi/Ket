@@ -7,9 +7,9 @@
 @property (nonatomic, readonly) NSUInteger numberOfCircles;
 @property (nonatomic, readonly) NSUInteger numberOfCircleCollections;
 
-- (instancetype)initWithDatabase:(CatalogDatabase *)database;
++ (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database;
 
-- (NSUInteger)pageAtIndex:(NSUInteger)index;
+- (NSUInteger)pageAtIndex:(NSUInteger)index; // XXX: remove in favor of -[CircleCollection page];
 - (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index;
 
 @end

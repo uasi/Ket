@@ -104,12 +104,6 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
   return [circles copy];
 }
 
-- (CircleCollection *)circleCollectionForPage:(NSUInteger)page
-{
-  NSArray *circles = [self circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:kNumberOfCutsInPage respectsCutIndex:YES];
-}
-
 - (NSString *)blockNameForID:(NSInteger)blockID
 {
   static NSArray *blockIDToBlockName;
@@ -238,7 +232,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 - (CatalogPerspective *)perspective
 {
-  return [[CatalogPerspective alloc] initWithDatabase:self];
+  return [CatalogPerspective perspectiveWithDatabase:self];
 }
 
 @end

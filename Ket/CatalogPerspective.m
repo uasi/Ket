@@ -22,9 +22,72 @@
 
 @end
 
+#pragma mark - CatalogPerspectiveDefault (Concrete Subclass)
+
+@interface CatalogPerspectiveDefault : CatalogPerspective
+
+@end
+
+@implementation CatalogPerspectiveDefault
+
+- (NSUInteger)numberOfCircleCollections
+{
+  return self.database.pageSet.count;
+  // XXX: will be used by a filtered perspective
+  /*
+   BOOL hasRemainder = self.numberOfCircles % self.numberOfCirclesInCollection != 0;
+   return self.numberOfCircles / self.numberOfCirclesInCollection + (hasRemainder ? 1 : 0);
+   */
+}
+
+- (NSUInteger)numberOfCirclesInCollection
+{
+  return self.database.numberOfCutsInRow * self.database.numberOfCutsInColumn;
+}
+
+- (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
+{
+  NSAssert(index < self.numberOfCircleCollections, @"index must be less than the number of circle collections");
+  NSUInteger page = [self pageAtIndex:index];
+  return [self circleCollectionForPage:page];
+}
+
+- (NSUInteger)pageAtIndex:(NSUInteger)index
+{
+  __block NSUInteger page = 0;
+  __block NSUInteger i = index;
+
+  [self.database.pageSet enumerateRangesUsingBlock:^(NSRange range, BOOL *stop) {
+    if (i > range.length) {
+      i -= range.length + 1;
+    }
+    else {
+      page = range.location + i;
+      *stop = YES;
+    }
+  }];
+
+  return page;
+}
+
+- (CircleCollection *)circleCollectionForPage:(NSUInteger)page
+{
+  NSArray *circles = [self.database circlesInPage:page];
+  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:self.numberOfCirclesInCollection respectsCutIndex:YES];
+}
+
+@end
+
+#pragma mark - CatalogPerspective (Abstract Superclass)
+
 @implementation CatalogPerspective
 
 @synthesize count = _count;
+
++ (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database
+{
+  return [[CatalogPerspectiveDefault alloc] initWithDatabase:database];
+}
 
 - (instancetype)initWithDatabase:(CatalogDatabase *)database
 {
@@ -60,62 +123,6 @@
   return self.count;
 }
 
-- (NSUInteger)numberOfCircleCollections
-{
-  return self.database.pageSet.count;
-  // XXX: will be used by a filtered perspective
-  /*
-  BOOL hasRemainder = self.numberOfCircles % self.numberOfCirclesInCollection != 0;
-  return self.numberOfCircles / self.numberOfCirclesInCollection + (hasRemainder ? 1 : 0);
-   */
-}
-
-// XXX: should be configurable (by the data provider?)
-- (NSUInteger)numberOfCirclesInCollection
-{
-  return self.database.numberOfCutsInRow * self.database.numberOfCutsInColumn;
-}
-
-// XXX: will be used by a filtered perspective
-/*
-- (NSArray *)circlesWithLimit:(NSUInteger)limit offset:(NSUInteger)offset
-{
-  static NSString *sqlFormat = @"SELECT * FROM %@ LIMIT (?) OFFSET (?);";
-  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
-  FMResultSet *result = [self.fmDatabase executeQuery:sql, self.viewName, @(limit), @(offset)];
-  NSMutableArray *circles = [NSMutableArray array];
-  while ([result next]) {
-    [circles addObject:[Circle circleWithResultSet:result]];
-  }
-  return [circles copy];
-}
- */
-
-- (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
-{
-  NSAssert(index < self.numberOfCircleCollections, @"index must be less than the number of circle collections");
-  NSUInteger page = [self pageAtIndex:index];
-  return [self.database circleCollectionForPage:page];
-}
-
-- (NSUInteger)pageAtIndex:(NSUInteger)index
-{
-  __block NSUInteger page = 0;
-  __block NSUInteger i = index;
-
-  [self.database.pageSet enumerateRangesUsingBlock:^(NSRange range, BOOL *stop) {
-    if (i > range.length) {
-      i -= range.length + 1;
-    }
-    else {
-      page = range.location + i;
-      *stop = YES;
-    }
-  }];
-
-  return page;
-}
-
 #pragma mark View Management
 
 - (void)createView
@@ -136,6 +143,47 @@
 - (NSString *)viewName
 {
   return [NSString stringWithFormat:@"view_%lx", (unsigned long)self.hash];
+}
+
+#pragma mark Abstract Methods
+
+- (NSUInteger)numberOfCircleCollections
+{
+  NSAssert(NO, @"");
+  return 0;
+}
+
+- (NSUInteger)numberOfCirclesInCollection
+{
+  NSAssert(NO, @"");
+  return 0;
+}
+
+// XXX: will be used by a filtered perspective
+/*
+ - (NSArray *)circlesWithLimit:(NSUInteger)limit offset:(NSUInteger)offset
+ {
+ static NSString *sqlFormat = @"SELECT * FROM %@ LIMIT (?) OFFSET (?);";
+ NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+ FMResultSet *result = [self.fmDatabase executeQuery:sql, self.viewName, @(limit), @(offset)];
+ NSMutableArray *circles = [NSMutableArray array];
+ while ([result next]) {
+ [circles addObject:[Circle circleWithResultSet:result]];
+ }
+ return [circles copy];
+ }
+ */
+
+- (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
+{
+  NSAssert(NO, @"");
+  return nil;
+}
+
+- (NSUInteger)pageAtIndex:(NSUInteger)index
+{
+  NSAssert(NO, @"");
+  return 0;
 }
 
 @end

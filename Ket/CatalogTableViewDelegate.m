@@ -8,6 +8,7 @@
 #import "Document.h"
 #import "PathUtils.h"
 
+static const NSUInteger kHightOfGroupRow = 22;
 static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
 @interface CatalogTableViewDelegate ()
@@ -120,7 +121,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-  if ([self.provider isGroupRow:row]) return 22;
+  if ([self.provider isGroupRow:row]) return kHightOfGroupRow;
   NSSize cutSize = self.provider.cutSize;
   CGFloat scale = tableView.bounds.size.width / (cutSize.width * self.provider.numberOfCutsInColumn);
   return (cutSize.height * self.provider.numberOfCutsInRow) * scale;
@@ -146,7 +147,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-  return [self.provider numberOfRows];
+  return self.provider.numberOfRows;
 }
 
 @end

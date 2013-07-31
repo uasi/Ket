@@ -68,19 +68,17 @@
   return page * 2;
 }
 
+- (NSString *)blockNameForID:(NSInteger)blockID
+{
+  return [self.database blockNameForID:blockID];
+}
+
+- (NSImage *)imageForCircle:(Circle *)circle
+{
+  return [self.archive imageForCircle:circle];
+}
+
 #pragma mark Accessors
-
-// XXX: remove
-- (CatalogDatabase *)catalogDatabase
-{
-  return self.database;
-}
-
-// XXX: remove
-- (CircleCutArchive *)circleCutArchive
-{
-  return self.archive;
-}
 
 - (NSSize)cutSize
 {
@@ -105,16 +103,6 @@
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
   return [self.database circleCollectionForPage:page];
-}
-
-- (NSString *)blockNameForID:(NSInteger)blockID
-{
-  return [self.database blockNameForID:blockID];
-}
-
-- (NSImage *)imageForCircle:(Circle *)circle
-{
-  return [self.archive imageForCircle:circle];
 }
 
 @end

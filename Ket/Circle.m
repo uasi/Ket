@@ -86,4 +86,19 @@ static NSURL *URLFromString(NSString *string) {
   return [NSString stringWithFormat:@"%d%@", (int)self.space, sub];
 }
 
+#pragma mark NSObject Protocol
+
+- (BOOL)isEqual:(id)object
+{
+  if ([self class] != [object class]) return NO;
+  Circle *other = object;
+  return (self.comiketNo == other.comiketNo &&
+          self.identifier == other.identifier);
+}
+
+- (NSUInteger)hash
+{
+  return (self.comiketNo << (sizeof(NSUInteger) / 2)) | self.identifier;
+}
+
 @end

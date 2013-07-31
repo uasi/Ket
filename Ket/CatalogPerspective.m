@@ -7,7 +7,6 @@
 @interface CatalogPerspective ()
 
 @property (nonatomic) FMDatabase *database;
-@property (nonatomic) NSString *filter;
 
 @property (nonatomic, readonly) NSString *viewName;
 
@@ -17,16 +16,15 @@
 
 @synthesize count = _count;
 
-- (instancetype)initWithDatabase:(FMDatabase *)database filter:(NSString *)filter
+- (instancetype)initWithDatabase:(FMDatabase *)database
 {
   self = [super init];
   if (!self) return nil;
 
   self.database = database;
-  self.filter = filter;
   _count = NSNotFound;
 
-  [self createViewWithFilter:filter];
+  [self createView];
 
   return self;
 }
@@ -58,15 +56,11 @@
 
 #pragma mark View Management
 
-- (void)createViewWithFilter:(NSString *)filter
+- (void)createView
 {
-  static NSString *query = (@"CREATE TEMPORARY VIEW (?1)"
-                            @"AS SELECT * FROM ComiketCircle"
-                            @"WHERE"
-                            @"  circleName LIKE (?2) OR"
-                            @"  circleKana LIKE (?2)"
-                            @"ORDER BY cutIndex ASC;");
-  [self.database executeQuery:query, self.viewName, filter];
+  static NSString *query = (@"CREATE TEMPORARY VIEW (?)"
+                            @"AS SELECT * FROM ComiketCircle;");
+  [self.database executeQuery:query, self.viewName];
 }
 
 - (void)dropView

@@ -4,7 +4,7 @@
 
 @property (nonatomic, readonly) NSUInteger count;
 
-- (instancetype)initWithDatabase:(FMDatabase *)database filter:(NSString *)filter;
+- (instancetype)initWithDatabase:(FMDatabase *)database;
 
 - (NSArray *)circlesWithLimit:(NSUInteger)limit offset:(NSUInteger)offset;
 

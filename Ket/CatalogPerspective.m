@@ -37,16 +37,18 @@
 - (NSUInteger)count
 {
   if (_count == NSNotFound) {
-    static NSString *query = @"SELECT COUNT(*) FROM (?);";
-    _count = [self.database intForQuery:query, self.viewName];
+    static NSString *sqlFormat = @"SELECT COUNT(*) FROM %@;";
+    NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+    _count = [self.database intForQuery:sql, self.viewName];
   }
   return _count;
 }
 
 - (NSArray *)circlesWithLimit:(NSUInteger)limit offset:(NSUInteger)offset
 {
-  static NSString *query = @"SELECT * FROM (?) LIMIT (?) OFFSET (?);";
-  FMResultSet *result = [self.database executeQuery:query, self.viewName, @(limit), @(offset)];
+  static NSString *sqlFormat = @"SELECT * FROM %@ LIMIT (?) OFFSET (?);";
+  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+  FMResultSet *result = [self.database executeQuery:sql, self.viewName, @(limit), @(offset)];
   NSMutableArray *circles = [NSMutableArray array];
   while ([result next]) {
     [circles addObject:[Circle circleWithResultSet:result]];
@@ -58,15 +60,17 @@
 
 - (void)createView
 {
-  static NSString *query = (@"CREATE TEMPORARY VIEW (?)"
-                            @"AS SELECT * FROM ComiketCircle;");
-  [self.database executeQuery:query, self.viewName];
+  static NSString *sqlFormat = (@"CREATE TEMPORARY VIEW %@"
+                                @"  AS SELECT * FROM ComiketCircle;");
+  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+  NSAssert([self.database executeUpdate:sql], @"CREATE VIEW must succeed");
 }
 
 - (void)dropView
 {
-  static NSString *query = @"DROP VIEW IF EXISTS (?);";
-  [self.database executeQuery:query, self.viewName];
+  static NSString *sqlFormat = @"DROP VIEW IF EXISTS %@;";
+  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+  NSAssert(([self.database executeUpdate:sql, self.viewName]), @"DROP VIEW must succeed");
 }
 
 - (NSString *)viewName

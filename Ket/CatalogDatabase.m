@@ -107,7 +107,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
   NSArray *circles = [self circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:kNumberOfCutsInPage];
+  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:kNumberOfCutsInPage respectsCutIndex:YES];
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID

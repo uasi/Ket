@@ -5,6 +5,7 @@
 @property (nonatomic, readonly) NSUInteger page;
 
 - (instancetype)initWithCircles:(NSArray *)circles
-                cutCountPerPage:(NSUInteger)count;
+                cutCountPerPage:(NSUInteger)count
+               respectsCutIndex:(BOOL)respectsCutIndex;
 
 @end

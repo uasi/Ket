@@ -8,8 +8,11 @@
 
 @interface CircleDataProvider ()
 
+// XXX: remove
 @property (nonatomic) CatalogDatabase *database;
 @property (nonatomic) CircleCutArchive *archive;
+
+@property (nonatomic, readwrite) NSUInteger comiketNo;
 
 @end
 
@@ -19,6 +22,8 @@
 {
   self = [super init];
   if (!self) return nil;
+
+  self.comiketNo = comiketNo;
 
   NSURL *databaseURL = CatalogDatabaseURLWithComiketNo(comiketNo);
   self.database = [[CatalogDatabase alloc] initWithURL:databaseURL];
@@ -65,14 +70,51 @@
 
 #pragma mark Accessors
 
+// XXX: remove
 - (CatalogDatabase *)catalogDatabase
 {
   return self.database;
 }
 
+// XXX: remove
 - (CircleCutArchive *)circleCutArchive
 {
   return self.archive;
+}
+
+- (NSSize)cutSize
+{
+  return self.archive.cutSize;
+}
+
+- (NSUInteger)numberOfCutsInRow
+{
+  return self.database.numberOfCutsInRow;
+}
+
+- (NSUInteger)numberOfCutsInColumn
+{
+  return self.database.numberOfCutsInColumn;
+}
+
+- (NSIndexSet *)pageNoIndexSet
+{
+  return self.database.pageNoIndexSet;
+}
+
+- (CircleCollection *)circleCollectionForPage:(NSUInteger)page
+{
+  return [self.database circleCollectionForPage:page];
+}
+
+- (NSString *)blockNameForID:(NSInteger)blockID
+{
+  return [self.database blockNameForID:blockID];
+}
+
+- (NSImage *)imageForCircle:(Circle *)circle
+{
+  return [self.archive imageForCircle:circle];
 }
 
 @end

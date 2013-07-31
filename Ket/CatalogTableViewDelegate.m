@@ -1,9 +1,7 @@
 #import "CatalogTableViewDelegate.h"
 
-#import "CatalogDatabase.h"
 #import "Circle.h"
 #import "CircleCollection.h"
-#import "CircleCutArchive.h"
 #import "CircleCutCell.h"
 #import "CircleCutMatrix.h"
 #import "CircleDataProvider.h"
@@ -37,7 +35,7 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
   [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
     CircleCutCell *cell = notification.userInfo[@"cell"];
     self.selectedCircle = cell.circle;
-    NSString *blockName = [self.provider.catalogDatabase blockNameForID:cell.circle.blockID];
+    NSString *blockName = [self.provider blockNameForID:cell.circle.blockID];
     NSLog(@"Sender=%@, selected circle block name=%@",notification.object ,blockName);
   }];
 }
@@ -47,9 +45,8 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 - (NSSize)cellSizeForTableView:(NSTableView *)tableView
 {
   return NSMakeSize(210, 300);
-  CatalogDatabase *database = self.provider.catalogDatabase;
-  NSSize originalSize = database.cutSize;
-  CGFloat scale = tableView.bounds.size.width / (originalSize.width * database.numberOfCutsInColumn);
+  NSSize originalSize = self.provider.cutSize;
+  CGFloat scale = tableView.bounds.size.width / (originalSize.width * self.provider.numberOfCutsInColumn);
   CGFloat actualWidth = floor(originalSize.width * scale);
   CGFloat actualHeight = floor(originalSize.height * scale);
   return NSMakeSize(actualWidth, actualHeight);
@@ -75,9 +72,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-  CatalogDatabase *database = self.provider.catalogDatabase;
-  CircleCutArchive *archive = self.provider.circleCutArchive;
-  NSUInteger page = indexAtIndex(database.pageNoIndexSet, row / 2);
+  NSUInteger page = indexAtIndex(self.provider.pageNoIndexSet, row / 2);
 
   if (!tableColumn) {
     NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:nil];
@@ -88,23 +83,23 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   NSString *identifier = NSStringFromClass([NSMatrix class]);
   CircleCutMatrix *view = [tableView makeViewWithIdentifier:identifier owner:nil];
 
-  NSUInteger rows = database.numberOfCutsInRow;
-  NSUInteger columns = database.numberOfCutsInColumn;
+  NSUInteger rows = self.provider.numberOfCutsInRow;
+  NSUInteger columns = self.provider.numberOfCutsInColumn;
 
   if (!view) {
     CircleCutCell *prototypeCell = [[CircleCutCell alloc] init];
-    prototypeCell.cutSize = archive.cutSize;
+    prototypeCell.cutSize = self.provider.cutSize;
     prototypeCell.imageScaling = NSImageScaleProportionallyUpOrDown;
     view = [[CircleCutMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:rows numberOfColumns:columns];
     view.identifier = identifier;
     view.intercellSpacing = NSMakeSize(0, 0);
   }
 
-  [view setBoundsSize:NSMakeSize(archive.cutSize.width * columns, archive.cutSize.height * rows)];
+  [view setBoundsSize:NSMakeSize(self.provider.cutSize.width * columns, self.provider.cutSize.height * rows)];
   view.cellSize = [self cellSizeForTableView:tableView];
   view.highlightedCircleCutCell = nil;
 
-  NSArray *circles = [database circleCollectionForPage:page].circlesPaddedWithNull;
+  NSArray *circles = [self.provider circleCollectionForPage:page].circlesPaddedWithNull;
 
   for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];
@@ -115,7 +110,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
     }
     else {
       if (circle == self.selectedCircle) view.highlightedCircleCutCell = cell;
-      cell.image = [archive imageForCircle:circle];
+      cell.image = [self.provider imageForCircle:circle];
       cell.circle = circle;
     }
   }
@@ -126,9 +121,9 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
   if ([self.provider isGroupRow:row]) return 22;
-  CatalogDatabase *database = self.provider.catalogDatabase;
-  CGFloat scale = tableView.bounds.size.width / (database.cutSize.width * database.numberOfCutsInColumn);
-  return (database.cutSize.height * database.numberOfCutsInRow) * scale;
+  NSSize cutSize = self.provider.cutSize;
+  CGFloat scale = tableView.bounds.size.width / (cutSize.width * self.provider.numberOfCutsInColumn);
+  return (cutSize.height * self.provider.numberOfCutsInRow) * scale;
 }
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row

@@ -43,8 +43,10 @@ static inline NSString *sqlitePath() {
   NSPipe *pipe = [NSPipe pipe];
   task.standardOutput = pipe;
 
+  IF_SANDBOXED([URL startAccessingSecurityScopedResource]);
   [task launch];
   [task waitUntilExit];
+  IF_SANDBOXED([URL stopAccessingSecurityScopedResource]);
   if ([task terminationStatus] != 0) return 0;
 
   NSData *data = [[pipe fileHandleForReading] readDataToEndOfFile];
@@ -58,6 +60,8 @@ static inline NSString *sqlitePath() {
 
 - (NSUInteger)comiketNoOfArchiveAtURL:(NSURL *)URL
 {
+  IF_SANDBOXED([URL startAccessingSecurityScopedResource]);
+  IF_SANDBOXED(@onExit { [URL stopAccessingSecurityScopedResource] });
   CircleCutArchive *archive = [[CircleCutArchive alloc] initWithURL:URL];
   if (!archive) return 0;
   return archive.comiketNo;
@@ -77,6 +81,7 @@ static inline NSString *sqlitePath() {
   [self convertDBv2AtURL:databaseURL toDBv3AtURL:newDatabaseURL withQueue:importQueue asyncResult:&result];
 
   dispatch_async(importQueue, ^{
+    IF_SANDBOXED([archiveURL startAccessingSecurityScopedResource]);
     NSURL *newArchiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
     [[NSFileManager defaultManager] removeItemAtURL:newArchiveURL error:NULL];
     BOOL ok = [[NSFileManager defaultManager] copyItemAtURL:archiveURL toURL:newArchiveURL error:NULL];
@@ -85,6 +90,7 @@ static inline NSString *sqlitePath() {
         result = result | kImportResultFlagCouldNotCopyArchive;
       }
     }
+    IF_SANDBOXED([archiveURL stopAccessingSecurityScopedResource]);
   });
 
   dispatch_barrier_async(importQueue, ^{
@@ -148,6 +154,7 @@ static inline NSString *sqlitePath() {
   loadTask.standardInput = conv2loadPipe;
 
   dumpTask.terminationHandler = ^(NSTask *dumpTask) {
+    IF_SANDBOXED([v2URL stopAccessingSecurityScopedResource]);
     DDLogInfo(@"Dump task completed with status %d", dumpTask.terminationStatus);
     if (dumpTask.terminationStatus != 0 && result != NULL) {
       @synchronized (self) {
@@ -175,6 +182,7 @@ static inline NSString *sqlitePath() {
 
   EnsureDirectoryExistsAtURL(v3URL.URLByDeletingLastPathComponent);
   [[NSFileManager defaultManager] removeItemAtURL:v3URL error:NULL];
+  IF_SANDBOXED([v2URL startAccessingSecurityScopedResource]);
   [dumpTask launch];
   [convTask launch];
   [loadTask launch];

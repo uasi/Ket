@@ -9,4 +9,6 @@
   #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 #endif
 
+#define IF_SANDBOXED(expr)
+
 extern int ddLogLevel;

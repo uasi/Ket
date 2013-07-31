@@ -1,6 +1,7 @@
 #import "CircleDataProvider.h"
 
 #import "CatalogDatabase.h"
+#import "CatalogPerspective.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import "CircleCutArchive.h"
@@ -8,8 +9,8 @@
 
 @interface CircleDataProvider ()
 
-// XXX: remove
 @property (nonatomic) CatalogDatabase *database;
+@property (nonatomic) CatalogPerspective *perspective;
 @property (nonatomic) CircleCutArchive *archive;
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
@@ -29,6 +30,8 @@
   self.database = [[CatalogDatabase alloc] initWithURL:databaseURL];
   if (!self.database) return nil;
 
+  self.perspective = [self.database perspective];
+
   NSURL *archiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
   self.archive = [[CircleCutArchive alloc] initWithURL:archiveURL];
   if (!self.archive) return nil;
@@ -38,19 +41,19 @@
 
 - (NSInteger)numberOfRows
 {
-  return self.database.pageSet.count * 2;
+  return self.perspective.numberOfCircleCollections * 2;
 }
 
 - (CircleCollection *)circleCollectionForRow:(NSInteger)row
 {
   if ([self isGroupRow:row]) return nil;
-  return [self.database circleCollectionForPage:[self pageAtIndex:[self pageIndexForRow:row]]];
+  return [self.perspective circleCollectionAtIndex:[self pageIndexForRow:row]];
 }
 
 - (NSString *)stringValueForGroupRow:(NSInteger)row
 {
   if (![self isGroupRow:row]) return nil;
-  return [NSString stringWithFormat:@"Page %lu", (unsigned long)[self pageAtIndex:[self pageIndexForRow:row]]];
+  return [NSString stringWithFormat:@"Page %lu", (unsigned long)[self.perspective pageAtIndex:[self pageIndexForRow:row]]];
 }
 
 - (BOOL)isGroupRow:(NSInteger)row
@@ -61,24 +64,6 @@
 - (NSInteger)pageIndexForRow:(NSInteger)row
 {
   return row / 2;
-}
-
-- (NSUInteger)pageAtIndex:(NSUInteger)index
-{
-  __block NSUInteger page = 0;
-  __block NSUInteger i = index;
-
-  [self.pageSet enumerateRangesUsingBlock:^(NSRange range, BOOL *stop) {
-    if (i > range.length) {
-      i -= range.length + 1;
-    }
-    else {
-      page = range.location + i;
-      *stop = YES;
-    }
-  }];
-
-  return page;
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID

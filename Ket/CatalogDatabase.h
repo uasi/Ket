@@ -1,3 +1,4 @@
+@class CatalogPerspective;
 @class CircleCollection;
 
 @interface CatalogDatabase : NSObject
@@ -14,5 +15,7 @@
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page;
 
 - (NSString *)blockNameForID:(NSInteger)blockID;
+
+- (CatalogPerspective *)perspective;
 
 @end

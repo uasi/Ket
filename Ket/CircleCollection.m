@@ -5,7 +5,7 @@
 @interface CircleCollection ()
 
 @property (nonatomic, copy, readwrite) NSArray *circles;
-@property (nonatomic, copy, readwrite) NSArray *circlesPaddedWithNull;
+@property (nonatomic, copy, readwrite) NSArray *circlesPaddedWithEmptyCircle;
 
 @end
 
@@ -24,13 +24,13 @@
   NSInteger circleIndex = 0;
   for (NSInteger cutIndex = 1; cutIndex <= count; cutIndex++) {
     if (circleIndex >= self.circles.count || cutIndex != ((Circle *)self.circles[circleIndex]).cutIndex) {
-      paddedCircles[cutIndex - 1] = [NSNull null];
+      paddedCircles[cutIndex - 1] = [Circle emptyCircle];
     }
     else {
       paddedCircles[cutIndex - 1] = circles[circleIndex++];
     }
   }
-  self.circlesPaddedWithNull = paddedCircles;
+  self.circlesPaddedWithEmptyCircle = paddedCircles;
 
   return self;
 }

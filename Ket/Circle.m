@@ -2,6 +2,24 @@
 
 #import <FMDB/FMResultSet.h>
 
+#pragma mark - EmptyCircle
+
+@interface EmptyCircle : Circle
+@end
+
+@implementation EmptyCircle
+
+#pragma mark NSObject Protocol
+
+- (NSUInteger)hash
+{
+  return 0;
+}
+
+@end
+
+#pragma mark - Circle
+
 @interface Circle ()
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
@@ -31,7 +49,15 @@
 
 @implementation Circle
 
-@dynamic spaceString;
++ (Circle *)emptyCircle
+{
+  static EmptyCircle *emptyCircle;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    emptyCircle = [[EmptyCircle alloc] init];
+  });
+  return emptyCircle;
+}
 
 + (instancetype)circleWithResultSet:(FMResultSet *)result
 {
@@ -75,11 +101,6 @@ static NSURL *URLFromString(NSString *string) {
   return self;
 }
 
-- (instancetype)init
-{
-  @throw NSInternalInconsistencyException;
-}
-
 - (NSString *)spaceString
 {
   NSString *sub = (self.spaceSub == CircleSpaceSubA) ? @"a" : @"b";
@@ -92,8 +113,8 @@ static NSURL *URLFromString(NSString *string) {
 {
   if ([self class] != [object class]) return NO;
   Circle *other = object;
-  return (self.comiketNo == other.comiketNo &&
-          self.identifier == other.identifier);
+  return self.hash == other.hash;
+
 }
 
 - (NSUInteger)hash

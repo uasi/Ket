@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
 @property (nonatomic, readonly) NSURL *RSSURL;           // rss
 @property (nonatomic, readonly) NSUInteger updateFlag;   // updateFlag
 
++ (Circle *)emptyCircle;
 + (instancetype)circleWithResultSet:(FMResultSet *)result;
 
 - (BOOL)isEqual:(id)object;

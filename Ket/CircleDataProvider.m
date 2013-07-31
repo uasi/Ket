@@ -44,13 +44,13 @@
 - (CircleCollection *)circleCollectionForRow:(NSInteger)row
 {
   if ([self isGroupRow:row]) return nil;
-  return [self.database circleCollectionForPage:[self pageForRow:row]];
+  return [self.database circleCollectionForPage:[self pageAtIndex:[self pageIndexForRow:row]]];
 }
 
 - (NSString *)stringValueForGroupRow:(NSInteger)row
 {
   if (![self isGroupRow:row]) return nil;
-  return [NSString stringWithFormat:@"Page %ld", (long)[self pageForRow:row]];
+  return [NSString stringWithFormat:@"Page %lu", (unsigned long)[self pageAtIndex:[self pageIndexForRow:row]]];
 }
 
 - (BOOL)isGroupRow:(NSInteger)row
@@ -58,14 +58,27 @@
   return row % 2 == 0;
 }
 
-- (NSInteger)pageForRow:(NSInteger)row
+- (NSInteger)pageIndexForRow:(NSInteger)row
 {
   return row / 2;
 }
 
-- (NSInteger)rowForPage:(NSInteger)page
+- (NSUInteger)pageAtIndex:(NSUInteger)index
 {
-  return page * 2;
+  __block NSUInteger page = 0;
+  __block NSUInteger i = index;
+
+  [self.pageSet enumerateRangesUsingBlock:^(NSRange range, BOOL *stop) {
+    if (i > range.length) {
+      i -= range.length + 1;
+    }
+    else {
+      page = range.location + i;
+      *stop = YES;
+    }
+  }];
+
+  return page;
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID
@@ -98,11 +111,6 @@
 - (NSIndexSet *)pageSet
 {
   return self.database.pageSet;
-}
-
-- (CircleCollection *)circleCollectionForPage:(NSUInteger)page
-{
-  return [self.database circleCollectionForPage:page];
 }
 
 @end

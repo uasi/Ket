@@ -53,31 +53,11 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
   return NSMakeSize(actualWidth, actualHeight);
 }
 
-static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
-{
-  __block NSUInteger resultIndex = 0;
-  __block NSUInteger i = index;
-
-  [indexSet enumerateRangesUsingBlock:^(NSRange range, BOOL *stop) {
-    if (i > range.length) {
-      i -= range.length + 1;
-    }
-    else {
-      resultIndex = range.location + i;
-      *stop = YES;
-    }
-  }];
-
-  return resultIndex;
-}
-
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-  NSUInteger page = indexAtIndex(self.provider.pageSet, row / 2);
-
   if (!tableColumn) {
     NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:nil];
-    textField.stringValue = [NSString stringWithFormat:@"Page %d", (int)page];
+    textField.stringValue = [self.provider stringValueForGroupRow:row];
     return textField;
   }
 
@@ -100,7 +80,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
   view.cellSize = [self cellSizeForTableView:tableView];
   view.highlightedCircleCutCell = nil;
 
-  NSArray *circles = [self.provider circleCollectionForPage:page].circlesPaddedWithNull;
+  NSArray *circles = [self.provider circleCollectionForRow:row].circlesPaddedWithNull;
 
   for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];

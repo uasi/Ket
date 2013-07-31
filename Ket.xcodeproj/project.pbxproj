@@ -41,6 +41,7 @@
 		58C3812D1705BBE9001FF665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58C3812B1705BBE9001FF665 /* InfoPlist.strings */; };
 		58C381301705BBE9001FF665 /* KetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3812F1705BBE9001FF665 /* KetTests.m */; };
 		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
+		58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,8 @@
 		58C3812F1705BBE9001FF665 /* KetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KetTests.m; sourceTree = "<group>"; };
 		58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDelegate.h; sourceTree = "<group>"; };
 		58C3814017060059001FF665 /* CatalogTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDelegate.m; sourceTree = "<group>"; };
+		58DD7D7D17A7E3B000EA36C8 /* CatalogPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogPerspective.h; sourceTree = "<group>"; };
+		58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogPerspective.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -216,6 +219,8 @@
 				58A039A51722698400A81DEE /* CatalogDatabase.m */,
 				588F56441791B31D00219BA6 /* CatalogImportWindowController.h */,
 				588F56451791B31E00219BA6 /* CatalogImportWindowController.m */,
+				58DD7D7D17A7E3B000EA36C8 /* CatalogPerspective.h */,
+				58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */,
 				58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */,
 				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
 				5870B4FC176EF41700B449DA /* Checklist.h */,
@@ -466,6 +471,7 @@
 				5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */,
 				5816053F179B12800039AAAB /* DocumentWindow.m in Sources */,
 				58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */,
+				58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

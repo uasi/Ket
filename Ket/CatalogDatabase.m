@@ -19,7 +19,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 @implementation CatalogDatabase
 
-@synthesize pageNoIndexSet = _pageNoIndexSet;
+@synthesize pageSet = _pageSet;
 
 - (instancetype)initWithURL:(NSURL *)URL
 {
@@ -71,9 +71,9 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
   return kNumberOfCutsInColmun;
 }
 
-- (NSIndexSet *)pageNoIndexSet
+- (NSIndexSet *)pageSet
 {
-  if (_pageNoIndexSet) return _pageNoIndexSet;
+  if (_pageSet) return _pageSet;
 
   NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
 
@@ -85,7 +85,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
     [indexSet addIndex:[result intForColumnIndex:0]];
   }
 
-  return _pageNoIndexSet = [indexSet copy];
+  return _pageSet = [indexSet copy];
 }
 
 - (NSArray *)circlesInPage:(NSUInteger)page

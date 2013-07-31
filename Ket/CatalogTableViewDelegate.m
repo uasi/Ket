@@ -73,7 +73,7 @@ static NSUInteger indexAtIndex(NSIndexSet *indexSet, NSUInteger index)
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-  NSUInteger page = indexAtIndex(self.provider.pageNoIndexSet, row / 2);
+  NSUInteger page = indexAtIndex(self.provider.pageSet, row / 2);
 
   if (!tableColumn) {
     NSTextField *textField = [tableView makeViewWithIdentifier:@"GroupRowTextField" owner:nil];

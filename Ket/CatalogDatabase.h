@@ -7,7 +7,7 @@
 @property (nonatomic, readonly) NSPoint cutOrigin __attribute__((deprecated));
 @property (nonatomic, readonly) NSUInteger numberOfCutsInRow;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
-@property (nonatomic, readonly) NSIndexSet *pageNoIndexSet;
+@property (nonatomic, readonly) NSIndexSet *pageSet;
 
 - (instancetype)initWithURL:(NSURL *)URL;
 

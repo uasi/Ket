@@ -38,7 +38,7 @@
 
 - (NSInteger)numberOfRows
 {
-  return self.database.pageNoIndexSet.count * 2;
+  return self.database.pageSet.count * 2;
 }
 
 - (CircleCollection *)circleCollectionForRow:(NSInteger)row
@@ -95,9 +95,9 @@
   return self.database.numberOfCutsInColumn;
 }
 
-- (NSIndexSet *)pageNoIndexSet
+- (NSIndexSet *)pageSet
 {
-  return self.database.pageNoIndexSet;
+  return self.database.pageSet;
 }
 
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page

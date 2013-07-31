@@ -7,7 +7,7 @@
 @property (nonatomic, readonly) NSSize cutSize;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInRow;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
-@property (nonatomic, readonly) NSIndexSet *pageNoIndexSet;
+@property (nonatomic, readonly) NSIndexSet *pageSet;
 
 - (instancetype)initWithComiketNo:(NSUInteger)comiketNo;
 

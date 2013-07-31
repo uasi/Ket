@@ -7,9 +7,9 @@
 #import <FMDB/FMResultSet.h>
 #import <sqlite3.h>
 
-static const NSUInteger NUMBER_OF_CUTS_IN_ROW = 6;
-static const NSUInteger NUMBER_OF_CUTS_IN_COLUMN = 6;
-static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN;
+static const NSUInteger kNumberOfCutsInRow = 6;
+static const NSUInteger kNumberOfCutsInColmun = 6;
+static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCutsInColmun;
 
 @interface CatalogDatabase ()
 
@@ -19,11 +19,6 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 
 @implementation CatalogDatabase
 
-@dynamic comiketNo;
-@dynamic cutSize;
-@dynamic cutOrigin;
-@dynamic numberOfCutsInRow;
-@dynamic numberOfCutsInColumn;
 @synthesize pageNoIndexSet = _pageNoIndexSet;
 
 - (instancetype)initWithURL:(NSURL *)URL
@@ -68,12 +63,12 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 
 - (NSUInteger)numberOfCutsInRow
 {
-  return NUMBER_OF_CUTS_IN_ROW;
+  return kNumberOfCutsInRow;
 }
 
 - (NSUInteger)numberOfCutsInColumn
 {
-  return NUMBER_OF_CUTS_IN_COLUMN;
+  return kNumberOfCutsInColmun;
 }
 
 - (NSIndexSet *)pageNoIndexSet
@@ -95,7 +90,7 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 
 - (NSArray *)circlesInPage:(NSUInteger)page
 {
-  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:CUT_COUNT_PER_PAGE];
+  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsInPage];
 
   NSString *query = (@"SELECT * FROM ComiketCircle"
                      @"  WHERE pageNo = (?)"
@@ -111,7 +106,7 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
   NSArray *circles = [self circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:CUT_COUNT_PER_PAGE];
+  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:kNumberOfCutsInPage];
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID

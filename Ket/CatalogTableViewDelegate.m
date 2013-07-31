@@ -10,7 +10,7 @@
 #import "Document.h"
 #import "PathUtils.h"
 
-static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
+static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
 @interface CatalogTableViewDelegate ()
 
@@ -30,7 +30,7 @@ static const NSTimeInterval ThrottleForReloadingDataOnResizing = 0.1;
   self.provider = [[CircleDataProvider alloc] initWithComiketNo:self.document.comiketNo];
 
   self.tableViewColumnDidResizeSignal = [RACSubject subject];
-  [[self.tableViewColumnDidResizeSignal throttle:ThrottleForReloadingDataOnResizing] subscribeNext:^(NSTableView *tableView) {
+  [[self.tableViewColumnDidResizeSignal throttle:kThrottleForReloadingDataOnResizing] subscribeNext:^(NSTableView *tableView) {
     [tableView reloadData];
   }];
 

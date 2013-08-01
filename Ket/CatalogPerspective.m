@@ -1,6 +1,7 @@
 #import "CatalogPerspective.h"
 
 #import "CatalogDatabase.h"
+#import "CatalogFilter.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import <FMDB/FMDatabase.h>
@@ -123,11 +124,12 @@
   return [[CatalogPerspectiveDefault alloc] initWithDatabase:database];
 }
 
-+ (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(NSString *)filter
++ (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(CatalogFilter *)filter
 {
   filter; // XXX: use me!
   return [[CatalogPerspectiveFiltered alloc] initWithDatabase:database];
 }
+
 
 - (instancetype)initWithDatabase:(CatalogDatabase *)database
 {

@@ -1,6 +1,7 @@
 #import "CircleDataProvider.h"
 
 #import "CatalogDatabase.h"
+#import "CatalogFilter.h"
 #import "CatalogPerspective.h"
 #import "Circle.h"
 #import "CircleCollection.h"
@@ -19,6 +20,8 @@
 @end
 
 @implementation CircleDataProvider
+
+@synthesize filter = _filter;
 
 - (instancetype)initWithComiketNo:(NSUInteger)comiketNo
 {
@@ -84,16 +87,9 @@
   }
 }
 
-- (void)filterUsingString:(NSString *)string
+- (void)filterWithString:(NSString *)string
 {
-  if ([string isEqualToString:@""]) {
-    self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database];
-  }
-  else {
-    self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database filter:string];
-  }
-
-  [(RACSubject *)self.dataDidChangeSignal sendNext:nil];
+  self.filter = [[CatalogFilter alloc] initWithString:string];
 }
 
 #pragma mark Accessors
@@ -111,6 +107,18 @@
 - (NSUInteger)numberOfCutsInColumn
 {
   return self.database.numberOfCutsInColumn;
+}
+
+- (CatalogFilter *)filter
+{
+  return _filter;
+}
+
+- (void)setFilter:(CatalogFilter *)filter
+{
+  self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database filter:filter];
+  [(RACSubject *)self.dataDidChangeSignal sendNext:nil];
+  _filter = filter;
 }
 
 @end

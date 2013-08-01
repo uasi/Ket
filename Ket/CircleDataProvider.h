@@ -1,3 +1,4 @@
+@class CatalogFilter;
 @class Circle;
 @class CircleCollection;
 
@@ -8,6 +9,7 @@
 @property (nonatomic, readonly) NSUInteger numberOfCutsInRow;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
 @property (nonatomic, readonly) RACSignal *dataDidChangeSignal;
+@property (nonatomic) CatalogFilter *filter;
 
 - (instancetype)initWithComiketNo:(NSUInteger)comiketNo;
 
@@ -17,7 +19,6 @@
 - (BOOL)isGroupRow:(NSInteger)row;
 - (NSString *)blockNameForID:(NSInteger)blockID;
 - (NSImage *)imageForCircle:(Circle *)circle;
-
-- (void)filterUsingString:(NSString *)string;
+- (void)filterWithString:(NSString *)string;
 
 @end

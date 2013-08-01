@@ -1,6 +1,7 @@
 #import "SearchPanelController.h"
 
 #import "CircleDataProvider.h"
+#import "CatalogFilter.h"
 #import "Document.h"
 
 @interface SearchPanelController ()
@@ -20,7 +21,7 @@
   [self.window orderOut:self];
   [self.queryTextField selectText:self];
   NSLog(@"query = %@, document = %@", query, document);
-  [document.circleDataProvider filterUsingString:query];
+  [document.circleDataProvider filterWithString:query];
 }
 
 #pragma mark Actions

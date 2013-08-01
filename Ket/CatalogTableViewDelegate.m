@@ -85,15 +85,9 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
   for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];
     Circle *circle = circles[i];
-    if ([circle isEqual:[Circle emptyCircle]]) {
-      cell.image = [NSImage imageNamed:@"Placeholder210x300"];
-      cell.circle = nil;
-    }
-    else {
-      if (circle == self.selectedCircle) view.highlightedCircleCutCell = cell;
-      cell.image = [self.provider imageForCircle:circle];
-      cell.circle = circle;
-    }
+    if ([circle isEqual:self.selectedCircle]) view.highlightedCircleCutCell = cell;
+    cell.image = [self.provider imageForCircle:circle];
+    cell.circle = circle;
   }
 
   return view;

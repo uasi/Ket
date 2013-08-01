@@ -126,9 +126,9 @@ static NSURL *URLFromString(NSString *string) {
 
 - (BOOL)isEqual:(id)object
 {
+  if (!object) return NO;
   if ([self class] != [object class]) return NO;
-  Circle *other = object;
-  return self.hash == other.hash;
+  return self.hash == ((Circle *)object).hash;
 
 }
 

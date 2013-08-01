@@ -73,7 +73,12 @@
 
 - (NSImage *)imageForCircle:(Circle *)circle
 {
-  return [self.archive imageForCircle:circle];
+  if ([circle isEqual:[Circle emptyCircle]]) {
+    return [NSImage imageNamed:@"Placeholder210x300"];
+  }
+  else {
+    return [self.archive imageForCircle:circle];
+  }
 }
 
 #pragma mark Accessors

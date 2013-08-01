@@ -10,7 +10,7 @@
 {
   [super drawInteriorWithFrame:cellFrame inView:controlView];
 
-  if (self.circle) {
+  if (self.circle && ![self.circle isEqual:[Circle emptyCircle]]) {
     [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
   };
 

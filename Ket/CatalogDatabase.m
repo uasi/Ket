@@ -109,7 +109,8 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
   static NSArray *blockIDToBlockName;
   if (!blockIDToBlockName) {
     blockIDToBlockName =
-    @[@"A",
+    @[@"*",
+      @"A",
       @"B",
       @"C",
       @"D",
@@ -227,7 +228,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
       @"れ"];
   }
 
-  return blockIDToBlockName[blockID - 1];
+  return blockIDToBlockName[blockID];
 }
 
 - (CatalogPerspective *)perspective

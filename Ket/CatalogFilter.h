@@ -1,5 +1,8 @@
 @interface CatalogFilter : NSObject
 
-- (instancetype)initWithString:(NSString *)string;
+@property (nonatomic, readonly) NSString *selectStatement;
+
++ (CatalogFilter *)passthroughFilter;
++ (CatalogFilter *)filterWithString:(NSString *)string;
 
 @end

@@ -89,7 +89,7 @@
 
 - (void)filterWithString:(NSString *)string
 {
-  self.filter = [[CatalogFilter alloc] initWithString:string];
+  self.filter = [CatalogFilter filterWithString:string];
 }
 
 #pragma mark Accessors

@@ -7,6 +7,8 @@
 #import <FMDB/FMDatabase.h>
 #import <FMDB/FMDatabaseAdditions.h>
 
+#define ABSTRACT_METHOD NSAssert(NO, @"abstract method %s is called", __func__)
+
 @interface CatalogDatabase (CatalogPerspective_Private)
 
 @property (nonatomic, readonly) FMDatabase *database;
@@ -17,13 +19,10 @@
 
 @property (nonatomic) CatalogDatabase *database;
 @property (nonatomic, weak) FMDatabase *fmDatabase;
+@property (nonatomic) CatalogFilter *filter;
 
 @property (nonatomic, readonly) NSUInteger numberOfCirclesInCollection;
 @property (nonatomic, readonly) NSString *viewName;
-
-// XXX: for CirclePerspectiveFiletered
-- (instancetype)initWithDatabase:(CatalogDatabase *)database;
-- (void)dropView;
 
 @end
 
@@ -67,20 +66,6 @@
 
 @implementation CatalogPerspectiveFiltered
 
-- (instancetype)initWithDatabase:(CatalogDatabase *)database
-{
-  self = [super initWithDatabase:database];
-
-  // XXX: a simple and stupid filter
-  [self dropView];
-  static NSString *sqlFormat = (@"CREATE TEMPORARY VIEW %@"
-                                @"  AS SELECT * FROM ComiketCircle WHERE pageNo < 100 AND pageNo != 0;");
-  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
-  NSAssert([self.fmDatabase executeUpdate:sql], @"CREATE VIEW must succeed");
-
-  return self;
-}
-
 - (NSArray *)circlesWithLimit:(NSUInteger)limit offset:(NSUInteger)offset
 {
   static NSString *sqlFormat = @"SELECT * FROM %@ LIMIT %lu OFFSET %lu;";
@@ -110,6 +95,14 @@
   return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:NO];
 }
 
+- (void)createView
+{
+  static NSString *sqlFormat = (@"CREATE TEMPORARY VIEW %@"
+                                @"  AS SELECT * FROM ComiketCircle WHERE pageNo < 100 AND pageNo != 0;");
+  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+  NSAssert([self.fmDatabase executeUpdate:sql], @"CREATE VIEW must succeed");
+}
+
 @end
 
 #pragma mark -
@@ -121,23 +114,27 @@
 
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database
 {
-  return [[CatalogPerspectiveDefault alloc] initWithDatabase:database];
+  return [self perspectiveWithDatabase:database filter:nil];
 }
 
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(CatalogFilter *)filter
 {
-  filter; // XXX: use me!
-  return [[CatalogPerspectiveFiltered alloc] initWithDatabase:database];
+  filter = filter ?: [CatalogFilter passthroughFilter];
+  Class class = ([filter isEqual:[CatalogFilter passthroughFilter]]
+                 ? [CatalogPerspectiveDefault class]
+                 : [CatalogPerspectiveFiltered class]);
+  return [[class alloc] initWithDatabase:database filter:filter];
 }
 
 
-- (instancetype)initWithDatabase:(CatalogDatabase *)database
+- (instancetype)initWithDatabase:(CatalogDatabase *)database filter:(CatalogFilter *)filter
 {
   self = [super init];
   if (!self) return nil;
 
   self.database = database;
   self.fmDatabase = database.database;
+  self.filter = filter;
   _count = NSNotFound;
 
   [self createView];
@@ -188,13 +185,27 @@
   return page;
 }
 
+- (NSUInteger)numberOfCircleCollections
+{
+  ABSTRACT_METHOD;
+  return 0;
+}
+
+- (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
+{
+  ABSTRACT_METHOD;
+  return nil;
+}
+
 #pragma mark View Management
 
 - (void)createView
 {
-  static NSString *sqlFormat = (@"CREATE TEMPORARY VIEW %@"
-                                @"  AS SELECT * FROM ComiketCircle;");
-  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
+  static NSString *sqlFormat = @"CREATE TEMPORARY VIEW %@ AS %@;";
+  NSString *sql = [NSString stringWithFormat:
+                   sqlFormat,
+                   self.viewName,
+                   self.filter.selectStatement];
   NSAssert([self.fmDatabase executeUpdate:sql], @"CREATE VIEW must succeed");
 }
 
@@ -209,19 +220,4 @@
 {
   return [NSString stringWithFormat:@"view_%lx", (unsigned long)self.hash];
 }
-
-#pragma mark Abstract Methods
-
-- (NSUInteger)numberOfCircleCollections
-{
-  NSAssert(NO, @"");
-  return 0;
-}
-
-- (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
-{
-  NSAssert(NO, @"");
-  return nil;
-}
-
 @end

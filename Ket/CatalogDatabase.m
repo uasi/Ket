@@ -1,6 +1,5 @@
 #import "CatalogDatabase.h"
 
-#import "CatalogPerspective.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import <FMDB/FMDatabase.h>
@@ -229,11 +228,6 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
   }
 
   return blockIDToBlockName[blockID];
-}
-
-- (CatalogPerspective *)perspective
-{
-  return [CatalogPerspective perspectiveWithDatabase:self];
 }
 
 @end

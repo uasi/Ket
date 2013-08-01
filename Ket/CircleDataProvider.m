@@ -31,7 +31,7 @@
   self.database = [[CatalogDatabase alloc] initWithURL:databaseURL];
   if (!self.database) return nil;
 
-  self.perspective = [self.database perspective];
+  self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database];
 
   NSURL *archiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
   self.archive = [[CircleCutArchive alloc] initWithURL:archiveURL];
@@ -86,7 +86,12 @@
 
 - (void)filterUsingString:(NSString *)string
 {
-  // TODO: filter
+  if ([string isEqualToString:@""]) {
+    self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database];
+  }
+  else {
+    self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database filter:string];
+  }
 
   [(RACSubject *)self.dataDidChangeSignal sendNext:nil];
 }

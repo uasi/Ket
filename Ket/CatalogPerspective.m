@@ -121,8 +121,12 @@
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database
 {
   return [[CatalogPerspectiveDefault alloc] initWithDatabase:database];
-  // XXX: use this if you want to test CatalogPerspectiveFiltered
-  //return [[CatalogPerspectiveFiltered alloc] initWithDatabase:database];
+}
+
++ (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(NSString *)filter
+{
+  filter; // XXX: use me!
+  return [[CatalogPerspectiveFiltered alloc] initWithDatabase:database];
 }
 
 - (instancetype)initWithDatabase:(CatalogDatabase *)database

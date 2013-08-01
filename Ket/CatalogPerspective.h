@@ -8,6 +8,7 @@
 @property (nonatomic, readonly) NSUInteger numberOfCircleCollections;
 
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database;
++ (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(NSString *)filter;
 
 - (NSUInteger)pageAtIndex:(NSUInteger)index; // XXX: remove in favor of -[CircleCollection page];
 - (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index;

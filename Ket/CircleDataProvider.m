@@ -53,7 +53,7 @@
 - (NSString *)stringValueForGroupRow:(NSInteger)row
 {
   if (![self isGroupRow:row]) return nil;
-  return [NSString stringWithFormat:@"Page %lu", (unsigned long)[self.perspective pageAtIndex:[self pageIndexForRow:row]]];
+  return [self circleCollectionForRow:row + 1].summary;
 }
 
 - (BOOL)isGroupRow:(NSInteger)row

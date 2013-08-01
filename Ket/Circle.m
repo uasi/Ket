@@ -113,6 +113,15 @@ static NSURL *URLFromString(NSString *string) {
   return [NSString stringWithFormat:@"%d%@", (int)self.space, sub];
 }
 
+- (NSComparisonResult)compare:(Circle *)circle
+{
+  if (self.comiketNo < circle.comiketNo) return NSOrderedAscending;
+  if (self.comiketNo > circle.comiketNo) return NSOrderedDescending;
+  if (self.identifier < circle.identifier) return NSOrderedAscending;
+  if (self.identifier > circle.identifier) return NSOrderedDescending;
+  return NSOrderedSame;
+}
+
 #pragma mark NSObject Protocol
 
 - (BOOL)isEqual:(id)object

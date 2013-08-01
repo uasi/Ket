@@ -11,6 +11,8 @@
 
 @implementation CircleCollection
 
+@synthesize summary = _summary;
+
 - (instancetype)initWithCircles:(NSArray *)circles count:(NSUInteger)count respectsCutIndex:(BOOL)respectsCutIndex
 {
   self = [super init];
@@ -44,11 +46,34 @@
   return self;
 }
 
-@dynamic page;
+static NSString *circleSummary(Circle *circle) {
+  return [NSString stringWithFormat:
+          @"Page %lu [%lu]",
+          (unsigned long)circle.page,
+          (unsigned long)circle.cutIndex];
+}
 
-- (NSUInteger)page
-{
-  return ((Circle *)self.circles[0]).page;
+- (NSString *)summary {
+  if (_summary) return _summary;
+
+  if (self.circles.count == 0) {
+    _summary = @"(Empty)";
+    return _summary;
+  }
+
+  NSArray *circles = [self.circles sortedArrayUsingSelector:@selector(compare:)];
+  Circle *minCircle = circles[0];
+  Circle *maxCircle = circles.lastObject;
+  if ([minCircle isEqual:maxCircle]) {
+    _summary = circleSummary(minCircle);
+  }
+  else {
+    _summary = [NSString stringWithFormat:
+                @"%@ - %@",
+                circleSummary(minCircle),
+                circleSummary(maxCircle)];
+  }
+  return _summary;
 }
 
 @end

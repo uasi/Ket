@@ -35,6 +35,8 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
 + (Circle *)emptyCircle;
 + (instancetype)circleWithResultSet:(FMResultSet *)result;
 
+- (NSComparisonResult)compare:(Circle *)circle;
+
 - (BOOL)isEqual:(id)object;
 - (NSUInteger)hash;
 

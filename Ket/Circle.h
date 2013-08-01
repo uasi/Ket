@@ -11,11 +11,12 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
                                                          // Column Name
 @property (nonatomic, readonly) NSUInteger comiketNo;    // comiketNo
 @property (nonatomic, readonly) NSUInteger identifier;   // id
-@property (nonatomic, readonly) NSUInteger page;         // page
+@property (nonatomic, readonly) NSUInteger page;         // pageNo
 @property (nonatomic, readonly) NSUInteger cutIndex;     // cutIndex (in [1, 36])
+@property (nonatomic, readonly) NSUInteger day;          // day
+@property (nonatomic, readonly) NSUInteger blockID;      // blockId
 @property (nonatomic, readonly) NSUInteger space;        // spaceNo
 @property (nonatomic, readonly) CircleSpaceSub spaceSub; // spaceNoSub
-@property (nonatomic, readonly) NSUInteger blockID;      // blockId
 @property (nonatomic, readonly) NSString *spaceString;   // (N/A)
 @property (nonatomic, readonly) NSUInteger genreID;      // genreId
 @property (nonatomic, readonly) NSString *circleName;    // circleName

@@ -32,9 +32,10 @@
 @property (nonatomic, readwrite) NSUInteger identifier;
 @property (nonatomic, readwrite) NSUInteger page;
 @property (nonatomic, readwrite) NSUInteger cutIndex;
+@property (nonatomic, readwrite) NSUInteger day;
+@property (nonatomic, readwrite) NSUInteger blockID;
 @property (nonatomic, readwrite) NSUInteger space;
 @property (nonatomic, readwrite) CircleSpaceSub spaceSub;
-@property (nonatomic, readwrite) NSUInteger blockID;
 @property (nonatomic, readwrite) NSString *spaceString;
 @property (nonatomic, readwrite) NSUInteger genreID;
 @property (nonatomic, readwrite) NSString *circleName;
@@ -87,9 +88,10 @@ static NSURL *URLFromString(NSString *string) {
   self.identifier = [result intForColumn:@"id"];
   self.page = [result intForColumn:@"pageNo"];
   self.cutIndex = [result intForColumn:@"cutIndex"];
+  self.day = [result intForColumn:@"day"];
+  self.blockID = [result intForColumn:@"blockId"];
   self.space = [result intForColumn:@"spaceNo"];
   self.spaceSub = (CircleSpaceSub)[result intForColumn:@"spaceNoSub"];
-  self.blockID = [result intForColumn:@"blockId"];
   self.genreID = [result intForColumn:@"genreId"];
   self.circleName = [result stringForColumn:@"circleName"];
   self.circleKana = [result stringForColumn:@"circleKana"];

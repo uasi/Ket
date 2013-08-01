@@ -11,9 +11,7 @@
 
 @implementation CircleCollection
 
-- (instancetype)initWithCircles:(NSArray *)circles
-                cutCountPerPage:(NSUInteger)count
-               respectsCutIndex:(BOOL)respectsCutIndex
+- (instancetype)initWithCircles:(NSArray *)circles count:(NSUInteger)count respectsCutIndex:(BOOL)respectsCutIndex
 {
   self = [super init];
   if (!self) return nil;

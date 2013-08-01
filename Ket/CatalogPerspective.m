@@ -38,7 +38,7 @@
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
   NSArray *circles = [self.database circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:self.numberOfCirclesInCollection respectsCutIndex:YES];
+  return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:YES];
 }
 
 #pragma mark Concrete Methods
@@ -106,7 +106,7 @@
   NSUInteger limit = self.numberOfCirclesInCollection;
   NSUInteger offset = index * self.numberOfCirclesInCollection;
   NSArray *circles = [self circlesWithLimit:limit offset:offset];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:self.numberOfCirclesInCollection respectsCutIndex:NO];
+  return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:NO];
 }
 
 @end

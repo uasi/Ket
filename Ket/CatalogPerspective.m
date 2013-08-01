@@ -95,14 +95,6 @@
   return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:NO];
 }
 
-- (void)createView
-{
-  static NSString *sqlFormat = (@"CREATE TEMPORARY VIEW %@"
-                                @"  AS SELECT * FROM ComiketCircle WHERE pageNo < 100 AND pageNo != 0;");
-  NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
-  NSAssert([self.fmDatabase executeUpdate:sql], @"CREATE VIEW must succeed");
-}
-
 @end
 
 #pragma mark -

@@ -13,6 +13,7 @@
 @property (nonatomic) CatalogPerspective *perspective;
 @property (nonatomic) CircleCutArchive *archive;
 
+@property (nonatomic, readwrite) RACSignal *dataDidChangeSignal;
 @property (nonatomic, readwrite) NSUInteger comiketNo;
 
 @end
@@ -36,7 +37,9 @@
   self.archive = [[CircleCutArchive alloc] initWithURL:archiveURL];
   if (!self.archive) return nil;
 
-  return self;[[NSFileManager defaultManager] fileExistsAtPath:[archiveURL path]];
+  self.dataDidChangeSignal = [RACSubject subject];
+
+  return self;
 }
 
 - (NSInteger)numberOfRows
@@ -79,6 +82,13 @@
   else {
     return [self.archive imageForCircle:circle];
   }
+}
+
+- (void)filterUsingString:(NSString *)string
+{
+  // TODO: filter
+
+  [(RACSubject *)self.dataDidChangeSignal sendNext:nil];
 }
 
 #pragma mark Accessors

@@ -14,10 +14,12 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 @interface CatalogTableViewDelegate ()
 
 @property (nonatomic, weak) IBOutlet Document *document;
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
+
+@property (nonatomic, weak) CircleDataProvider *provider;
 
 @property (nonatomic, readwrite) Circle *selectedCircle;
 
-@property (nonatomic) CircleDataProvider *provider;
 @property (nonatomic) RACSubject *tableViewColumnDidResizeSignal;
 
 @end
@@ -26,11 +28,15 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
 - (void)awakeFromNib
 {
-  self.provider = [[CircleDataProvider alloc] initWithComiketNo:self.document.comiketNo];
+  self.provider = self.document.circleDataProvider;
 
   self.tableViewColumnDidResizeSignal = [RACSubject subject];
   [[self.tableViewColumnDidResizeSignal throttle:kThrottleForReloadingDataOnResizing] subscribeNext:^(NSTableView *tableView) {
     [tableView reloadData];
+  }];
+
+  [self.provider.dataDidChangeSignal subscribeNext:^(id _) {
+    [self.tableView reloadData];
   }];
 
   [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {

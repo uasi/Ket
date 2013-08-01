@@ -2,6 +2,7 @@
 
 #import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
+#import "CircleDataProvider.h"
 #import "DocumentController.h"
 #import "PathUtils.h"
 
@@ -11,6 +12,8 @@
 @property (nonatomic, readwrite) Circle *selectedCircle; // bound to self.tableViewDelegate.selectedCircle.
 
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
+
+@property (nonatomic) CircleDataProvider *provider;
 
 @end
 
@@ -35,6 +38,7 @@
 {
   _comiketNo = comiketNo;
   EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
+  self.provider = [[CircleDataProvider alloc] initWithComiketNo:comiketNo];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -71,6 +75,13 @@
 - (IBAction)performFindPanelAction:(id)sender
 {
   [[DocumentController sharedDocumentController] showSearchPanel:self];
+}
+
+#pragma mark Accessors
+
+- (CircleDataProvider *)circleDataProvider
+{
+  return _provider;
 }
 
 @end

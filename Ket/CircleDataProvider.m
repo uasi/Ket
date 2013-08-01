@@ -93,9 +93,4 @@
   return self.database.numberOfCutsInColumn;
 }
 
-- (NSIndexSet *)pageSet
-{
-  return self.database.pageSet;
-}
-
 @end

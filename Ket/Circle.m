@@ -1,5 +1,6 @@
 #import "Circle.h"
 
+#import "PathUtils.h"
 #import <FMDB/FMResultSet.h>
 
 #pragma mark - EmptyCircle
@@ -14,6 +15,11 @@
 - (NSUInteger)hash
 {
   return 0;
+}
+
+- (NSString *)description
+{
+  return @"<(empty circle)>";
 }
 
 @end
@@ -120,6 +126,26 @@ static NSURL *URLFromString(NSString *string) {
 - (NSUInteger)hash
 {
   return (self.comiketNo << (sizeof(NSUInteger) / 2)) | self.identifier;
+}
+
+- (NSString *)description
+{
+  if (self.page > 0) {
+    return [NSString stringWithFormat:
+            @"<%@ #%lu p%lu[%lu] %@>",
+            ComiketNameFromComiketNo(self.comiketNo),
+            (unsigned long)self.identifier,
+            (unsigned long)self.page,
+            (unsigned long)self.cutIndex,
+            self.circleName];
+  }
+  else {
+    return [NSString stringWithFormat:
+            @"<%@ #%lu (unaccepted) %@>",
+            ComiketNameFromComiketNo(self.comiketNo),
+            (unsigned long)self.identifier,
+            self.circleName];
+  }
 }
 
 @end

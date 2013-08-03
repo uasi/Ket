@@ -1,10 +1,10 @@
-#import "Circle.h"
-#import "Document.h"
+@class Circle;
+@class Document;
 
 @interface CircleInspectorController : NSWindowController <NSWindowDelegate>
 
 @property (nonatomic, readonly) Circle *circle;
-@property (nonatomic, setter = setBookmarked:) BOOL isBookmarked;
+@property (nonatomic, getter = isBookmarked, setter = setBookmarked:) BOOL bookmarked;
 
 @end
 

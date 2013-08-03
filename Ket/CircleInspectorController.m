@@ -1,5 +1,6 @@
 #import "CircleInspectorController.h"
 
+#import "Circle.h"
 #import "Document.h"
 #import "DocumentController.h"
 
@@ -32,6 +33,14 @@
   return self;
 }
 
+- (void)windowDidLoad
+{
+  [super windowDidLoad];
+  self.window.delegate = self;
+}
+
+#pragma mark Accessors
+
 - (void)setDocument:(Document *)document
 {
   [super setDocument:document];
@@ -42,14 +51,6 @@
   self.circleBindingDisposable = [binding bindTo:RACBind(document, selectedCircle)];
 }
 
-- (void)windowDidLoad
-{
-  [super windowDidLoad];
-  self.window.delegate = self;
-}
-
-#pragma mark - Accessors
-
 - (BOOL)isBookmarked
 {
   if (!self.circle) return NO;
@@ -57,9 +58,9 @@
   return bookmark && bookmark.boolValue;
 }
 
-- (void)setBookmarked:(BOOL)isBookmarked {
+- (void)setBookmarked:(BOOL)bookmarked {
   if (!self.circle) return;
-  self.document.bookmarks[@(self.circle.identifier)] = @(isBookmarked);
+  self.document.bookmarks[@(self.circle.identifier)] = @(bookmarked);
 }
 
 @end

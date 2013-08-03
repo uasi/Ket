@@ -11,6 +11,7 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
                                                          // Column Name
 @property (nonatomic, readonly) NSUInteger comiketNo;    // comiketNo
 @property (nonatomic, readonly) NSUInteger identifier;   // id
+@property (nonatomic, readonly) NSUInteger globalID;     // (N/A)
 @property (nonatomic, readonly) NSUInteger page;         // pageNo
 @property (nonatomic, readonly) NSUInteger cutIndex;     // cutIndex (in [1, 36])
 @property (nonatomic, readonly) NSUInteger day;          // day

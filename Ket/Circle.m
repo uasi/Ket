@@ -124,6 +124,13 @@ static NSURL *URLFromString(NSString *string) {
   return NSOrderedSame;
 }
 
+#pragma mark Accessors
+
+- (NSUInteger)globalID
+{
+  return (self.comiketNo << 24) | self.identifier;
+}
+
 #pragma mark NSObject Protocol
 
 - (BOOL)isEqual:(id)object

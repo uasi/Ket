@@ -1,3 +1,4 @@
+@class Checklist;
 @class Circle;
 @class CircleDataProvider;
 
@@ -7,6 +8,7 @@
 @property (nonatomic, readonly) NSMutableDictionary *bookmarks;
 @property (nonatomic, readonly) Circle *selectedCircle;
 @property (nonatomic, readonly) CircleDataProvider *circleDataProvider;
+@property (nonatomic, readonly) Checklist *checklist;
 
 - (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo;
 

@@ -2,14 +2,15 @@
 
 #import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
+#import "Checklist.h"
 #import "CircleDataProvider.h"
 #import "DocumentController.h"
 #import "PathUtils.h"
 
 @interface Document ()
 
-@property (nonatomic, readwrite) NSMutableDictionary *bookmarks;
 @property (nonatomic, readwrite) Circle *selectedCircle; // bound to self.tableViewDelegate.selectedCircle.
+@property (nonatomic, readwrite) Checklist *checklist;
 
 @property (nonatomic) IBOutlet CatalogTableViewDelegate *tableViewDelegate;
 
@@ -18,16 +19,6 @@
 @end
 
 @implementation Document
-
-- (id)init
-{
-  self = [super init];
-  if (!self) return nil;
-
-  self.bookmarks = [NSMutableDictionary dictionary];
-
-  return self;
-}
 
 - (NSString *)windowNibName
 {
@@ -38,6 +29,7 @@
 {
   _comiketNo = comiketNo;
   EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
+  self.checklist = [[Checklist alloc] initWithComiketNo:comiketNo];
   self.provider = [[CircleDataProvider alloc] initWithComiketNo:comiketNo];
 }
 
@@ -54,20 +46,13 @@
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-  return [NSKeyedArchiver archivedDataWithRootObject:@{
-          @"bookmarks": self.bookmarks,
-          }];
+  return [self.checklist data];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-  NSDictionary *properties = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  if (!properties && outError) {
-    *outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
-    return NO;
-  }
-  self.bookmarks = properties[@"bookmarks"];
-  return YES;
+  self.checklist = [[Checklist alloc] initWithData:data error:outError];
+  return !!self.checklist;
 }
 
 #pragma mark Actions (As A Responder)

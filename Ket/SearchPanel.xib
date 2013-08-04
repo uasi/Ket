@@ -58,7 +58,7 @@
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="801325982">
 								<int key="NSCellFlags">-1804599231</int>
-								<int key="NSCellFlags2">272630784</int>
+								<int key="NSCellFlags2">268436480</int>
 								<string key="NSContents"/>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande</string>
@@ -287,7 +287,7 @@
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<boolean value="YES" key="5.NSWindowTemplate.visibleAtLaunch"/>
+				<boolean value="NO" key="5.NSWindowTemplate.visibleAtLaunch"/>
 				<array key="6.IBNSViewMetadataConstraints">
 					<reference ref="777705985"/>
 					<reference ref="158808774"/>
@@ -319,17 +319,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SearchPanelController</string>
 					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">performSearch:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">performSearch:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="performSearch:">id</string>
+						<string key="showWindowForAddressSearch:">id</string>
+						<string key="showWindowForGenericSearch:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="performSearch:">
 							<string key="name">performSearch:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="showWindowForAddressSearch:">
+							<string key="name">showWindowForAddressSearch:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showWindowForGenericSearch:">
+							<string key="name">showWindowForGenericSearch:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">queryTextField</string>
 						<string key="NS.object.0">NSTextField</string>

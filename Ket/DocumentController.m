@@ -28,6 +28,9 @@
   self.searchPanelController = [[SearchPanelController alloc] initWithWindowNibName:@"SearchPanel"];
   self.welcomeWindowController = [[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
 
+  [self.circleInspectorController window];
+  [self.searchPanelController window];
+
   return self;
 }
 
@@ -72,9 +75,14 @@
   // TODO: make inspector hidable
 }
 
-- (IBAction)showSearchPanel:(id)sender
+- (IBAction)showSearchPanelForGenericSearch:(id)sender
 {
-  [self.searchPanelController showWindow:self];
+  [self.searchPanelController showWindowForGenericSearch:self];
+}
+
+- (IBAction)showSearchPanelForAddressSearch:(id)sender
+{
+  [self.searchPanelController showWindowForAddressSearch:self];
 }
 
 @end

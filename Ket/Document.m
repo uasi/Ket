@@ -59,7 +59,7 @@
 
 - (IBAction)performFindPanelAction:(id)sender
 {
-  [[DocumentController sharedDocumentController] showSearchPanel:self];
+  [[DocumentController sharedDocumentController] showSearchPanelForGenericSearch:self];
 }
 
 #pragma mark Accessors

@@ -13,7 +13,8 @@
 - (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withComiketNo:(NSUInteger)comiketNo error:(NSError **)outError;
 
 - (IBAction)showCircleInspector:(id)sender;
-- (IBAction)showSearchPanel:(id)sender;
+- (IBAction)showSearchPanelForGenericSearch:(id)sender;
+- (IBAction)showSearchPanelForAddressSearch:(id)sender;
 
 @end
 

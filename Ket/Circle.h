@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
 @property (nonatomic, readonly) NSUInteger identifier;   // id
 @property (nonatomic, readonly) NSUInteger globalID;     // (N/A)
 @property (nonatomic, readonly) NSUInteger page;         // pageNo
-@property (nonatomic, readonly) NSUInteger cutIndex;     // cutIndex (in [1, 36])
+@property (nonatomic, readonly) NSUInteger cutIndex;     // cutIndex
 @property (nonatomic, readonly) NSUInteger day;          // day
 @property (nonatomic, readonly) NSUInteger blockID;      // blockId
 @property (nonatomic, readonly) NSUInteger space;        // spaceNo

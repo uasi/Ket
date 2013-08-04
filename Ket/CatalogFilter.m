@@ -1,7 +1,5 @@
 #import "CatalogFilter.h"
 
-#define ESCAPE_CHAR_STRING @"\uffff" // A unicode noncharacter.
-
 @interface CatalogFilter ()
 
 @property (nonatomic, readwrite) NSString *selectStatement;
@@ -33,8 +31,9 @@
 
 static NSString *sqlEscape(NSString *string)
 {
-  string = [string stringByReplacingOccurrencesOfString:@"%" withString:(ESCAPE_CHAR_STRING @"%")];
-  string = [string stringByReplacingOccurrencesOfString:@"_" withString:(ESCAPE_CHAR_STRING @"_")];
+  string = [string stringByReplacingOccurrencesOfString:@"$" withString:@"$$"];
+  string = [string stringByReplacingOccurrencesOfString:@"%" withString:@"$%"];
+  string = [string stringByReplacingOccurrencesOfString:@"_" withString:@"$_"];
   string = [string stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
   return [NSString stringWithFormat:@"%%%@%%", string];
 }
@@ -48,11 +47,10 @@ static NSString *sqlEscape(NSString *string)
 
   NSString *sqlFormat = (@"SELECT * FROM ComiketCircle"
                          @"  WHERE pageNo > 0 AND description LIKE '%@'"
-                         @"  ESCAPE '%@'");
+                         @"  ESCAPE '$'");
   self.selectStatement = [NSString stringWithFormat:
                           sqlFormat,
-                          sqlEscape(string),
-                          ESCAPE_CHAR_STRING];
+                          sqlEscape(string)];
 
   return self;
 }

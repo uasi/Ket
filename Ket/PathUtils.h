@@ -1,4 +1,4 @@
-// Returns "Cxxx" where xxx is a given Comiket number, zero-padded
+// Returns "Cxxx" where xxx is a given Comiket number, left-padded with "0"
 //
 // Comiket ID is the canonical representation of Comiket number. Prefer it to
 // Comiket name for file name etc.

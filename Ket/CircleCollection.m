@@ -4,8 +4,8 @@
 
 @interface CircleCollection ()
 
+@property (nonatomic, copy, readwrite) NSArray *nonEmptyCircles;
 @property (nonatomic, copy, readwrite) NSArray *circles;
-@property (nonatomic, copy, readwrite) NSArray *circlesPaddedWithEmptyCircle;
 
 @end
 
@@ -18,14 +18,14 @@
   self = [super init];
   if (!self) return nil;
 
-  self.circles = circles;
+  self.nonEmptyCircles = circles;
 
   NSMutableArray *paddedCircles = [NSMutableArray arrayWithCapacity:count];
 
   if (respectsCutIndex) {
     NSInteger circleIndex = 0;
     for (NSInteger cutIndex = 1; cutIndex <= count; cutIndex++) {
-      if (circleIndex >= self.circles.count || cutIndex != ((Circle *)self.circles[circleIndex]).cutIndex) {
+      if (circleIndex >= circles.count || cutIndex != ((Circle *)circles[circleIndex]).cutIndex) {
         paddedCircles[cutIndex - 1] = [Circle emptyCircle];
       }
       else {
@@ -41,7 +41,7 @@
     }
   }
 
-  self.circlesPaddedWithEmptyCircle = paddedCircles;
+  self.circles = paddedCircles;
 
   return self;
 }
@@ -56,12 +56,12 @@ static NSString *circleSummary(Circle *circle) {
 - (NSString *)summary {
   if (_summary) return _summary;
 
-  if (self.circles.count == 0) {
+  if (self.nonEmptyCircles.count == 0) {
     _summary = @"(Empty)";
     return _summary;
   }
 
-  NSArray *circles = [self.circles sortedArrayUsingSelector:@selector(compare:)];
+  NSArray *circles = [self.nonEmptyCircles sortedArrayUsingSelector:@selector(compare:)];
   Circle *minCircle = circles[0];
   Circle *maxCircle = circles.lastObject;
   if ([minCircle isEqual:maxCircle]) {

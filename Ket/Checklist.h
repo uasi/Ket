@@ -2,6 +2,8 @@
 
 @interface Checklist : NSObject
 
+@property (nonatomic, readonly) NSUInteger comiketNo;
+
 - (instancetype)initWithComiketNo:(NSUInteger)comiketNo;
 - (instancetype)initWithData:(NSData *)data error:(NSError **)error;
 

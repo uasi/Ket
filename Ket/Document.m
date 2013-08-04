@@ -51,8 +51,11 @@
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-  self.checklist = [[Checklist alloc] initWithData:data error:outError];
-  return !!self.checklist;
+  Checklist *checklist = [[Checklist alloc] initWithData:data error:outError];
+  if (!checklist) return NO;
+  [self prepareDocumentWithComiketNo:checklist.comiketNo];
+  self.checklist = checklist;
+  return YES;
 }
 
 #pragma mark Actions (As A Responder)

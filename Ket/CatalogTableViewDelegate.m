@@ -36,6 +36,7 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
   }];
 
   [self.provider.dataDidChangeSignal subscribeNext:^(id _) {
+    [self.tableView scrollPoint:NSZeroPoint];
     [self.tableView reloadData];
   }];
 

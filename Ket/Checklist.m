@@ -4,6 +4,7 @@
 
 @interface Checklist ()
 
+@property (nonatomic) NSUInteger comiketNo;
 @property (nonatomic) NSMutableDictionary *bookmarks;
 
 @end
@@ -15,6 +16,7 @@
   self = [super init];
   if (!self) return nil;
 
+  self.comiketNo = comiketNo;
   self.bookmarks = [[NSMutableDictionary alloc] init];
 
   return self;
@@ -26,11 +28,23 @@
   if (!self) return nil;
 
   NSDictionary *properties = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  if (!properties && error) {
-    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
+  if (!properties) {
+    if (error) {
+      NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey:@"could not unarchive data"};
+      *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:userInfo];
+    }
     return nil;
   }
 
+  NSNumber *comiketNo = properties[@"comiketNo"];
+  if (!comiketNo) {
+    if (error) {
+      NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: @"comiketNo is not set"};
+      *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:userInfo];
+    }
+    return nil;
+  }
+  self.comiketNo = [comiketNo unsignedIntegerValue];
   self.bookmarks = [(properties[@"bookmarks"] ?: @[]) mutableCopy];
 
   return self;
@@ -57,8 +71,9 @@
 - (NSData *)data
 {
   return [NSKeyedArchiver archivedDataWithRootObject:@{
-   @"bookmarks": self.bookmarks,
-   }];
+          @"bookmarks": self.bookmarks,
+          @"comiketNo": @(self.comiketNo),
+          }];
 }
 
 @end

@@ -20,7 +20,6 @@
 @property (nonatomic) CatalogDatabase *database;
 @property (nonatomic, weak) FMDatabase *fmDatabase;
 @property (nonatomic) CatalogFilter *filter;
-@property (nonatomic) NSCache *circleCollectionCache;
 
 @property (nonatomic, readonly) NSUInteger numberOfCirclesInCollection;
 @property (nonatomic, readonly) NSString *viewName;
@@ -52,14 +51,7 @@
 - (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
 {
   NSAssert(index < self.numberOfCircleCollections, @"index must be less than the number of circle collections");
-
-  CircleCollection *collection = [self.circleCollectionCache objectForKey:@(index)];
-  if (collection) return collection;
-
-  NSUInteger page = [self pageAtIndex:index];
-  collection = [self circleCollectionForPage:page];
-  [self.circleCollectionCache setObject:collection forKey:@(index)];
-  return collection;
+  return [self circleCollectionForPage:[self pageAtIndex:index]];
 }
 
 @end
@@ -96,16 +88,10 @@
 - (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
 {
   NSAssert(index < self.numberOfCircleCollections, @"index must be less than the number of circle collections");
-
-  CircleCollection *collection = [self.circleCollectionCache objectForKey:@(index)];
-  if (collection) return collection;
-
   NSUInteger limit = self.numberOfCirclesInCollection;
   NSUInteger offset = index * self.numberOfCirclesInCollection;
   NSArray *circles = [self circlesWithLimit:limit offset:offset];
-  collection = [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:NO];
-  [self.circleCollectionCache setObject:collection forKey:@(index)];
-  return collection;
+  return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:NO];
 }
 
 @end
@@ -140,7 +126,6 @@
   self.database = database;
   self.fmDatabase = database.database;
   self.filter = filter;
-  self.circleCollectionCache = [[NSCache alloc] init];
   _count = NSNotFound;
 
   [self createView];

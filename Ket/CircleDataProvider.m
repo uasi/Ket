@@ -10,12 +10,15 @@
 
 @interface CircleDataProvider ()
 
+@property (nonatomic, readwrite) NSUInteger comiketNo;
+@property (nonatomic, readwrite) RACSignal *dataDidChangeSignal;
+
 @property (nonatomic) CatalogDatabase *database;
 @property (nonatomic) CatalogPerspective *perspective;
 @property (nonatomic) CircleCutArchive *archive;
 
-@property (nonatomic, readwrite) RACSignal *dataDidChangeSignal;
-@property (nonatomic, readwrite) NSUInteger comiketNo;
+@property (nonatomic) NSCache *circleCollectionCache;
+@property (nonatomic, readonly) NSCache *sharedCircleCutCache;
 
 @end
 
@@ -40,6 +43,8 @@
   self.archive = [[CircleCutArchive alloc] initWithURL:archiveURL];
   if (!self.archive) return nil;
 
+  self.circleCollectionCache = [[NSCache alloc] init];
+
   self.dataDidChangeSignal = [RACSubject subject];
 
   return self;
@@ -53,7 +58,13 @@
 - (CircleCollection *)circleCollectionForRow:(NSInteger)row
 {
   if ([self isGroupRow:row]) return nil;
-  return [self.perspective circleCollectionAtIndex:[self pageIndexForRow:row]];
+
+  CircleCollection *collection = [self.circleCollectionCache objectForKey:@(row)];
+  if (collection) return collection;
+
+  collection = [self.perspective circleCollectionAtIndex:[self pageIndexForRow:row]];
+  [self.circleCollectionCache setObject:collection forKey:@(row)];
+  return collection;
 }
 
 - (NSString *)stringValueForGroupRow:(NSInteger)row
@@ -79,12 +90,17 @@
 
 - (NSImage *)imageForCircle:(Circle *)circle
 {
+  NSImage *image = [self.sharedCircleCutCache objectForKey:@(circle.globalID)];
+  if (image) return image;
+
   if ([circle isEqual:[Circle emptyCircle]]) {
-    return [NSImage imageNamed:@"Placeholder210x300"];
+    image = [NSImage imageNamed:@"Placeholder210x300"];
   }
   else {
-    return [self.archive imageForCircle:circle];
+    image = [self.archive imageForCircle:circle];
   }
+  [self.sharedCircleCutCache setObject:image forKey:@(circle.globalID)];
+  return image;
 }
 
 - (void)filterWithString:(NSString *)string
@@ -117,8 +133,19 @@
 - (void)setFilter:(CatalogFilter *)filter
 {
   self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database filter:filter];
+  [self.circleCollectionCache removeAllObjects];
   [(RACSubject *)self.dataDidChangeSignal sendNext:nil];
   _filter = filter;
+}
+
+- (NSCache *)sharedCircleCutCache
+{
+  static NSCache *cache;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    cache = [[NSCache alloc] init];
+  });
+  return cache;
 }
 
 @end

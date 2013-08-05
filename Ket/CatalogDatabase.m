@@ -1,5 +1,6 @@
 #import "CatalogDatabase.h"
 
+#import "ChecklistModule.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import <FMDB/FMDatabase.h>
@@ -28,6 +29,10 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
   self.database = [FMDatabase databaseWithPath:URL.path];
   if (![self.database openWithFlags:SQLITE_OPEN_READONLY]) return nil;
+
+  int rc = ChecklistModuleInit(self.database.sqliteHandle);
+  NSAssert(rc == SQLITE_OK, @"ChecklistModuleInit() must succeed");
+  if (rc != SQLITE_OK) return nil;
 
   return self;
 }

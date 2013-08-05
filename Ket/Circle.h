@@ -1,6 +1,7 @@
-#import <Foundation/Foundation.h>
-
 @class FMResultSet;
+
+NSUInteger ComiketNoFromGlobalCircleID(NSUInteger globalID);
+NSUInteger CircleIdentifierFromGlobalCircleID(NSUInteger globalID);
 
 typedef NS_ENUM(NSUInteger, CircleSpaceSub) {
   CircleSpaceSubA = 0,

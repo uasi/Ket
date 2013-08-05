@@ -4,7 +4,8 @@
 
 @interface Checklist ()
 
-@property (nonatomic) NSUInteger comiketNo;
+@property (nonatomic, readwrite) NSUInteger comiketNo;
+
 @property (nonatomic) NSMutableDictionary *bookmarks;
 
 // Snapshot management
@@ -15,7 +16,7 @@
 
 @implementation Checklist
 
-@synthesize orderedGlobalIDSet = _orderedGlobalIDSet;
+@synthesize globalIDSet = _globalIDSet;
 @synthesize data = _data;
 @synthesize snapshot = _snapshot;
 
@@ -100,15 +101,20 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   return !!self.bookmarks[@(circle.globalID)];
 }
 
-- (NSOrderedSet *)orderedGlobalIDSet
+- (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID
 {
-  if (_orderedGlobalIDSet) return _orderedGlobalIDSet;
-  NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:self.bookmarks.allKeys];
-  [set sortUsingComparator:^NSComparisonResult(NSNumber *n1, NSNumber *n2) {
-    return [n1 compare:n2];
-  }];
-  _orderedGlobalIDSet = [set copy];
-  return _orderedGlobalIDSet;
+  return !!self.bookmarks[@(globalID)];
+}
+
+- (NSIndexSet *)globalIDSet
+{
+  if (_globalIDSet) return _globalIDSet;
+  NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+  for (NSNumber *globalID in self.bookmarks) {
+    [set addIndex:globalID.unsignedIntegerValue];
+  }
+  _globalIDSet = [set copy];
+  return _globalIDSet;
 }
 
 - (NSData *)data
@@ -129,11 +135,16 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   return _snapshot;
 }
 
+- (NSString *)tableName
+{
+  return [NSString stringWithFormat:@"checklist_%tx", (void *)self];
+}
+
 #pragma mark Cached State Management
 
 - (void)invalidateCachedState
 {
-  _orderedGlobalIDSet = nil;
+  _globalIDSet = nil;
   _data = nil;
   _snapshot = nil;
 }

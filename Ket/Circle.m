@@ -3,6 +3,16 @@
 #import "PathUtils.h"
 #import <FMDB/FMResultSet.h>
 
+NSUInteger ComiketNoFromGlobalCircleID(NSUInteger globalID)
+{
+  return globalID >> 24;
+}
+
+NSUInteger CircleIdentifierFromGlobalCircleID(NSUInteger globalID)
+{
+  return globalID & 0x00FFFFFF;
+}
+
 #pragma mark - EmptyCircle
 
 @interface EmptyCircle : Circle

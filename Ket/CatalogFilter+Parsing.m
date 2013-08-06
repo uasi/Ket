@@ -75,7 +75,7 @@ static NSDictionary *blockNameToIDTable(void);
 
 #define SET_SUBSTR_IF_PRESENTS(subscript, string, result, index) \
 if ([result rangeAtIndex:index].length > 0) { \
-subscript = [string substringWithRange:[result rangeAtIndex:index]]; \
+  subscript = [string substringWithRange:[result rangeAtIndex:index]]; \
 }
 
 + (NSDictionary *)componentsByScanningCompactAddress:(NSString *)compactAddress
@@ -84,11 +84,11 @@ subscript = [string substringWithRange:[result rangeAtIndex:index]]; \
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     NSString *pattern = (@"^@([1-3])" // 1: day
-                         @"[EW]?" // east or west
-                         @"([A-Z]|(?:[kstnhfpmyr]|sh|ch|ts)?[aiueo][hk]?)" // 2: block
-                         @"(\\d{1,2})" // 3: space
-                         @"([ab]?)" // 4: subspace
-                         );
+                         @"(?:[EW]?" // east or west
+                         @"(?:([A-Z]|(?:[kstnhfpmyr]|sh|ch|ts)?[aiueo][hk]?)" // 2: block
+                         @"(?:(\\d{1,2})" // 3: space
+                         @"(?:([ab]?)" // 4: subspace
+                         @")?)?)?)?");
     NSError *error;
     regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
     NSCAssert(regex, @"%@", error);

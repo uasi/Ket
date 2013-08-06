@@ -15,6 +15,7 @@
 - (IBAction)showCircleInspector:(id)sender;
 - (IBAction)showSearchPanelForGenericSearch:(id)sender;
 - (IBAction)showSearchPanelForAddressSearch:(id)sender;
+- (IBAction)showSearchPanelForLabelSearch:(id)sender;
 
 @end
 

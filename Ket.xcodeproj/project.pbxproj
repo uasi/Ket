@@ -19,6 +19,8 @@
 		5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5870B4F5176E9DEC00B449DA /* CircleInspector.xib */; };
 		5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FA176ECBE800B449DA /* PathUtils.m */; };
 		5870B4FE176EF41800B449DA /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FD176EF41700B449DA /* Checklist.m */; };
+		587FDA4317AFA4EA00CD412D /* ChecklistModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FDA4217AFA4E900CD412D /* ChecklistModule.m */; };
+		587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */; };
 		588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */ = {isa = PBXBuildFile; fileRef = 588F563F1791A8C900219BA6 /* sqlite-wrapper */; };
 		588F56471791B31E00219BA6 /* CatalogImportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56451791B31E00219BA6 /* CatalogImportWindowController.m */; };
 		588F56481791B31E00219BA6 /* CatalogImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588F56461791B31E00219BA6 /* CatalogImportWindow.xib */; };
@@ -93,6 +95,10 @@
 		5870B4FA176ECBE800B449DA /* PathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtils.m; sourceTree = "<group>"; };
 		5870B4FC176EF41700B449DA /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
 		5870B4FD176EF41700B449DA /* Checklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checklist.m; sourceTree = "<group>"; };
+		587FDA4117AFA4E800CD412D /* ChecklistModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChecklistModule.h; sourceTree = "<group>"; };
+		587FDA4217AFA4E900CD412D /* ChecklistModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChecklistModule.m; sourceTree = "<group>"; };
+		587FDA4617B13EAB00CD412D /* CatalogFilter+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CatalogFilter+Parsing.h"; sourceTree = "<group>"; };
+		587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CatalogFilter+Parsing.m"; sourceTree = "<group>"; };
 		588F563F1791A8C900219BA6 /* sqlite-wrapper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sqlite-wrapper"; sourceTree = "<group>"; };
 		588F56441791B31D00219BA6 /* CatalogImportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogImportWindowController.h; sourceTree = "<group>"; };
 		588F56451791B31E00219BA6 /* CatalogImportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogImportWindowController.m; sourceTree = "<group>"; };
@@ -220,6 +226,8 @@
 			children = (
 				58A039A41722698400A81DEE /* CatalogDatabase.h */,
 				58A039A51722698400A81DEE /* CatalogDatabase.m */,
+				587FDA4617B13EAB00CD412D /* CatalogFilter+Parsing.h */,
+				587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */,
 				58AAE6E817AAAAC9005DA52D /* CatalogFilter.h */,
 				58AAE6E917AAAACA005DA52D /* CatalogFilter.m */,
 				588F56441791B31D00219BA6 /* CatalogImportWindowController.h */,
@@ -230,6 +238,8 @@
 				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
 				5870B4FC176EF41700B449DA /* Checklist.h */,
 				5870B4FD176EF41700B449DA /* Checklist.m */,
+				587FDA4117AFA4E800CD412D /* ChecklistModule.h */,
+				587FDA4217AFA4E900CD412D /* ChecklistModule.m */,
 				58A039A61722698400A81DEE /* Circle.h */,
 				58A039A71722698500A81DEE /* Circle.m */,
 				58553FD01724DA6400D8387C /* CircleCollection.h */,
@@ -478,6 +488,8 @@
 				58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */,
 				58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */,
 				58AAE6EA17AAAACC005DA52D /* CatalogFilter.m in Sources */,
+				587FDA4317AFA4EA00CD412D /* ChecklistModule.m in Sources */,
+				587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

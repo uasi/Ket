@@ -1,5 +1,6 @@
 #import "CatalogDatabase.h"
 
+#import "ChecklistModule.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import <FMDB/FMDatabase.h>
@@ -7,9 +8,9 @@
 #import <FMDB/FMResultSet.h>
 #import <sqlite3.h>
 
-static const NSUInteger kNumberOfCutsInRow = 6;
-static const NSUInteger kNumberOfCutsInColmun = 6;
-static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCutsInColmun;
+static const NSUInteger kNumberOfCutsPerRow = 6;
+static const NSUInteger kNumberOfCutsPerColmun = 6;
+static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCutsPerColmun;
 
 @interface CatalogDatabase ()
 
@@ -21,13 +22,36 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 @synthesize pageSet = _pageSet;
 
++ (void)load
+{
+  sqlite3_config(SQLITE_CONFIG_URI, 1);
+}
+
 - (instancetype)initWithURL:(NSURL *)URL
 {
   self = [super init];
   if (!self) return nil;
 
-  self.database = [FMDatabase databaseWithPath:URL.path];
-  if (![self.database openWithFlags:SQLITE_OPEN_READONLY]) return nil;
+  // Here we create a writable in-memory database at first, then attach a
+  // read-only database to it. This enables us to execute a statement which has
+  // a side effect.
+  // If we do the opposite - in other words if we open a read-only database and
+  // then attach a writable database, we will not be able to execute such a
+  // statement even on the writable one. This is supposedly because the SQLite
+  // engine tries to aquire a mutex or something in the main database
+  // (which is read-only in this case).
+
+  self.database = [FMDatabase databaseWithPath:@":memory:"];
+  if (![self.database open]) return nil;
+
+  NSString *URLString = [URL.absoluteString stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+  static NSString *sqlFormat = @"ATTACH DATABASE '%@?mode=ro' AS Comiket;";
+  NSString *sql = [NSString stringWithFormat:sqlFormat, URLString];
+  if (![self.database executeUpdate:sql]) return nil;
+
+  int rc = ChecklistModuleInit(self.database.sqliteHandle);
+  NSAssert(rc == SQLITE_OK, @"ChecklistModuleInit() must succeed: %@", self.database.lastError);
+  if (rc != SQLITE_OK) return nil;
 
   return self;
 }
@@ -63,12 +87,12 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 - (NSUInteger)numberOfCutsInRow
 {
-  return kNumberOfCutsInRow;
+  return kNumberOfCutsPerRow;
 }
 
 - (NSUInteger)numberOfCutsInColumn
 {
-  return kNumberOfCutsInColmun;
+  return kNumberOfCutsPerColmun;
 }
 
 - (NSIndexSet *)pageSet
@@ -90,7 +114,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 - (NSArray *)circlesInPage:(NSUInteger)page
 {
-  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsInPage];
+  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsPerPage];
 
   NSString *query = (@"SELECT * FROM ComiketCircle"
                      @"  WHERE pageNo = (?)"

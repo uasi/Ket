@@ -1,17 +1,19 @@
 @class CatalogFilter;
+@class Checklist;
 @class Circle;
 @class CircleCollection;
 
 @interface CircleDataProvider : NSObject
 
 @property (nonatomic, readonly) NSUInteger comiketNo;
+@property (nonatomic, readonly) Checklist *checklist;
 @property (nonatomic, readonly) NSSize cutSize;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInRow;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
 @property (nonatomic, readonly) RACSignal *dataDidChangeSignal;
 @property (nonatomic) CatalogFilter *filter;
 
-- (instancetype)initWithComiketNo:(NSUInteger)comiketNo;
+- (instancetype)initWithChecklist:(Checklist *)checklist;
 
 - (NSInteger)numberOfRows;
 - (CircleCollection *)circleCollectionForRow:(NSInteger)row;

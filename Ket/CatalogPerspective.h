@@ -6,7 +6,9 @@
 
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) NSUInteger numberOfCircles;
+@property (nonatomic, readonly) NSUInteger numberOfCirclesPerCollection;
 @property (nonatomic, readonly) NSUInteger numberOfCircleCollections;
+
 
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database;
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(CatalogFilter *)filter;

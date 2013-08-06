@@ -30,7 +30,7 @@
   _comiketNo = comiketNo;
   EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
   self.checklist = [[Checklist alloc] initWithComiketNo:comiketNo];
-  self.provider = [[CircleDataProvider alloc] initWithComiketNo:comiketNo];
+  self.provider = [[CircleDataProvider alloc] initWithChecklist:self.checklist];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController

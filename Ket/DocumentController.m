@@ -85,4 +85,9 @@
   [self.searchPanelController showWindowForAddressSearch:self];
 }
 
+- (IBAction)showSearchPanelForLabelSearch:(id)sender
+{
+  [self.searchPanelController showWindowForLabelSearch:self];
+}
+
 @end

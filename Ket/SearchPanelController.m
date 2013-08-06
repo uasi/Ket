@@ -33,6 +33,16 @@
 
 - (IBAction)showWindowForAddressSearch:(id)sender
 {
+  [self showWindowForSpecialSearch:sender withPrefix:@"@"];
+}
+
+- (IBAction)showWindowForLabelSearch:(id)sender
+{
+  [self showWindowForSpecialSearch:sender withPrefix:@":"];
+}
+
+- (void)showWindowForSpecialSearch:(id)sender withPrefix:(NSString *)prefix
+{
   // We need to show window prior to creating a field editor,
   // otherwise the field editor will not bound to the text field.
   // No idea why.
@@ -42,11 +52,11 @@
 
   NSString *query = self.queryTextField.stringValue;
   NSText *fieldEditor = [self.window fieldEditor:YES forObject:self.queryTextField];
-  if ([query hasPrefix:@"@"] && query.length > 1) {
-    fieldEditor.selectedRange = NSMakeRange(1, query.length - 1);
+  if ([query hasPrefix:prefix] && query.length > prefix.length) {
+    fieldEditor.selectedRange = NSMakeRange(prefix.length, query.length - prefix.length);
   }
   else {
-    fieldEditor.string = @"@";
+    fieldEditor.string = prefix;
     fieldEditor.selectedRange = NSMakeRange(fieldEditor.string.length, 0);
   }
 

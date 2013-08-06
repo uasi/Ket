@@ -13,18 +13,23 @@
 
 @synthesize summary = _summary;
 
-- (instancetype)initWithCircles:(NSArray *)circles count:(NSUInteger)count respectsCutIndex:(BOOL)respectsCutIndex
++ (CircleCollection *)emptyCircleCollectionWithMaxCount:(NSUInteger)maxCount
+{
+  return [[CircleCollection alloc] initWithCircles:@[] maxCount:maxCount respectsCutIndex:NO];
+}
+
+- (instancetype)initWithCircles:(NSArray *)circles maxCount:(NSUInteger)maxCount respectsCutIndex:(BOOL)respectsCutIndex
 {
   self = [super init];
   if (!self) return nil;
 
   self.nonEmptyCircles = circles;
 
-  NSMutableArray *paddedCircles = [NSMutableArray arrayWithCapacity:count];
+  NSMutableArray *paddedCircles = [NSMutableArray arrayWithCapacity:maxCount];
 
   if (respectsCutIndex) {
     NSInteger circleIndex = 0;
-    for (NSInteger cutIndex = 1; cutIndex <= count; cutIndex++) {
+    for (NSInteger cutIndex = 1; cutIndex <= maxCount; cutIndex++) {
       if (circleIndex >= circles.count || cutIndex != ((Circle *)circles[circleIndex]).cutIndex) {
         paddedCircles[cutIndex - 1] = [Circle emptyCircle];
       }
@@ -35,7 +40,7 @@
   }
   else {
     [paddedCircles addObjectsFromArray:circles];
-    NSInteger paddings = count - circles.count;
+    NSInteger paddings = maxCount - circles.count;
     for (NSInteger i = 0; i < paddings; i++) {
       [paddedCircles addObject:[Circle emptyCircle]];
     }

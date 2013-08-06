@@ -51,7 +51,7 @@ static NSDictionary *blockNameToIDTable(void);
     joinType = CatalogFilterJoinTypeLeftOuter;
   }
   else {
-    return nil;
+    return @{@"constraint": @"0"};
   }
   return @{@"constraint": constraint,
            @"requiresChecklist": @YES,
@@ -63,16 +63,14 @@ static NSDictionary *blockNameToIDTable(void);
   NSString *constraint = [NSString stringWithFormat:
                           @"(description LIKE '%%%@%%')",
                           escapeSQLMeta(word)];
-  return @{@"constraint": constraint,
-           @"requiresChecklist": @NO};
+  return @{@"constraint": constraint};
 }
 
 + (NSDictionary *)propertiesByParsingCompactAddress:(NSString *)compactAddress
 {
   NSDictionary *components = [self componentsByScanningCompactAddress:compactAddress];
-  if (!components) return nil;
-  return @{@"constraint": [self constraintWithCompactAddressComponents:components],
-           @"requiresChecklist": @NO};
+  if (!components) return @{@"constraint": @"0"};
+  return @{@"constraint": [self constraintWithCompactAddressComponents:components]};
 }
 
 #define SET_SUBSTR_IF_PRESENTS(subscript, string, result, index) \

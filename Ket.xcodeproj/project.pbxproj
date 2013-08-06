@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160539179B0F460039AAAB /* SearchPanelController.m */; };
-		5816053C179B0F460039AAAB /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5816053A179B0F460039AAAB /* SearchPanel.xib */; };
 		5816053F179B12800039AAAB /* DocumentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5816053E179B12800039AAAB /* DocumentWindow.m */; };
 		58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160541179BD9B80039AAAB /* CircleDataProvider.m */; };
 		5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */ = {isa = PBXBuildFile; fileRef = 5823A3871722F30100B2A946 /* Placeholder210x300.png */; };
@@ -16,17 +15,18 @@
 		5823A38E1723D65200B2A946 /* CircleCutMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38D1723D65200B2A946 /* CircleCutMatrix.m */; };
 		58553FD21724DA6400D8387C /* CircleCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58553FD11724DA6400D8387C /* CircleCollection.m */; };
 		5870B4F6176E9DEC00B449DA /* CircleInspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */; };
-		5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5870B4F5176E9DEC00B449DA /* CircleInspector.xib */; };
 		5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FA176ECBE800B449DA /* PathUtils.m */; };
 		5870B4FE176EF41800B449DA /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FD176EF41700B449DA /* Checklist.m */; };
 		587FDA4317AFA4EA00CD412D /* ChecklistModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FDA4217AFA4E900CD412D /* ChecklistModule.m */; };
 		587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */; };
+		587FDA4917B1783800CD412D /* CatalogImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA4B17B1783800CD412D /* CatalogImportWindow.xib */; };
+		587FDA4C17B1783D00CD412D /* CircleInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA4E17B1783D00CD412D /* CircleInspector.xib */; };
+		587FDA4F17B1784600CD412D /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA5117B1784600CD412D /* SearchPanel.xib */; };
+		587FDA5217B1784C00CD412D /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA5417B1784C00CD412D /* WelcomeWindow.xib */; };
 		588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */ = {isa = PBXBuildFile; fileRef = 588F563F1791A8C900219BA6 /* sqlite-wrapper */; };
 		588F56471791B31E00219BA6 /* CatalogImportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56451791B31E00219BA6 /* CatalogImportWindowController.m */; };
-		588F56481791B31E00219BA6 /* CatalogImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588F56461791B31E00219BA6 /* CatalogImportWindow.xib */; };
 		588F564B1791D26600219BA6 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F564A1791D26600219BA6 /* DocumentController.m */; };
 		588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F564D179697AB00219BA6 /* WelcomeWindowController.m */; };
-		588F5650179697AB00219BA6 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588F564E179697AB00219BA6 /* WelcomeWindow.xib */; };
 		588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */; };
 		58A039A81722698500A81DEE /* CircleCutArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A31722698400A81DEE /* CircleCutArchive.m */; };
 		58A039A91722698500A81DEE /* CatalogDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A51722698400A81DEE /* CatalogDatabase.m */; };
@@ -76,7 +76,6 @@
 		0D255A44D37B47C1AD9EB543 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		58160538179B0F450039AAAB /* SearchPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPanelController.h; sourceTree = "<group>"; };
 		58160539179B0F460039AAAB /* SearchPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPanelController.m; sourceTree = "<group>"; };
-		5816053A179B0F460039AAAB /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
 		5816053D179B127F0039AAAB /* DocumentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindow.h; sourceTree = "<group>"; };
 		5816053E179B12800039AAAB /* DocumentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindow.m; sourceTree = "<group>"; };
 		58160540179BD9B80039AAAB /* CircleDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDataProvider.h; sourceTree = "<group>"; };
@@ -90,7 +89,6 @@
 		58553FD11724DA6400D8387C /* CircleCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCollection.m; sourceTree = "<group>"; };
 		5870B4F3176E9DEC00B449DA /* CircleInspectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleInspectorController.h; sourceTree = "<group>"; };
 		5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleInspectorController.m; sourceTree = "<group>"; };
-		5870B4F5176E9DEC00B449DA /* CircleInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleInspector.xib; sourceTree = "<group>"; };
 		5870B4F9176ECBE700B449DA /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtils.h; sourceTree = "<group>"; };
 		5870B4FA176ECBE800B449DA /* PathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtils.m; sourceTree = "<group>"; };
 		5870B4FC176EF41700B449DA /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
@@ -99,15 +97,17 @@
 		587FDA4217AFA4E900CD412D /* ChecklistModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChecklistModule.m; sourceTree = "<group>"; };
 		587FDA4617B13EAB00CD412D /* CatalogFilter+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CatalogFilter+Parsing.h"; sourceTree = "<group>"; };
 		587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CatalogFilter+Parsing.m"; sourceTree = "<group>"; };
+		587FDA4A17B1783800CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/CatalogImportWindow.xib; sourceTree = "<group>"; };
+		587FDA4D17B1783D00CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/CircleInspector.xib; sourceTree = "<group>"; };
+		587FDA5017B1784600CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/SearchPanel.xib; sourceTree = "<group>"; };
+		587FDA5317B1784C00CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/WelcomeWindow.xib; sourceTree = "<group>"; };
 		588F563F1791A8C900219BA6 /* sqlite-wrapper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sqlite-wrapper"; sourceTree = "<group>"; };
 		588F56441791B31D00219BA6 /* CatalogImportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogImportWindowController.h; sourceTree = "<group>"; };
 		588F56451791B31E00219BA6 /* CatalogImportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogImportWindowController.m; sourceTree = "<group>"; };
-		588F56461791B31E00219BA6 /* CatalogImportWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatalogImportWindow.xib; sourceTree = "<group>"; };
 		588F56491791D26600219BA6 /* DocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentController.h; sourceTree = "<group>"; };
 		588F564A1791D26600219BA6 /* DocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentController.m; sourceTree = "<group>"; };
 		588F564C179697AB00219BA6 /* WelcomeWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeWindowController.h; sourceTree = "<group>"; };
 		588F564D179697AB00219BA6 /* WelcomeWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeWindowController.m; sourceTree = "<group>"; };
-		588F564E179697AB00219BA6 /* WelcomeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeWindow.xib; sourceTree = "<group>"; };
 		588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Extensions.h"; sourceTree = "<group>"; };
 		588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+Extensions.m"; sourceTree = "<group>"; };
 		58A039A21722698300A81DEE /* CircleCutArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutArchive.h; sourceTree = "<group>"; };
@@ -170,12 +170,12 @@
 		5870B4F8176EABB700B449DA /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
-				588F56461791B31E00219BA6 /* CatalogImportWindow.xib */,
-				5870B4F5176E9DEC00B449DA /* CircleInspector.xib */,
+				587FDA4B17B1783800CD412D /* CatalogImportWindow.xib */,
+				587FDA4E17B1783D00CD412D /* CircleInspector.xib */,
 				58C381171705BBE9001FF665 /* Document.xib */,
 				58C3811A1705BBE9001FF665 /* MainMenu.xib */,
-				5816053A179B0F460039AAAB /* SearchPanel.xib */,
-				588F564E179697AB00219BA6 /* WelcomeWindow.xib */,
+				587FDA5117B1784600CD412D /* SearchPanel.xib */,
+				587FDA5417B1784C00CD412D /* WelcomeWindow.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -387,10 +387,10 @@
 				58C381191705BBE9001FF665 /* Document.xib in Resources */,
 				58C3811C1705BBE9001FF665 /* MainMenu.xib in Resources */,
 				5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */,
-				5870B4F7176E9DEC00B449DA /* CircleInspector.xib in Resources */,
-				588F56481791B31E00219BA6 /* CatalogImportWindow.xib in Resources */,
-				588F5650179697AB00219BA6 /* WelcomeWindow.xib in Resources */,
-				5816053C179B0F460039AAAB /* SearchPanel.xib in Resources */,
+				587FDA4C17B1783D00CD412D /* CircleInspector.xib in Resources */,
+				587FDA4917B1783800CD412D /* CatalogImportWindow.xib in Resources */,
+				587FDA5217B1784C00CD412D /* WelcomeWindow.xib in Resources */,
+				587FDA4F17B1784600CD412D /* SearchPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +512,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		587FDA4B17B1783800CD412D /* CatalogImportWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA4A17B1783800CD412D /* en */,
+			);
+			name = CatalogImportWindow.xib;
+			sourceTree = "<group>";
+		};
+		587FDA4E17B1783D00CD412D /* CircleInspector.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA4D17B1783D00CD412D /* en */,
+			);
+			name = CircleInspector.xib;
+			sourceTree = "<group>";
+		};
+		587FDA5117B1784600CD412D /* SearchPanel.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA5017B1784600CD412D /* en */,
+			);
+			name = SearchPanel.xib;
+			sourceTree = "<group>";
+		};
+		587FDA5417B1784C00CD412D /* WelcomeWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA5317B1784C00CD412D /* en */,
+			);
+			name = WelcomeWindow.xib;
+			sourceTree = "<group>";
+		};
 		58C3810B1705BBE9001FF665 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

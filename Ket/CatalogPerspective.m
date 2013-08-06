@@ -197,14 +197,14 @@
                    sqlFormat,
                    self.viewName,
                    self.filter.selectStatement];
-  NSAssert([self.fmDatabase executeUpdate:sql], @"CREATE VIEW must succeed");
+  NSAssert([self.fmDatabase executeUpdate:sql], @"CREATE VIEW must succeed: %@", self.fmDatabase.lastError);
 }
 
 - (void)dropView
 {
   static NSString *sqlFormat = @"DROP VIEW IF EXISTS %@;";
   NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
-  NSAssert(([self.fmDatabase executeUpdate:sql, self.viewName]), @"DROP VIEW must succeed");
+  NSAssert(([self.fmDatabase executeUpdate:sql, self.viewName]), @"DROP VIEW must succeed: %@", self.fmDatabase.lastError);
 }
 
 - (NSString *)viewName

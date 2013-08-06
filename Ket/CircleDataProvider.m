@@ -3,6 +3,7 @@
 #import "CatalogDatabase.h"
 #import "CatalogFilter.h"
 #import "CatalogPerspective.h"
+#import "Checklist.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import "CircleCutArchive.h"
@@ -11,6 +12,7 @@
 @interface CircleDataProvider ()
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
+@property (nonatomic, readwrite) Checklist *checklist;
 @property (nonatomic, readwrite) RACSignal *dataDidChangeSignal;
 
 @property (nonatomic) CatalogDatabase *database;
@@ -26,20 +28,23 @@
 
 @synthesize filter = _filter;
 
-- (instancetype)initWithComiketNo:(NSUInteger)comiketNo
+- (instancetype)initWithChecklist:(Checklist *)checklist
 {
+  NSAssert(checklist, @"checklist must not be nil");
+
   self = [super init];
   if (!self) return nil;
 
-  self.comiketNo = comiketNo;
+  self.checklist = checklist;
+  self.comiketNo = checklist.comiketNo;
 
-  NSURL *databaseURL = CatalogDatabaseURLWithComiketNo(comiketNo);
+  NSURL *databaseURL = CatalogDatabaseURLWithComiketNo(checklist.comiketNo);
   self.database = [[CatalogDatabase alloc] initWithURL:databaseURL];
   if (!self.database) return nil;
 
   self.perspective = [CatalogPerspective perspectiveWithDatabase:self.database];
 
-  NSURL *archiveURL = CircleCutArchiveURLWithComiketNo(comiketNo);
+  NSURL *archiveURL = CircleCutArchiveURLWithComiketNo(checklist.comiketNo);
   self.archive = [[CircleCutArchive alloc] initWithURL:archiveURL];
   if (!self.archive) return nil;
 
@@ -105,7 +110,7 @@
 
 - (void)filterWithString:(NSString *)string
 {
-  self.filter = [CatalogFilter filterWithString:string];
+  self.filter = [CatalogFilter filterWithDatabase:self.database checklist:self.checklist string:string];
 }
 
 #pragma mark Accessors

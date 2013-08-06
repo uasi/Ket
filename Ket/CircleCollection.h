@@ -4,7 +4,9 @@
 @property (nonatomic, copy, readonly) NSArray *circles;
 @property (nonatomic, readonly) NSString *summary;
 
-- (instancetype)initWithCircles:(NSArray *)circles count:(NSUInteger)count respectsCutIndex:(BOOL)respectsCutIndex;
++ (CircleCollection *)emptyCircleCollectionWithMaxCount:(NSUInteger)maxCount;
+
+- (instancetype)initWithCircles:(NSArray *)circles maxCount:(NSUInteger)count respectsCutIndex:(BOOL)respectsCutIndex;
 
 - (NSString *)summary;
 

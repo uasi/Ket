@@ -21,7 +21,6 @@
 @property (nonatomic, weak) FMDatabase *fmDatabase;
 @property (nonatomic) CatalogFilter *filter;
 
-@property (nonatomic, readonly) NSUInteger numberOfCirclesInCollection;
 @property (nonatomic, readonly) NSString *viewName;
 
 @end
@@ -38,7 +37,7 @@
 - (CircleCollection *)circleCollectionForPage:(NSUInteger)page
 {
   NSArray *circles = [self.database circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:YES];
+  return [[CircleCollection alloc] initWithCircles:circles maxCount:self.numberOfCirclesPerCollection respectsCutIndex:YES];
 }
 
 #pragma mark Concrete Methods
@@ -81,17 +80,17 @@
 
 - (NSUInteger)numberOfCircleCollections
 {
-   BOOL hasRemainder = self.numberOfCircles % self.numberOfCirclesInCollection != 0;
-   return self.numberOfCircles / self.numberOfCirclesInCollection + (hasRemainder ? 1 : 0);
+   BOOL hasRemainder = self.numberOfCircles % self.numberOfCirclesPerCollection != 0;
+   return self.numberOfCircles / self.numberOfCirclesPerCollection + (hasRemainder ? 1 : 0);
 }
 
 - (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index
 {
   NSAssert(index < self.numberOfCircleCollections, @"index must be less than the number of circle collections");
-  NSUInteger limit = self.numberOfCirclesInCollection;
-  NSUInteger offset = index * self.numberOfCirclesInCollection;
+  NSUInteger limit = self.numberOfCirclesPerCollection;
+  NSUInteger offset = index * self.numberOfCirclesPerCollection;
   NSArray *circles = [self circlesWithLimit:limit offset:offset];
-  return [[CircleCollection alloc] initWithCircles:circles count:self.numberOfCirclesInCollection respectsCutIndex:NO];
+  return [[CircleCollection alloc] initWithCircles:circles maxCount:self.numberOfCirclesPerCollection respectsCutIndex:NO];
 }
 
 @end
@@ -153,7 +152,7 @@
   return self.count;
 }
 
-- (NSUInteger)numberOfCirclesInCollection
+- (NSUInteger)numberOfCirclesPerCollection
 {
   return self.database.numberOfCutsInRow * self.database.numberOfCutsInColumn;
 }

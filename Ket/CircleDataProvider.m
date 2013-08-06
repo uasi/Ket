@@ -57,7 +57,7 @@
 
 - (NSInteger)numberOfRows
 {
-  return self.perspective.numberOfCircleCollections * 2;
+  return MAX(2, self.perspective.numberOfCircleCollections * 2);
 }
 
 - (CircleCollection *)circleCollectionForRow:(NSInteger)row
@@ -67,7 +67,12 @@
   CircleCollection *collection = [self.circleCollectionCache objectForKey:@(row)];
   if (collection) return collection;
 
-  collection = [self.perspective circleCollectionAtIndex:[self pageIndexForRow:row]];
+  if (self.perspective.numberOfCircleCollections > 0) {
+    collection = [self.perspective circleCollectionAtIndex:[self pageIndexForRow:row]];
+  }
+  else {
+    collection = [CircleCollection emptyCircleCollectionWithMaxCount:self.perspective.numberOfCirclesPerCollection];
+  }
   [self.circleCollectionCache setObject:collection forKey:@(row)];
   return collection;
 }

@@ -22,6 +22,8 @@
 @property (nonatomic) Checklist *checklist;
 @property (nonatomic) NSString *string;
 
+@property (nonatomic, readonly) NSString *tableName;
+
 @end
 
 @implementation CatalogFilter
@@ -47,7 +49,7 @@
     static NSString *sqlFormat = (@"SELECT * FROM ComiketCircle"
                                   @"  %1$@ JOIN %2$@"
                                   @"  ON ComiketCircle.id = %2$@.id");
-    partialStatement = [NSString stringWithFormat:sqlFormat, join, checklist.tableName];
+    partialStatement = [NSString stringWithFormat:sqlFormat, join, filter.tableName];
   }
   else {
     partialStatement = @"SELECT * FROM ComiketCircle";
@@ -80,9 +82,10 @@
   NSAssert(self.checklist, @"self.checklist must not be nil");
   ChecklistModuleRegisterChecklistWeakRef(self.checklist);
   NSString *sql = [NSString stringWithFormat:
-                   @"CREATE VIRTUAL TABLE IF NOT EXISTS main.%@ USING %@;",
-                   self.checklist.tableName,
-                   ChecklistModuleName()];
+                   @"CREATE VIRTUAL TABLE IF NOT EXISTS main.%@ USING %@ (%@);",
+                   self.tableName,
+                   ChecklistModuleName(),
+                   self.checklist.identifier];
   BOOL ok = [self.database.database executeUpdate:sql];
   NSAssert(ok, @"CREATE VIRTUAL TABLE must succeed: %@", self.database.database.lastError);
 }
@@ -92,9 +95,16 @@
   if (!self.checklist) return;
   NSString *sql = [NSString stringWithFormat:
                    @"DROP TABLE IF EXISTS main.%@",
-                   self.checklist.tableName];
+                   self.tableName];
   BOOL ok = [self.database.database executeUpdate:sql];
   NSAssert(ok, @"DROP TABLE must succeed: %@", self.database.database.lastError);
+}
+
+- (NSString *)tableName
+{
+  return [NSString stringWithFormat:@"%@_%tx",
+          NSStringFromClass([self class]),
+          (void *)self];
 }
 
 @end

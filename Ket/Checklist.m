@@ -135,9 +135,12 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   return _snapshot;
 }
 
-- (NSString *)tableName
+- (NSString *)identifier
 {
-  return [NSString stringWithFormat:@"checklist_%tx", (void *)self];
+  return [NSString stringWithFormat:
+          @"%@_%tx",
+          NSStringFromClass([self class]),
+          (void *)self];
 }
 
 #pragma mark Cached State Management

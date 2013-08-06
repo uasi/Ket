@@ -51,6 +51,7 @@ static void checklistTabFree(checklist_vtab *pTab)
 // argv[0] == module name
 // argv[1] == database name
 // argv[2] == table name
+// argv[3] == checklist identifier
 static int checklistConnect(sqlite3 *db,
                             void *pAux,
                             int argc,
@@ -76,16 +77,23 @@ static int checklistConnect(sqlite3 *db,
     return rc;
   }
 
-  const char *zTableName = argv[2];
-  NSString *tableName = [NSString stringWithUTF8String:zTableName];
-  Checklist *checklist = [checklistMapTable objectForKey:tableName];
+  if (argc < 4) {
+    *pzErr = sqlite3_mprintf("%s: checklist identifier must be specified as the first argument",
+                             pNewTab->zClassName);
+    checklistTabFree(pNewTab);
+    return SQLITE_MISUSE;
+  }
+
+  const char *zIdentifier = argv[3];
+  NSString *identifier = [NSString stringWithUTF8String:zIdentifier];
+  Checklist *checklist = [checklistMapTable objectForKey:identifier];
   if (checklist) {
     pNewTab->pChecklist = CFBridgingRetain(checklist);
   }
   else {
     *pzErr = sqlite3_mprintf("%s: no checklist found for %s in %s",
                              pNewTab->zClassName,
-                             zTableName,
+                             zIdentifier,
                              checklistMapTable.description.UTF8String);
     checklistTabFree(pNewTab);
     return SQLITE_MISUSE;
@@ -295,5 +303,5 @@ void ChecklistModuleRegisterChecklistWeakRef(Checklist *checklist)
 {
   NSCAssert(checklistMapTable, @"ChecklistModule must be initialized");
   NSCAssert(checklist, @"checklist must not be nil");
-  [checklistMapTable setObject:checklist forKey:checklist.tableName];
+  [checklistMapTable setObject:checklist forKey:checklist.identifier];
 }

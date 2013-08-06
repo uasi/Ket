@@ -8,9 +8,9 @@
 #import <FMDB/FMResultSet.h>
 #import <sqlite3.h>
 
-static const NSUInteger kNumberOfCutsInRow = 6;
-static const NSUInteger kNumberOfCutsInColmun = 6;
-static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCutsInColmun;
+static const NSUInteger kNumberOfCutsPerRow = 6;
+static const NSUInteger kNumberOfCutsPerColmun = 6;
+static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCutsPerColmun;
 
 @interface CatalogDatabase ()
 
@@ -87,12 +87,12 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 - (NSUInteger)numberOfCutsInRow
 {
-  return kNumberOfCutsInRow;
+  return kNumberOfCutsPerRow;
 }
 
 - (NSUInteger)numberOfCutsInColumn
 {
-  return kNumberOfCutsInColmun;
+  return kNumberOfCutsPerColmun;
 }
 
 - (NSIndexSet *)pageSet
@@ -114,7 +114,7 @@ static const NSUInteger kNumberOfCutsInPage = kNumberOfCutsInRow * kNumberOfCuts
 
 - (NSArray *)circlesInPage:(NSUInteger)page
 {
-  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsInPage];
+  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsPerPage];
 
   NSString *query = (@"SELECT * FROM ComiketCircle"
                      @"  WHERE pageNo = (?)"

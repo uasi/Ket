@@ -81,6 +81,7 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
     view = [[CircleCutMatrix alloc] initWithFrame:NSZeroRect mode:NSTrackModeMatrix prototype:prototypeCell numberOfRows:rows numberOfColumns:columns];
     view.identifier = identifier;
     view.intercellSpacing = NSMakeSize(0, 0);
+    [view prepareMatrixWithChecklist:self.document.checklist];
   }
 
   [view setBoundsSize:NSMakeSize(self.provider.cutSize.width * columns, self.provider.cutSize.height * rows)];

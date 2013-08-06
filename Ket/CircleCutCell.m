@@ -1,6 +1,8 @@
 #import "CircleCutCell.h"
 
+#import "Checklist.h"
 #import "Circle.h"
+#import "CircleCutMatrix.h"
 
 #define CUT_SHOULDER_RECT_FOR_CUT_OF_210x300 NSMakeRect(7, 7, 49, 49)
 
@@ -10,9 +12,14 @@
 {
   [super drawInteriorWithFrame:cellFrame inView:controlView];
 
+  CircleCutMatrix *matrix = (CircleCutMatrix *)controlView;
+
   if (self.circle && ![self.circle isEqual:[Circle emptyCircle]]) {
-    [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
-  };
+    if ([matrix.checklist bookmarksContainsCircle:self.circle]) {
+      [self drawCutShoulderBackgroundRect:[self cutShoulderRectForCutRect:cellFrame]];
+    }
+    [self drawCutShoulderForegroundRect:[self cutShoulderRectForCutRect:cellFrame]];
+  }
 
   if (self.isHighlighted) {
     [NSGraphicsContext saveGraphicsState];
@@ -24,12 +31,20 @@
   }
 }
 
-- (void)drawCutShoulderRect:(NSRect)rect
+- (void)drawCutShoulderBackgroundRect:(NSRect)rect
 {
   NSGraphicsContext *context = [NSGraphicsContext currentContext];
   [context saveGraphicsState];
 
   [[NSColor yellowColor] drawSwatchInRect:rect];
+
+  [context restoreGraphicsState];
+}
+
+- (void)drawCutShoulderForegroundRect:(NSRect)rect
+{
+  NSGraphicsContext *context = [NSGraphicsContext currentContext];
+  [context saveGraphicsState];
 
   NSDictionary *attributes =
   @{NSFontAttributeName: [NSFont systemFontOfSize:24]};

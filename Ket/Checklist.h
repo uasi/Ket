@@ -1,3 +1,5 @@
+extern NSString *ChecklistDidChangeNotification;
+
 @class Circle;
 
 @protocol ChecklistReading

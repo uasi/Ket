@@ -2,6 +2,8 @@
 
 #import "Circle.h"
 
+NSString *ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
+
 @interface Checklist ()
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
@@ -84,6 +86,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   NSAssert(circle, @"circle must not be nil");
   WRITING;
   self.bookmarks[@(circle.globalID)] = @YES;
+  [self postNotification];
 }
 
 - (void)removeCircleFromBookmarks:(Circle *)circle
@@ -91,6 +94,16 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   NSAssert(circle, @"circle must not be nil");
   WRITING;
   [self.bookmarks removeObjectForKey:@(circle.globalID)];
+  [self postNotification];
+}
+
+- (void)postNotification
+{
+  void (^post)(void) = ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ChecklistDidChangeNotification object:self];
+  };
+  if ([NSThread isMainThread]) post();
+  else dispatch_async(dispatch_get_main_queue(), post);
 }
 
 #pragma mark Reading

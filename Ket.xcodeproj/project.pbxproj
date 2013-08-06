@@ -386,11 +386,11 @@
 				58C381131705BBE9001FF665 /* Credits.rtf in Resources */,
 				58C381191705BBE9001FF665 /* Document.xib in Resources */,
 				58C3811C1705BBE9001FF665 /* MainMenu.xib in Resources */,
-				5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */,
 				587FDA4C17B1783D00CD412D /* CircleInspector.xib in Resources */,
 				587FDA4917B1783800CD412D /* CatalogImportWindow.xib in Resources */,
 				587FDA5217B1784C00CD412D /* WelcomeWindow.xib in Resources */,
 				587FDA4F17B1784600CD412D /* SearchPanel.xib in Resources */,
+				5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

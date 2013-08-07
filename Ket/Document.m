@@ -3,6 +3,7 @@
 #import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
 #import "Checklist.h"
+#import "Circle.h"
 #import "CircleDataProvider.h"
 #import "DocumentController.h"
 #import "NSRegularExpression+Extensions.h"
@@ -59,14 +60,19 @@
   return YES;
 }
 
-#pragma mark Shortcut Key Handling
+#pragma mark Key Down Handling
 
-- (BOOL)handleShortcutKeyWithKeyDown:(NSEvent *)event
+- (BOOL)handleKeyDown:(NSEvent *)event
 {
   NSString *c = event.charactersIgnoringModifiers;
   BOOL noModKeyPressed = (event.modifierFlags & NSDeviceIndependentModifierFlagsMask) == 0;
 
-  if (noModKeyPressed && [c isEqualToString:@"/"]) {
+  if (noModKeyPressed && [c isEqualToString:@"o"]) {
+    if (self.selectedCircle.URL) {
+      [[NSWorkspace sharedWorkspace] openURL:self.selectedCircle.URL];
+    }
+  }
+  else if (noModKeyPressed && [c isEqualToString:@"/"]) {
     [[DocumentController sharedDocumentController] showSearchPanelForGenericSearch:self];
   }
   else if (noModKeyPressed && [c isEqualToString:@"@"]) {
@@ -104,7 +110,7 @@
 
 - (BOOL)window:(NSWindow *)window shouldPropagateKeyDown:(NSEvent *)event
 {
-  return ![self handleShortcutKeyWithKeyDown:event];
+  return ![self handleKeyDown:event];
 }
 
 @end

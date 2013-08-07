@@ -208,6 +208,8 @@
 
 - (NSString *)viewName
 {
-  return [NSString stringWithFormat:@"view_%lx", (unsigned long)self.hash];
+  return [NSString stringWithFormat:@"%@_%tx",
+          NSStringFromClass([self class]),
+          (void *)self];
 }
 @end

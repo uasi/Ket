@@ -3,6 +3,11 @@
 #import "PathUtils.h"
 #import <FMDB/FMResultSet.h>
 
+NSUInteger GlobalCircleIDMake(NSUInteger comiketNo, NSUInteger circleID)
+{
+  return (comiketNo << 24) | circleID;
+}
+
 NSUInteger ComiketNoFromGlobalCircleID(NSUInteger globalID)
 {
   return globalID >> 24;
@@ -138,7 +143,7 @@ static NSURL *URLFromString(NSString *string) {
 
 - (NSUInteger)globalID
 {
-  return (self.comiketNo << 24) | self.identifier;
+  return GlobalCircleIDMake(self.comiketNo, self.identifier);
 }
 
 #pragma mark NSObject Protocol
@@ -147,13 +152,12 @@ static NSURL *URLFromString(NSString *string) {
 {
   if (!object) return NO;
   if ([self class] != [object class]) return NO;
-  return self.hash == ((Circle *)object).hash;
-
+  return self.globalID == ((Circle *)object).globalID;
 }
 
 - (NSUInteger)hash
 {
-  return (self.comiketNo << (sizeof(NSUInteger) / 2)) | self.identifier;
+  return self.globalID;
 }
 
 - (NSString *)description

@@ -103,9 +103,15 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle
 {
   NSAssert(circle, @"circle must not be nil");
+  [self setColorCode:colorCode forCircleWithGlobalID:circle.globalID];
+}
+
+- (void)setColorCode:(NSInteger)colorCode forCircleWithGlobalID:(NSUInteger)globalID
+{
+  NSAssert(globalID, @"globalID must not be zero");
   NSAssert(0 <= colorCode && colorCode <= 9, @"colorCode must be between 0 and 9");
   BEGIN_WRITING;
-  [self propertiesOfCircle:circle][@"colorCode"] = @(colorCode);
+  [self propertiesOfCircleWithGlobalID:globalID][@"colorCode"] = @(colorCode);
   END_WRITING;
 }
 
@@ -194,11 +200,16 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 
 - (NSMutableDictionary *)propertiesOfCircle:(Circle *)circle
 {
-  NSMutableDictionary *properties = self.dictionaryOfProperties[@(circle.globalID)];
+  return [self propertiesOfCircleWithGlobalID:circle.globalID];
+}
+
+- (NSMutableDictionary *)propertiesOfCircleWithGlobalID:(NSUInteger)globalID
+{
+  NSMutableDictionary *properties = self.dictionaryOfProperties[@(globalID)];
   if (properties) return properties;
 
   properties = [NSMutableDictionary dictionary];
-  self.dictionaryOfProperties[@(circle.globalID)] = properties;
+  self.dictionaryOfProperties[@(globalID)] = properties;
   return properties;
 }
 

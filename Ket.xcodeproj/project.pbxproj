@@ -46,6 +46,7 @@
 		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
 		58C6335317B239BB00FA4840 /* CSVChecklistV2Scanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335217B239BB00FA4840 /* CSVChecklistV2Scanner.m */; };
 		58C6335617B2771E00FA4840 /* CSVChecklistV2Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335517B2771E00FA4840 /* CSVChecklistV2Reader.m */; };
+		58C6335917B2B84500FA4840 /* Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335817B2B84400FA4840 /* Error.m */; };
 		58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -147,6 +148,8 @@
 		58C6335217B239BB00FA4840 /* CSVChecklistV2Scanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVChecklistV2Scanner.m; sourceTree = "<group>"; };
 		58C6335417B2771E00FA4840 /* CSVChecklistV2Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVChecklistV2Reader.h; sourceTree = "<group>"; };
 		58C6335517B2771E00FA4840 /* CSVChecklistV2Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVChecklistV2Reader.m; sourceTree = "<group>"; };
+		58C6335717B2B84300FA4840 /* Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
+		58C6335817B2B84400FA4840 /* Error.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Error.m; sourceTree = "<group>"; };
 		58DD7D7D17A7E3B000EA36C8 /* CatalogPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogPerspective.h; sourceTree = "<group>"; };
 		58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogPerspective.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +285,8 @@
 				58C381091705BBE9001FF665 /* Supporting Files */,
 				588F564C179697AB00219BA6 /* WelcomeWindowController.h */,
 				588F564D179697AB00219BA6 /* WelcomeWindowController.m */,
+				58C6335717B2B84300FA4840 /* Error.h */,
+				58C6335817B2B84400FA4840 /* Error.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 				587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */,
 				58C6335317B239BB00FA4840 /* CSVChecklistV2Scanner.m in Sources */,
 				58C6335617B2771E00FA4840 /* CSVChecklistV2Reader.m in Sources */,
+				58C6335917B2B84500FA4840 /* Error.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

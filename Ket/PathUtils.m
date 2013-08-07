@@ -18,7 +18,7 @@ NSUInteger ComiketNoFromString(NSString *comiketNameOrID)
 {
   NSInteger comiketNo;
   NSScanner *scanner = [NSScanner scannerWithString:comiketNameOrID];
-  scanner.charactersToBeSkipped = [NSCharacterSet characterSetWithCharactersInString:@"Cc"];
+  scanner.charactersToBeSkipped = [NSCharacterSet letterCharacterSet];
   BOOL ok = [scanner scanInteger:&comiketNo];
   return (NSUInteger)(ok ? comiketNo : 0);
 }

@@ -1,5 +1,6 @@
 @class FMResultSet;
 
+NSUInteger GlobalCircleIDMake(NSUInteger comiketNo, NSUInteger circleID);
 NSUInteger ComiketNoFromGlobalCircleID(NSUInteger globalID);
 NSUInteger CircleIdentifierFromGlobalCircleID(NSUInteger globalID);
 

@@ -25,6 +25,7 @@ extern NSString *ChecklistDidChangeNotification;
 - (void)removeCircleFromBookmarks:(Circle *)circle __deprecated;
 
 - (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle;
+- (void)setColorCode:(NSInteger)colorCode forCircleWithGlobalID:(NSUInteger)globalID;
 
 @end
 

@@ -11,6 +11,9 @@ NSString *ComiketIDFromComiketNo(NSUInteger comiketNo);
 NSString *ComiketNameFromComiketNo(NSUInteger comiketNo);
 
 // Returns a Comiket number by parsing a given Comiket name or Comiket ID
+//
+// This function scans for a decimal integer representation skipping alphabets
+// and ideographs.
 NSUInteger ComiketNoFromString(NSString *comiketNameOrID);
 
 // Returns a URL that points to "<Home directory>/Application Support/Ket"

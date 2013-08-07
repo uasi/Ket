@@ -2,7 +2,7 @@ extern NSString *ChecklistDidChangeNotification;
 
 @class Circle;
 
-@protocol ChecklistReading
+@protocol ChecklistReading <NSObject>
 
 @property (nonatomic, readonly) NSUInteger comiketNo;
 @property (nonatomic, readonly) NSIndexSet *globalIDSet;
@@ -18,7 +18,7 @@ extern NSString *ChecklistDidChangeNotification;
 
 @end
 
-@protocol ChecklistWriting
+@protocol ChecklistWriting <NSObject>
 
 // XXX: use setColorCode:forCircle: for marking a circle.
 - (void)addCircleToBookmarks:(Circle *)circle __deprecated;

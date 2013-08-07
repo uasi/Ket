@@ -8,7 +8,7 @@ NSString *ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
 
-@property (nonatomic) NSMutableDictionary *bookmarks;
+@property (nonatomic) NSMutableDictionary *dictionaryOfProperties;
 
 // Snapshot management
 @property (nonatomic) BOOL frozen;
@@ -32,7 +32,7 @@ NSString *ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
   if (!self) return nil;
 
   self.comiketNo = comiketNo;
-  self.bookmarks = [[NSMutableDictionary alloc] init];
+  self.dictionaryOfProperties = [[NSMutableDictionary alloc] init];
 
   return self;
 }
@@ -62,7 +62,7 @@ NSString *ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
     return nil;
   }
   self.comiketNo = [comiketNo unsignedIntegerValue];
-  self.bookmarks = [(properties[@"bookmarks"] ?: @[]) mutableCopy];
+  self.dictionaryOfProperties = [(properties[@"dictionaryOfProperties"] ?: @{}) mutableCopy];
 
   return self;
 }
@@ -71,39 +71,42 @@ NSString *ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
 {
   Checklist *newChecklist = [[Checklist alloc] init];
   newChecklist.comiketNo = self.comiketNo;
-  newChecklist.bookmarks = [self.bookmarks mutableCopy];
+  newChecklist.dictionaryOfProperties = [self.dictionaryOfProperties mutableCopy];
   return newChecklist;
 }
 
 #pragma mark Writing
 
-#define WRITING \
+#define BEGIN_WRITING \
 NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 [self invalidateCachedState];
+
+#define END_WRITING \
+[self postNotification];
 
 - (void)addCircleToBookmarks:(Circle *)circle
 {
   NSAssert(circle, @"circle must not be nil");
-  WRITING;
-  self.bookmarks[@(circle.globalID)] = @YES;
-  [self postNotification];
+  BEGIN_WRITING;
+  [self propertiesOfCircle:circle][@"colorCode"] = @(1);
+  END_WRITING;
 }
 
 - (void)removeCircleFromBookmarks:(Circle *)circle
 {
   NSAssert(circle, @"circle must not be nil");
-  WRITING;
-  [self.bookmarks removeObjectForKey:@(circle.globalID)];
-  [self postNotification];
+  BEGIN_WRITING;
+  [[self propertiesOfCircle:circle] removeObjectForKey:@"colorCode"];
+  END_WRITING;
 }
 
-- (void)postNotification
+- (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle
 {
-  void (^post)(void) = ^{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ChecklistDidChangeNotification object:self];
-  };
-  if ([NSThread isMainThread]) post();
-  else dispatch_async(dispatch_get_main_queue(), post);
+  NSAssert(circle, @"circle must not be nil");
+  NSAssert(0 <= colorCode && colorCode <= 9, @"colorCode must be between 0 and 9");
+  BEGIN_WRITING;
+  [self propertiesOfCircle:circle][@"colorCode"] = @(colorCode);
+  END_WRITING;
 }
 
 #pragma mark Reading
@@ -111,19 +114,50 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (BOOL)bookmarksContainsCircle:(Circle *)circle
 {
   if (!circle) return NO;
-  return !!self.bookmarks[@(circle.globalID)];
+  return !!self.dictionaryOfProperties[(@(circle.globalID))][@"colorCode"];
 }
 
 - (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID
 {
-  return !!self.bookmarks[@(globalID)];
+  return !!self.dictionaryOfProperties[@(globalID)][@"colorCode"];
+}
+
+- (NSColor *)colorForCircle:(Circle *)circle
+{
+  return [self colorForCode:[self colorCodeForCircle:circle]];
+}
+
+- (NSInteger)colorCodeForCircle:(Circle *)circle
+{
+  NSNumber *codeNumber = self.dictionaryOfProperties[@(circle.globalID)][@"colorCode"] ?: @0;
+  return [codeNumber integerValue];
+}
+
+#define BGR(b, g, r) \
+[NSColor colorWithCalibratedRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1.0]
+
+- (NSColor *)colorForCode:(NSInteger)colorCode
+{
+  // The default color palette of Comiket Catalog Browser for Windows.
+  switch (colorCode) {
+    case 1: return BGR(74, 148, 255);
+    case 2: return BGR(255, 0, 255);
+    case 3: return BGR(0, 247, 255);
+    case 4: return BGR(74, 181, 0);
+    case 5: return BGR(255, 181, 0);
+    case 6: return BGR(156, 82, 156);
+    case 7: return BGR(255, 0, 0);
+    case 8: return BGR(0, 255, 0);
+    case 9: return BGR(0, 0, 255);
+    default: return [NSColor clearColor];
+  }
 }
 
 - (NSIndexSet *)globalIDSet
 {
   if (_globalIDSet) return _globalIDSet;
   NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-  for (NSNumber *globalID in self.bookmarks) {
+  for (NSNumber *globalID in self.dictionaryOfProperties) {
     [set addIndex:globalID.unsignedIntegerValue];
   }
   _globalIDSet = [set copy];
@@ -134,7 +168,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 {
   if (_data) return _data;
   _data = [NSKeyedArchiver archivedDataWithRootObject:@{
-           @"bookmarks": self.bookmarks,
+           @"dictionaryOfProperties": self.dictionaryOfProperties,
            @"comiketNo": @(self.comiketNo),
            }];
   return _data;
@@ -154,6 +188,29 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
           @"%@_%tx",
           NSStringFromClass([self class]),
           (void *)self];
+}
+
+#pragma mark Circle Property Management
+
+- (NSMutableDictionary *)propertiesOfCircle:(Circle *)circle
+{
+  NSMutableDictionary *properties = self.dictionaryOfProperties[@(circle.globalID)];
+  if (properties) return properties;
+
+  properties = [NSMutableDictionary dictionary];
+  self.dictionaryOfProperties[@(circle.globalID)] = properties;
+  return properties;
+}
+
+#pragma mark Notification
+
+- (void)postNotification
+{
+  void (^post)(void) = ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ChecklistDidChangeNotification object:self];
+  };
+  if ([NSThread isMainThread]) post();
+  else dispatch_async(dispatch_get_main_queue(), post);
 }
 
 #pragma mark Cached State Management

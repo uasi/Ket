@@ -12,13 +12,19 @@ extern NSString *ChecklistDidChangeNotification;
 
 - (BOOL)bookmarksContainsCircle:(Circle *)circle;
 - (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID;
+- (NSColor *)colorForCircle:(Circle *)circle;
+- (NSInteger)colorCodeForCircle:(Circle *)circle;
+- (NSColor *)colorForCode:(NSInteger)colorCode;
 
 @end
 
 @protocol ChecklistWriting
 
-- (void)addCircleToBookmarks:(Circle *)circle;
-- (void)removeCircleFromBookmarks:(Circle *)circle;
+// XXX: use setColorCode:forCircle: for marking a circle.
+- (void)addCircleToBookmarks:(Circle *)circle __deprecated;
+- (void)removeCircleFromBookmarks:(Circle *)circle __deprecated;
+
+- (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle;
 
 @end
 

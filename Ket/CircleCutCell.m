@@ -16,7 +16,8 @@
 
   if (self.circle && ![self.circle isEqual:[Circle emptyCircle]]) {
     if ([matrix.checklist bookmarksContainsCircle:self.circle]) {
-      [self drawCutShoulderBackgroundRect:[self cutShoulderRectForCutRect:cellFrame]];
+      NSColor *color = [matrix.checklist colorForCircle:self.circle];
+      [self drawCutShoulderBackgroundRect:[self cutShoulderRectForCutRect:cellFrame] withColor:color];
     }
     [self drawCutShoulderForegroundRect:[self cutShoulderRectForCutRect:cellFrame]];
   }
@@ -31,12 +32,14 @@
   }
 }
 
-- (void)drawCutShoulderBackgroundRect:(NSRect)rect
+- (void)drawCutShoulderBackgroundRect:(NSRect)rect withColor:(NSColor *)color
 {
   NSGraphicsContext *context = [NSGraphicsContext currentContext];
   [context saveGraphicsState];
 
-  [[NSColor yellowColor] drawSwatchInRect:rect];
+  if (![color isEqual:[NSColor clearColor]]) {
+    [color drawSwatchInRect:rect];
+  }
 
   [context restoreGraphicsState];
 }

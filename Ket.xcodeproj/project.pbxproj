@@ -44,6 +44,8 @@
 		58C3812D1705BBE9001FF665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58C3812B1705BBE9001FF665 /* InfoPlist.strings */; };
 		58C381301705BBE9001FF665 /* KetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3812F1705BBE9001FF665 /* KetTests.m */; };
 		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
+		58C6335317B239BB00FA4840 /* CSVChecklistV2Scanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335217B239BB00FA4840 /* CSVChecklistV2Scanner.m */; };
+		58C6335617B2771E00FA4840 /* CSVChecklistV2Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335517B2771E00FA4840 /* CSVChecklistV2Reader.m */; };
 		58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -141,6 +143,10 @@
 		58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDelegate.h; sourceTree = "<group>"; };
 		58C3814017060059001FF665 /* CatalogTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDelegate.m; sourceTree = "<group>"; };
 		58C6335017B21F9300FA4840 /* DocumentWindowDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentWindowDelegate.h; sourceTree = "<group>"; };
+		58C6335117B239BB00FA4840 /* CSVChecklistV2Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVChecklistV2Scanner.h; sourceTree = "<group>"; };
+		58C6335217B239BB00FA4840 /* CSVChecklistV2Scanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVChecklistV2Scanner.m; sourceTree = "<group>"; };
+		58C6335417B2771E00FA4840 /* CSVChecklistV2Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVChecklistV2Reader.h; sourceTree = "<group>"; };
+		58C6335517B2771E00FA4840 /* CSVChecklistV2Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVChecklistV2Reader.m; sourceTree = "<group>"; };
 		58DD7D7D17A7E3B000EA36C8 /* CatalogPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogPerspective.h; sourceTree = "<group>"; };
 		58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogPerspective.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +261,10 @@
 				58160541179BD9B80039AAAB /* CircleDataProvider.m */,
 				5870B4F3176E9DEC00B449DA /* CircleInspectorController.h */,
 				5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */,
+				58C6335417B2771E00FA4840 /* CSVChecklistV2Reader.h */,
+				58C6335517B2771E00FA4840 /* CSVChecklistV2Reader.m */,
+				58C6335117B239BB00FA4840 /* CSVChecklistV2Scanner.h */,
+				58C6335217B239BB00FA4840 /* CSVChecklistV2Scanner.m */,
 				58C381141705BBE9001FF665 /* Document.h */,
 				58C381151705BBE9001FF665 /* Document.m */,
 				588F56491791D26600219BA6 /* DocumentController.h */,
@@ -492,6 +502,8 @@
 				58AAE6EA17AAAACC005DA52D /* CatalogFilter.m in Sources */,
 				587FDA4317AFA4EA00CD412D /* ChecklistModule.m in Sources */,
 				587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */,
+				58C6335317B239BB00FA4840 /* CSVChecklistV2Scanner.m in Sources */,
+				58C6335617B2771E00FA4840 /* CSVChecklistV2Reader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

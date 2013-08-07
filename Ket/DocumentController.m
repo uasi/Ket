@@ -7,6 +7,9 @@
 #import "SearchPanelController.h"
 #import "WelcomeWindowController.h"
 
+// XXX: test
+#import "CSVChecklistV2Reader.h"
+
 @interface DocumentController ()
 
 @property (nonatomic, readwrite) CatalogImportWindowController *catalogImportWindowController;

@@ -5,6 +5,7 @@
 #import "Checklist.h"
 #import "CircleDataProvider.h"
 #import "DocumentController.h"
+#import "NSRegularExpression+Extensions.h"
 #import "PathUtils.h"
 
 @interface Document ()
@@ -58,6 +59,33 @@
   return YES;
 }
 
+#pragma mark Shortcut Key Handling
+
+- (BOOL)handleShortcutKeyWithKeyDown:(NSEvent *)event
+{
+  NSString *c = event.charactersIgnoringModifiers;
+  BOOL noModKeyPressed = (event.modifierFlags & NSDeviceIndependentModifierFlagsMask) == 0;
+
+  if (noModKeyPressed && [c isEqualToString:@"/"]) {
+    [[DocumentController sharedDocumentController] showSearchPanelForGenericSearch:self];
+  }
+  else if (noModKeyPressed && [c isEqualToString:@"@"]) {
+    [[DocumentController sharedDocumentController] showSearchPanelForAddressSearch:self];
+  }
+  else if (noModKeyPressed && [c isEqualToString:@":"]) {
+    [[DocumentController sharedDocumentController] showSearchPanelForLabelSearch:self];
+  }
+  else if (noModKeyPressed && [NSRegularExpression testString:c withPattern:@"^[0-9]$"]) {
+    NSInteger colorCode;
+    [[NSScanner scannerWithString:c] scanInteger:&colorCode];
+    [self.checklist setColorCode:colorCode forCircle:self.selectedCircle];
+  }
+  else {
+    return NO;
+  }
+  return YES;
+}
+
 #pragma mark Actions (As A Responder)
 
 - (IBAction)performFindPanelAction:(id)sender
@@ -70,6 +98,13 @@
 - (CircleDataProvider *)circleDataProvider
 {
   return _provider;
+}
+
+#pragma mark DocumentWindowDelegate Protocol
+
+- (BOOL)window:(NSWindow *)window shouldPropagateKeyDown:(NSEvent *)event
+{
+  return ![self handleShortcutKeyWithKeyDown:event];
 }
 
 @end

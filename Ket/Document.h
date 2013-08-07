@@ -1,8 +1,10 @@
+#import "DocumentWindowDelegate.h"
+
 @class Checklist;
 @class Circle;
 @class CircleDataProvider;
 
-@interface Document : NSDocument
+@interface Document : NSDocument <DocumentWindowDelegate>
 
 @property (nonatomic, readonly) NSUInteger comiketNo;
 @property (nonatomic, readonly) NSMutableDictionary *bookmarks;

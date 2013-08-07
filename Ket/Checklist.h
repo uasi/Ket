@@ -1,4 +1,4 @@
-extern NSString *ChecklistDidChangeNotification;
+extern NSString *const ChecklistDidChangeNotification;
 
 @class Circle;
 

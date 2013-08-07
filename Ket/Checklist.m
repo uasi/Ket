@@ -2,7 +2,7 @@
 
 #import "Circle.h"
 
-NSString *ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
+NSString *const ChecklistDidChangeNotification = @"ChecklistDidChangeNotification";
 
 @interface Checklist ()
 

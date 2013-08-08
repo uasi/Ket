@@ -7,8 +7,25 @@
   #import <ReactiveCocoa/ReactiveCocoa.h>
 
   #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
-#endif
 
-#define IF_SANDBOXED(expr)
+  // XXX: deprecated
+  #define IF_SANDBOXED(expr)
+
+  #if 1 // XXX: if sandbox is disabled
+    #define START_ACCESSING_RESOURCE(URL) (void)URL
+    #define START_ACCESSING_RESOURCE_WITHIN_SCOPE(URL) (void)URL
+    #define STOP_ACCESSING_RESOURCE(URL) (void)URL
+  #else
+    #define START_ACCESSING_RESOURCE(URL) \
+      [URL startAccessingSecurityScopedURL]
+    #define START_ACCESSING_RESOURCE_WITHIN_SCOPE(URL) \
+      do { \
+        [URL startAccessingSecurityScopedURL]; \
+        @onExit { [URL stopAccessingSecurityScopedURL]; }; \
+      while (0)
+    #define STOP_ACCESSING_RESOURCE(URL) ((void *)URL) \
+      [URL stopAccessingSecurityScopedURL]
+  #endif
+#endif
 
 extern int ddLogLevel;

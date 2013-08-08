@@ -13,6 +13,7 @@
 @property (nonatomic, readonly) Checklist *checklist;
 
 - (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo;
+- (IBAction)performExportAction:(id)sender;
 
 @end
 

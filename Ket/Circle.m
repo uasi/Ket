@@ -59,7 +59,7 @@ NSUInteger CircleIdentifierFromGlobalCircleID(NSUInteger globalID)
 @property (nonatomic, readwrite) NSString *title;
 @property (nonatomic, readwrite) NSURL *URL;
 @property (nonatomic, readwrite) NSString *mailAddress;
-@property (nonatomic, readwrite) NSString *note;
+@property (nonatomic, readwrite) NSString *circleDescription;
 @property (nonatomic, readwrite) NSString *memo;
 @property (nonatomic, readwrite) NSUInteger updateID;
 @property (nonatomic, readwrite) NSString *updateInfo;
@@ -114,7 +114,7 @@ static NSURL *URLFromString(NSString *string) {
   self.title = [result stringForColumn:@"bookName"];
   self.URL = URLFromString([result stringForColumn:@"URL"]);
   self.mailAddress = [result stringForColumn:@"mailAddr"];
-  self.note = [result stringForColumn:@"description"];
+  self.circleDescription = [result stringForColumn:@"description"];
   self.memo = [result stringForColumn:@"memo"];
   self.updateID = [result intForColumn:@"updateId"];
   self.updateInfo = [result stringForColumn:@"updateData"];

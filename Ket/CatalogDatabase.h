@@ -1,3 +1,4 @@
+@class Circle;
 @class CircleCollection;
 
 @interface CatalogDatabase : NSObject
@@ -11,8 +12,11 @@
 
 - (instancetype)initWithURL:(NSURL *)URL;
 
+- (Circle *)circleForGlobalID:(NSUInteger)globalID;
 - (NSArray *)circlesInPage:(NSUInteger)page;
 
+- (NSDictionary *)dateInfoOfDay:(NSInteger)day;
+- (NSString *)simpleAreaNameForBlockID:(NSInteger)blockID;
 - (NSString *)blockNameForID:(NSInteger)blockID;
 
 @end

@@ -1,5 +1,6 @@
 #import "Document.h"
 
+#import "CSVChecklistV2Writer.h"
 #import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
 #import "Checklist.h"
@@ -93,6 +94,26 @@
 }
 
 #pragma mark Actions (As A Responder)
+
+- (IBAction)performExportAction:(id)sender
+{
+  NSSavePanel *savePanel = [NSSavePanel savePanel];
+  savePanel.nameFieldStringValue = self.fileURL.lastPathComponent.stringByDeletingPathExtension;
+  savePanel.nameFieldLabel = @"Export As:"; // TODO: localize
+  savePanel.canCreateDirectories = YES;
+  savePanel.canSelectHiddenExtension = YES;
+  savePanel.allowedFileTypes = @[@"csv"];
+  savePanel.allowsOtherFileTypes = NO;
+  [savePanel beginSheetModalForWindow:[self windowForSheet] completionHandler:^(NSInteger result) {
+    if (result != NSFileHandlingPanelOKButton) return;
+    NSURL *URL = savePanel.URL;
+    NSError *error;
+    BOOL ok = [CSVChecklistV2Writer writeChecklist:self.checklist withDatabase:self.provider.database toURL:URL error:&error];
+    if (!ok && error) {
+      [self presentError:error];
+    }
+  }];
+}
 
 - (IBAction)performFindPanelAction:(id)sender
 {

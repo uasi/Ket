@@ -13,9 +13,9 @@
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
 @property (nonatomic, readwrite) Checklist *checklist;
+@property (nonatomic, readwrite) CatalogDatabase *database;
 @property (nonatomic, readwrite) RACSignal *dataDidChangeSignal;
 
-@property (nonatomic) CatalogDatabase *database;
 @property (nonatomic) CatalogPerspective *perspective;
 @property (nonatomic) CircleCutArchive *archive;
 

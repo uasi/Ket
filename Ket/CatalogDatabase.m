@@ -112,6 +112,15 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
   return _pageSet = [indexSet copy];
 }
 
+- (Circle *)circleForGlobalID:(NSUInteger)globalID
+{
+  NSUInteger circleID = CircleIdentifierFromGlobalCircleID(globalID);
+  NSString *sql = @"SELECT * FROM ComiketCircle WHERE id = (?)";
+  FMResultSet *result = [self.database executeQuery:sql, @(circleID)];
+  if (![result next]) return nil;
+  return [Circle circleWithResultSet:result];
+}
+
 - (NSArray *)circlesInPage:(NSUInteger)page
 {
   NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsPerPage];
@@ -125,6 +134,30 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
   }
 
   return [circles copy];
+}
+
+- (NSDictionary *)dateInfoOfDay:(NSInteger)day
+{
+  NSString *sql = @"SELECT * FROM ComiketDate WHERE id = (?)";
+  FMResultSet *result = [self.database executeQuery:sql, @(day)];
+  NSMutableDictionary *dateInfo = [NSMutableDictionary dictionary];
+  if (![result next]) return nil;
+  dateInfo[@"year"] = @([result intForColumn:@"year"]);
+  dateInfo[@"month"] = @([result intForColumn:@"month"]);
+  dateInfo[@"day"] = @([result intForColumn:@"day"]);
+  dateInfo[@"weekday"] = @([result intForColumn:@"weekday"]);
+  return [dateInfo copy];
+}
+
+- (NSString *)simpleAreaNameForBlockID:(NSInteger)blockID
+{
+  NSString *sql = (@"SELECT simpleName FROM ComiketArea"
+                   @"  INNER JOIN ComiketBlock"
+                   @"  ON ComiketArea.id = ComiketBlock.areaId"
+                   @"  WHERE ComiketBlock.id = (?)");
+  FMResultSet *result = [self.database executeQuery:sql, @(blockID)];
+  if (![result next]) return nil;
+  return [result stringForColumn:@"simpleName"];
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID

@@ -1,3 +1,4 @@
+@class CatalogDatabase;
 @class CatalogFilter;
 @class Checklist;
 @class Circle;
@@ -7,6 +8,7 @@
 
 @property (nonatomic, readonly) NSUInteger comiketNo;
 @property (nonatomic, readonly) Checklist *checklist;
+@property (nonatomic, readonly) CatalogDatabase *database;
 @property (nonatomic, readonly) NSSize cutSize;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInRow;
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;

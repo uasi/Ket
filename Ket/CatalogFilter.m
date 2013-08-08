@@ -82,7 +82,7 @@
   NSAssert(self.checklist, @"self.checklist must not be nil");
   ChecklistModuleRegisterChecklistWeakRef(self.checklist);
   NSString *sql = [NSString stringWithFormat:
-                   @"CREATE VIRTUAL TABLE IF NOT EXISTS main.%@ USING %@ (%@);",
+                   @"CREATE VIRTUAL TABLE IF NOT EXISTS main.%@ USING %@ (%@)",
                    self.tableName,
                    ChecklistModuleName(),
                    self.checklist.identifier];

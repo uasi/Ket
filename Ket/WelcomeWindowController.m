@@ -53,7 +53,7 @@
   }] array];
 }
 
-#pragma mark - Actions
+#pragma mark Actions
 
 - (IBAction)performOpen:(id)sender
 {
@@ -74,14 +74,14 @@
   [[DocumentController sharedDocumentController].catalogImportWindowController showWindow:self];
 }
 
-#pragma mark - NSTableViewDataSource
+#pragma mark NSTableViewDataSource Protocol
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
   return MAX(1, self.cachedCatalogNames.count);
 }
 
-#pragma mark - NSTableViewDelegate
+#pragma mark NSTableViewDelegate Protocol
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {

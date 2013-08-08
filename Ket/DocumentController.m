@@ -7,9 +7,6 @@
 #import "SearchPanelController.h"
 #import "WelcomeWindowController.h"
 
-// XXX: test
-#import "CSVChecklistV2Reader.h"
-
 @interface DocumentController ()
 
 @property (nonatomic, readwrite) CatalogImportWindowController *catalogImportWindowController;
@@ -72,10 +69,13 @@
 
 - (IBAction)showCircleInspector:(id)sender
 {
+  if (self.circleInspectorController.window.isVisible) {
+    [self.circleInspectorController.window orderOut:self];
+    return;
+  }
   Document *document = [self documentForWindow:[NSApp mainWindow]];
   self.circleInspectorController.document = document;
   [self.circleInspectorController showWindow:self];
-  // TODO: make inspector hidable
 }
 
 - (IBAction)showSearchPanelForGenericSearch:(id)sender

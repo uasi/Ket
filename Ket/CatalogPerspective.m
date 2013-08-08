@@ -66,7 +66,7 @@
 
 - (NSArray *)circlesWithLimit:(NSUInteger)limit offset:(NSUInteger)offset
 {
-  static NSString *sqlFormat = @"SELECT * FROM %@ LIMIT %lu OFFSET %lu;";
+  NSString *sqlFormat = @"SELECT * FROM %@ LIMIT %lu OFFSET %lu;";
   NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName, (unsigned long)limit, (unsigned long)offset];
   FMResultSet *result = [self.fmDatabase executeQuery:sql, self.viewName];
   NSMutableArray *circles = [NSMutableArray array];
@@ -140,7 +140,7 @@
 - (NSUInteger)count
 {
   if (_count == NSNotFound) {
-    static NSString *sqlFormat = @"SELECT COUNT(*) FROM %@ WHERE pageNo > 0;";
+    NSString *sqlFormat = @"SELECT COUNT(*) FROM %@ WHERE pageNo > 0;";
     NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
     _count = [self.fmDatabase intForQuery:sql, self.viewName];
   }
@@ -191,7 +191,7 @@
 
 - (void)createView
 {
-  static NSString *sqlFormat = @"CREATE TEMPORARY VIEW %@ AS %@;";
+  NSString *sqlFormat = @"CREATE TEMPORARY VIEW %@ AS %@;";
   NSString *sql = [NSString stringWithFormat:
                    sqlFormat,
                    self.viewName,
@@ -201,7 +201,7 @@
 
 - (void)dropView
 {
-  static NSString *sqlFormat = @"DROP VIEW IF EXISTS %@;";
+  NSString *sqlFormat = @"DROP VIEW IF EXISTS %@;";
   NSString *sql = [NSString stringWithFormat:sqlFormat, self.viewName];
   NSAssert(([self.fmDatabase executeUpdate:sql, self.viewName]), @"DROP VIEW must succeed: %@", self.fmDatabase.lastError);
 }

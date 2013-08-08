@@ -45,7 +45,7 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
   if (![self.database open]) return nil;
 
   NSString *URLString = [URL.absoluteString stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-  static NSString *sqlFormat = @"ATTACH DATABASE '%@?mode=ro' AS Comiket;";
+  NSString *sqlFormat = @"ATTACH DATABASE '%@?mode=ro' AS Comiket";
   NSString *sql = [NSString stringWithFormat:sqlFormat, URLString];
   if (![self.database executeUpdate:sql]) return nil;
 
@@ -56,11 +56,6 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
   return self;
 }
 
-- (instancetype)init
-{
-  @throw NSInternalInconsistencyException;
-}
-
 - (void)dealloc
 {
   [self.database close];
@@ -68,13 +63,13 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
 
 - (NSInteger)comiketNo
 {
-  return [self.database intForQuery:@"SELECT comiketNo FROM ComiketInfo;"];
+  return [self.database intForQuery:@"SELECT comiketNo FROM ComiketInfo"];
 }
 
 - (NSSize)cutSize
 {
-  CGFloat w = [self.database intForQuery:@"SELECT cutSizeW FROM ComiketInfo;"];
-  CGFloat h = [self.database intForQuery:@"SELECT cutSizeH FROM ComiketInfo;"];
+  CGFloat w = [self.database intForQuery:@"SELECT cutSizeW FROM ComiketInfo"];
+  CGFloat h = [self.database intForQuery:@"SELECT cutSizeH FROM ComiketInfo"];
   return NSMakeSize(w, h);
 }
 
@@ -101,10 +96,10 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
 
   NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
 
-  NSString *query = (@"SELECT DISTINCT pageNo FROM ComiketCircle"
-                     @"  WHERE pageNo > 0"
-                     @"  ORDER BY pageNo ASC;");
-  FMResultSet *result = [self.database executeQuery:query];
+  NSString *sql = (@"SELECT DISTINCT pageNo FROM ComiketCircle"
+                   @"  WHERE pageNo > 0"
+                   @"  ORDER BY pageNo ASC");
+  FMResultSet *result = [self.database executeQuery:sql];
   while ([result next]) {
     [indexSet addIndex:[result intForColumnIndex:0]];
   }
@@ -125,10 +120,10 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
 {
   NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsPerPage];
 
-  NSString *query = (@"SELECT * FROM ComiketCircle"
-                     @"  WHERE pageNo = (?)"
-                     @"  ORDER BY cutIndex ASC;");
-  FMResultSet *result = [self.database executeQuery:query, [NSNumber numberWithUnsignedInteger:page]];
+  NSString *sql = (@"SELECT * FROM ComiketCircle"
+                   @"  WHERE pageNo = (?)"
+                   @"  ORDER BY cutIndex ASC;");
+  FMResultSet *result = [self.database executeQuery:sql, [NSNumber numberWithUnsignedInteger:page]];
   while ([result next]) {
     [circles addObject:[Circle circleWithResultSet:result]];
   }

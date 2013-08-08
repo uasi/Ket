@@ -3,7 +3,7 @@
 #import "CircleCutArchive.h"
 #import "PathUtils.h"
 
-static const char *kImportQueueLabel = "org.exsen.Ket.CatalogImportController.ImportQueue";
+static const char *const kImportQueueLabel = "org.exsen.Ket.CatalogImportController.ImportQueue";
 
 typedef NS_OPTIONS(NSUInteger, ImportResult) {
   kImportResultOK = 0,

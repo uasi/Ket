@@ -21,7 +21,6 @@ static NSString *const kKetVersionString = @"Ket 1.0.0 Compatible";
 + (BOOL)writeChecklist:(Checklist *)checklist withDatabase:(CatalogDatabase *)database toURL:(NSURL *)URL error:(NSError **)error
 {
   NSString *string = [self stringRepresentationOfChecklist:checklist withDatabase:(CatalogDatabase *)database];
-  START_ACCESSING_RESOURCE_WITHIN_SCOPE(URL);
   return [string writeToURL:URL atomically:YES encoding:NSUTF8StringEncoding error:error];
 }
 

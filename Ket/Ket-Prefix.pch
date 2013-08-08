@@ -8,10 +8,7 @@
 
   #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
 
-  // XXX: deprecated
-  #define IF_SANDBOXED(expr)
-
-  #if 1 // XXX: if sandbox is disabled
+  #if 1
     #define START_ACCESSING_RESOURCE(URL) (void)URL
     #define START_ACCESSING_RESOURCE_WITHIN_SCOPE(URL) (void)URL
     #define STOP_ACCESSING_RESOURCE(URL) (void)URL

@@ -97,8 +97,10 @@
 
 - (IBAction)performExportAction:(id)sender
 {
+  NSString *fileName = (self.fileURL.lastPathComponent.stringByDeletingPathExtension ?:
+                        ComiketNameFromComiketNo(self.comiketNo));
   NSSavePanel *savePanel = [NSSavePanel savePanel];
-  savePanel.nameFieldStringValue = self.fileURL.lastPathComponent.stringByDeletingPathExtension;
+  savePanel.nameFieldStringValue = fileName;
   savePanel.nameFieldLabel = @"Export As:"; // TODO: localize
   savePanel.canCreateDirectories = YES;
   savePanel.canSelectHiddenExtension = YES;

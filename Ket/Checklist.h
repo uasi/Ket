@@ -12,6 +12,8 @@ extern NSString *const ChecklistDidChangeNotification;
 
 - (BOOL)bookmarksContainsCircle:(Circle *)circle;
 - (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID;
+- (NSString *)noteForCircle:(Circle *)circle;
+- (NSString *)noteForCircleWithGlobalID:(NSUInteger)globalID;
 - (NSColor *)colorForCircle:(Circle *)circle;
 - (NSInteger)colorCodeForCircle:(Circle *)circle;
 - (NSColor *)colorForCode:(NSInteger)colorCode;
@@ -24,6 +26,8 @@ extern NSString *const ChecklistDidChangeNotification;
 - (void)addCircleToBookmarks:(Circle *)circle __deprecated;
 - (void)removeCircleFromBookmarks:(Circle *)circle __deprecated;
 
+- (void)setNote:(NSString *)note forCircle:(Circle *)circle;
+- (void)setNote:(NSString *)note forCircleWithGlobalID:(NSUInteger)globalID;
 - (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle;
 - (void)setColorCode:(NSInteger)colorCode forCircleWithGlobalID:(NSUInteger)globalID;
 

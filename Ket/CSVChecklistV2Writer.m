@@ -74,7 +74,7 @@ static NSString *const kKetVersionString = @"Ket 1.0.0 Compatible";
           // Column 16 to 20
           circle.mailAddress,
           circle.circleDescription,
-          @"", // XXX: user's notes
+          [checklist noteForCircle:circle] ?: @"",
           (long)0, // XXX: circle position.X
           (long)0, // XXX: circle position.Y
           // Column 21 to 25

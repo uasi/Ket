@@ -100,6 +100,25 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   END_WRITING;
 }
 
+- (void)setNote:(NSString *)note forCircle:(Circle *)circle
+{
+  NSAssert(circle, @"circle must not be nil");
+  [self setNote:note forCircleWithGlobalID:circle.globalID];
+}
+
+- (void)setNote:(NSString *)note forCircleWithGlobalID:(NSUInteger)globalID
+{
+  NSAssert(globalID > 0, @"globalID must not be zero");
+  BEGIN_WRITING;
+  if (!note || [note isEqualToString:@""]) {
+    [[self entryForGlobalID:globalID] removeObjectForKey:@"note"];
+  }
+  else {
+    [self entryForGlobalID:globalID][@"note"] = note;
+  }
+  END_WRITING;
+}
+
 - (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle
 {
   NSAssert(circle, @"circle must not be nil");
@@ -108,7 +127,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 
 - (void)setColorCode:(NSInteger)colorCode forCircleWithGlobalID:(NSUInteger)globalID
 {
-  NSAssert(globalID, @"globalID must not be zero");
+  NSAssert(globalID > 0, @"globalID must not be zero");
   NSAssert(0 <= colorCode && colorCode <= 9, @"colorCode must be between 0 and 9");
   BEGIN_WRITING;
   if (colorCode == 0) {
@@ -131,6 +150,16 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID
 {
   return !!self.entries[@(globalID)][@"colorCode"];
+}
+
+- (NSString *)noteForCircle:(Circle *)circle
+{
+  return self.entries[@(circle.globalID)][@"note"];
+}
+
+- (NSString *)noteForCircleWithGlobalID:(NSUInteger)globalID
+{
+  return self.entries[@(globalID)][@"note"];
 }
 
 - (NSColor *)colorForCircle:(Circle *)circle

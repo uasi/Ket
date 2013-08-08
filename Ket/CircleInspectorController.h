@@ -1,3 +1,5 @@
+#import <Cocoa/Cocoa.h>
+
 @class Checklist;
 @class Circle;
 @class Document;
@@ -8,6 +10,7 @@
 @property (nonatomic, readonly) Checklist *checklist;
 
 @property (nonatomic, getter = isBookmarked, setter = setBookmarked:) BOOL bookmarked;
+@property (nonatomic) NSString *note;
 
 @end
 

@@ -23,6 +23,11 @@
   return [NSSet setWithObject:@"circle"];
 }
 
++ (NSSet *)keyPathsForValuesAffectingNote
+{
+  return [NSSet setWithObject:@"circle"];
+}
+
 - (id)initWithWindow:(NSWindow *)window
 {
   self = [super initWithWindow:window];
@@ -78,6 +83,20 @@
     [self.checklist removeCircleFromBookmarks:self.circle];
   }
   [self didChangeValueForKey:@"bookmarked"];
+}
+
+- (NSString *)note
+{
+  if (!self.circle) return nil;
+  return [self.checklist noteForCircle:self.circle];
+}
+
+- (void)setNote:(NSString *)string
+{
+  if (!self.circle) return;
+  [self willChangeValueForKey:@"note"];
+  [self.checklist setNote:string forCircle:self.circle];
+  [self didChangeValueForKey:@"note"];
 }
 
 @end

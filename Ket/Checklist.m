@@ -96,7 +96,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 {
   NSAssert(circle, @"circle must not be nil");
   BEGIN_WRITING;
-  [[self entryForCircle:circle] removeObjectForKey:@"colorCode"];
+  [self removeObjectForKey:@"colorCode" inEntryForGlobalID:circle.globalID];
   END_WRITING;
 }
 
@@ -111,7 +111,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   NSAssert(globalID > 0, @"globalID must not be zero");
   BEGIN_WRITING;
   if (!note || [note isEqualToString:@""]) {
-    [[self entryForGlobalID:globalID] removeObjectForKey:@"note"];
+    [self removeObjectForKey:@"note" inEntryForGlobalID:globalID];
   }
   else {
     [self entryForGlobalID:globalID][@"note"] = note;
@@ -131,7 +131,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   NSAssert(0 <= colorCode && colorCode <= 9, @"colorCode must be between 0 and 9");
   BEGIN_WRITING;
   if (colorCode == 0) {
-    [[self entryForGlobalID:globalID] removeObjectForKey:@"colorCode"];
+    [self removeObjectForKey:@"colorCode" inEntryForGlobalID:globalID];
   }
   else {
     [self entryForGlobalID:globalID][@"colorCode"] = @(colorCode);
@@ -173,6 +173,12 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   return [codeNumber integerValue];
 }
 
+- (NSInteger)colorCodeForCircleWithGlobalID:(NSUInteger)globalID
+{
+  NSNumber *codeNumber = self.entries[@(globalID)][@"colorCode"] ?: @0;
+  return [codeNumber integerValue];
+}
+
 #define BGR(b, g, r) \
 [NSColor colorWithCalibratedRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
@@ -196,7 +202,6 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (NSIndexSet *)globalIDSet
 {
   if (_globalIDSet) return _globalIDSet;
-  [self removeEmptyEntries];
   NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
   for (NSNumber *globalID in self.entries) {
     [set addIndex:globalID.unsignedIntegerValue];
@@ -208,7 +213,6 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (NSData *)data
 {
   if (_data) return _data;
-  [self removeEmptyEntries];
   _data = [NSKeyedArchiver archivedDataWithRootObject:@{
            @"entries": self.entries,
            @"comiketNo": @(self.comiketNo),
@@ -241,23 +245,20 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 
 - (NSMutableDictionary *)entryForGlobalID:(NSUInteger)globalID
 {
-  NSMutableDictionary *properties = self.entries[@(globalID)];
-  if (properties) return properties;
+  NSMutableDictionary *entry = self.entries[@(globalID)];
+  if (entry) return entry;
 
-  properties = [NSMutableDictionary dictionary];
-  self.entries[@(globalID)] = properties;
-  return properties;
+  entry = [NSMutableDictionary dictionary];
+  self.entries[@(globalID)] = entry;
+  return entry;
 }
 
-// Method that returns aggregated information about entries should call this
-// method first.
-- (void)removeEmptyEntries
+- (void)removeObjectForKey:(id)key inEntryForGlobalID:(NSUInteger)globalID
 {
-  for (id key in self.entries.allKeys) {
-    if (((NSMutableDictionary *)self.entries[key]).count == 0) {
-      [self.entries removeObjectForKey:key];
-    }
-  }
+  NSMutableDictionary *entry = self.entries[@(globalID)];
+  if (!entry) return;
+  [entry removeObjectForKey:key];
+  if (entry.count == 0) [self.entries removeObjectForKey:@(globalID)];
 }
 
 #pragma mark Notification

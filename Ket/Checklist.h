@@ -14,8 +14,9 @@ extern NSString *const ChecklistDidChangeNotification;
 - (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID;
 - (NSString *)noteForCircle:(Circle *)circle;
 - (NSString *)noteForCircleWithGlobalID:(NSUInteger)globalID;
-- (NSColor *)colorForCircle:(Circle *)circle;
 - (NSInteger)colorCodeForCircle:(Circle *)circle;
+- (NSInteger)colorCodeForCircleWithGlobalID:(NSUInteger)globalID;
+- (NSColor *)colorForCircle:(Circle *)circle;
 - (NSColor *)colorForCode:(NSInteger)colorCode;
 
 @end

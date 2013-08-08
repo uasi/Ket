@@ -8,7 +8,7 @@ NSString *const ChecklistDidChangeNotification = @"ChecklistDidChangeNotificatio
 
 @property (nonatomic, readwrite) NSUInteger comiketNo;
 
-@property (nonatomic) NSMutableDictionary *dictionaryOfProperties;
+@property (nonatomic) NSMutableDictionary *entries;
 
 // Snapshot management
 @property (nonatomic) BOOL frozen;
@@ -32,7 +32,7 @@ NSString *const ChecklistDidChangeNotification = @"ChecklistDidChangeNotificatio
   if (!self) return nil;
 
   self.comiketNo = comiketNo;
-  self.dictionaryOfProperties = [[NSMutableDictionary alloc] init];
+  self.entries = [[NSMutableDictionary alloc] init];
 
   return self;
 }
@@ -62,7 +62,7 @@ NSString *const ChecklistDidChangeNotification = @"ChecklistDidChangeNotificatio
     return nil;
   }
   self.comiketNo = [comiketNo unsignedIntegerValue];
-  self.dictionaryOfProperties = [(properties[@"dictionaryOfProperties"] ?: @{}) mutableCopy];
+  self.entries = [(properties[@"dictionaryOfProperties"] ?: @{}) mutableCopy];
 
   return self;
 }
@@ -71,7 +71,7 @@ NSString *const ChecklistDidChangeNotification = @"ChecklistDidChangeNotificatio
 {
   Checklist *newChecklist = [[Checklist alloc] init];
   newChecklist.comiketNo = self.comiketNo;
-  newChecklist.dictionaryOfProperties = [self.dictionaryOfProperties mutableCopy];
+  newChecklist.entries = [self.entries mutableCopy];
   return newChecklist;
 }
 
@@ -88,7 +88,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 {
   NSAssert(circle, @"circle must not be nil");
   BEGIN_WRITING;
-  [self propertiesOfCircle:circle][@"colorCode"] = @(1);
+  [self entryForCircle:circle][@"colorCode"] = @(1);
   END_WRITING;
 }
 
@@ -96,7 +96,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 {
   NSAssert(circle, @"circle must not be nil");
   BEGIN_WRITING;
-  [[self propertiesOfCircle:circle] removeObjectForKey:@"colorCode"];
+  [[self entryForCircle:circle] removeObjectForKey:@"colorCode"];
   END_WRITING;
 }
 
@@ -111,7 +111,12 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   NSAssert(globalID, @"globalID must not be zero");
   NSAssert(0 <= colorCode && colorCode <= 9, @"colorCode must be between 0 and 9");
   BEGIN_WRITING;
-  [self propertiesOfCircleWithGlobalID:globalID][@"colorCode"] = @(colorCode);
+  if (colorCode == 0) {
+    [[self entryForGlobalID:globalID] removeObjectForKey:@"colorCode"];
+  }
+  else {
+    [self entryForGlobalID:globalID][@"colorCode"] = @(colorCode);
+  }
   END_WRITING;
 }
 
@@ -120,12 +125,12 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (BOOL)bookmarksContainsCircle:(Circle *)circle
 {
   if (!circle) return NO;
-  return !!self.dictionaryOfProperties[(@(circle.globalID))][@"colorCode"];
+  return !!self.entries[(@(circle.globalID))][@"colorCode"];
 }
 
 - (BOOL)bookmarksContainsCircleWithGlobalID:(NSUInteger)globalID
 {
-  return !!self.dictionaryOfProperties[@(globalID)][@"colorCode"];
+  return !!self.entries[@(globalID)][@"colorCode"];
 }
 
 - (NSColor *)colorForCircle:(Circle *)circle
@@ -135,7 +140,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 
 - (NSInteger)colorCodeForCircle:(Circle *)circle
 {
-  NSNumber *codeNumber = self.dictionaryOfProperties[@(circle.globalID)][@"colorCode"] ?: @0;
+  NSNumber *codeNumber = self.entries[@(circle.globalID)][@"colorCode"] ?: @0;
   return [codeNumber integerValue];
 }
 
@@ -162,8 +167,9 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (NSIndexSet *)globalIDSet
 {
   if (_globalIDSet) return _globalIDSet;
+  [self removeEmptyEntries];
   NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-  for (NSNumber *globalID in self.dictionaryOfProperties) {
+  for (NSNumber *globalID in self.entries) {
     [set addIndex:globalID.unsignedIntegerValue];
   }
   _globalIDSet = [set copy];
@@ -173,8 +179,9 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 - (NSData *)data
 {
   if (_data) return _data;
+  [self removeEmptyEntries];
   _data = [NSKeyedArchiver archivedDataWithRootObject:@{
-           @"dictionaryOfProperties": self.dictionaryOfProperties,
+           @"entries": self.entries,
            @"comiketNo": @(self.comiketNo),
            }];
   return _data;
@@ -196,21 +203,32 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
           (void *)self];
 }
 
-#pragma mark Circle Property Management
+#pragma mark Entry Management
 
-- (NSMutableDictionary *)propertiesOfCircle:(Circle *)circle
+- (NSMutableDictionary *)entryForCircle:(Circle *)circle
 {
-  return [self propertiesOfCircleWithGlobalID:circle.globalID];
+  return [self entryForGlobalID:circle.globalID];
 }
 
-- (NSMutableDictionary *)propertiesOfCircleWithGlobalID:(NSUInteger)globalID
+- (NSMutableDictionary *)entryForGlobalID:(NSUInteger)globalID
 {
-  NSMutableDictionary *properties = self.dictionaryOfProperties[@(globalID)];
+  NSMutableDictionary *properties = self.entries[@(globalID)];
   if (properties) return properties;
 
   properties = [NSMutableDictionary dictionary];
-  self.dictionaryOfProperties[@(globalID)] = properties;
+  self.entries[@(globalID)] = properties;
   return properties;
+}
+
+// Method that returns aggregated information about entries should call this
+// method first.
+- (void)removeEmptyEntries
+{
+  for (id key in self.entries.allKeys) {
+    if (((NSMutableDictionary *)self.entries[key]).count == 0) {
+      [self.entries removeObjectForKey:key];
+    }
+  }
 }
 
 #pragma mark Notification

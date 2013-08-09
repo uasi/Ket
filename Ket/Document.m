@@ -66,6 +66,7 @@
 - (BOOL)handleKeyDown:(NSEvent *)event
 {
   NSString *c = event.charactersIgnoringModifiers;
+  // XXX: noModKeyPressed may be too restrictive; allow shift key?
   BOOL noModKeyPressed = (event.modifierFlags & NSDeviceIndependentModifierFlagsMask) == 0;
 
   if (noModKeyPressed && [c isEqualToString:@"o"]) {
@@ -87,6 +88,14 @@
     [[NSScanner scannerWithString:c] scanInteger:&colorCode];
     [self.checklist setColorCode:colorCode forCircle:self.selectedCircle];
   }
+#ifdef DEBUG
+  else if ([c isEqualToString:@"?"]) {
+    NSLog(@"entry = %@", [self.checklist debug_entryForCircleWithGlobalID:self.selectedCircle.globalID]);
+  }
+  else if ([c isEqualToString:@"!"]) {
+    NSLog(@"entries = %@", [self.checklist debug_entries]);
+  }
+#endif
   else {
     return NO;
   }

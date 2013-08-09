@@ -281,4 +281,20 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   _snapshot = nil;
 }
 
+#pragma mark Debugging
+
+#ifdef DEBUG
+
+- (NSMutableDictionary *)debug_entryForCircleWithGlobalID:(NSUInteger)globalID
+{
+  return self.entries[@(globalID)];
+}
+
+- (NSMutableDictionary *)debug_entries
+{
+  return self.entries;
+}
+
+#endif
+
 @end

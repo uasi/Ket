@@ -39,4 +39,9 @@ extern NSString *const ChecklistDidChangeNotification;
 - (instancetype)initWithComiketNo:(NSUInteger)comiketNo;
 - (instancetype)initWithData:(NSData *)data error:(NSError **)error;
 
+#ifdef DEBUG
+- (NSMutableDictionary *)debug_entryForCircleWithGlobalID:(NSUInteger)globalID;
+- (NSMutableDictionary *)debug_entries;
+#endif
+
 @end

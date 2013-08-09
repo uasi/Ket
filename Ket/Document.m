@@ -28,12 +28,20 @@
   return @"Document";
 }
 
-- (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo
+- (void)prepareUntitledDocumentWithComiketNo:(NSUInteger)comiketNo
 {
   _comiketNo = comiketNo;
   EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
   self.checklist = [[Checklist alloc] initWithComiketNo:comiketNo];
   self.provider = [[CircleDataProvider alloc] initWithChecklist:self.checklist];
+}
+
+- (void)prepareDocumentWithChecklist:(Checklist *)checklist
+{
+  _comiketNo = checklist.comiketNo;
+  EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(self.comiketNo));
+  self.checklist = checklist;
+  self.provider = [[CircleDataProvider alloc] initWithChecklist:checklist];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -56,8 +64,7 @@
 {
   Checklist *checklist = [[Checklist alloc] initWithData:data error:outError];
   if (!checklist) return NO;
-  [self prepareDocumentWithComiketNo:checklist.comiketNo];
-  self.checklist = checklist;
+  [self prepareDocumentWithChecklist:checklist];
   return YES;
 }
 

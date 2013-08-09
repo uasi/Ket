@@ -6,6 +6,8 @@
 #import "PathUtils.h"
 #import "SearchPanelController.h"
 #import "WelcomeWindowController.h"
+#import <CocoaLumberjack/DDFileLogger.h>
+#import <CocoaLumberjack/DDTTYLogger.h>
 
 @interface DocumentController ()
 
@@ -17,6 +19,21 @@
 @end
 
 @implementation DocumentController
+
+// Initializes CocoaLumberjack
++ (void)load {
+  //Add the DDTTYLogger that output logs to Xcode's debug console.
+  [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
+  // Enable coloring if XcodeColors plugin has been installed.
+  // (See https://github.com/robbiehanson/XcodeColors )
+  [DDTTYLogger sharedInstance].colorsEnabled = YES;
+
+  // Add a DDFileLogger.
+  DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+  fileLogger.rollingFrequency = 60 * 60 * 24; // 24hrs
+  [DDLog addLogger:fileLogger];
+}
 
 - (instancetype)init
 {
@@ -49,7 +66,7 @@
 {
   Document *document = [super openUntitledDocumentAndDisplay:NO error:outError];
   if (!document) return nil;
-  [document prepareDocumentWithComiketNo:comiketNo];
+  [document prepareUntitledDocumentWithComiketNo:comiketNo];
   if (displayDocument) {
     [document makeWindowControllers];
     [document showWindows];

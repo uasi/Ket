@@ -12,7 +12,7 @@
 @property (nonatomic, readonly) CircleDataProvider *circleDataProvider;
 @property (nonatomic, readonly) Checklist *checklist;
 
-- (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo;
+- (void)prepareUntitledDocumentWithComiketNo:(NSUInteger)comiketNo;
 - (IBAction)performExportAction:(id)sender;
 
 @end

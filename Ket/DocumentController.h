@@ -1,4 +1,5 @@
 @class CatalogImportWindowController;
+@class Checklist;
 @class CircleInspectorController;
 @class SearchPanelController;
 @class WelcomeWindowController;
@@ -11,6 +12,7 @@
 @property (nonatomic, readonly) WelcomeWindowController *welcomeWindowController;
 
 - (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withComiketNo:(NSUInteger)comiketNo error:(NSError **)outError;
+- (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withChecklist:(Checklist *)checklist error:(NSError **)outError;
 
 - (IBAction)showCircleInspector:(id)sender;
 - (IBAction)showSearchPanelForGenericSearch:(id)sender;

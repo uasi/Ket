@@ -1,5 +1,6 @@
 #import "Document.h"
 
+#import "CSVChecklistV2Reader.h"
 #import "CSVChecklistV2Writer.h"
 #import "CatalogImportWindowController.h"
 #import "CatalogTableViewDelegate.h"
@@ -28,7 +29,7 @@
   return @"Document";
 }
 
-- (void)prepareUntitledDocumentWithComiketNo:(NSUInteger)comiketNo
+- (void)prepareDocumentWithComiketNo:(NSUInteger)comiketNo
 {
   _comiketNo = comiketNo;
   EnsureDirectoryExistsAtURL(CatalogDirectoryURLWithComiketNo(comiketNo));
@@ -110,6 +111,27 @@
 }
 
 #pragma mark Actions (As A Responder)
+
+- (IBAction)performImportAction:(id)sender
+{
+  NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+  openPanel.canChooseFiles = YES;
+  openPanel.canChooseDirectories = NO;
+  openPanel.allowsMultipleSelection = NO;
+  openPanel.allowedFileTypes = @[@"csv"];
+  [openPanel beginSheetModalForWindow:[self windowForSheet] completionHandler:^(NSInteger result) {
+    if (result != NSFileHandlingPanelOKButton) return;
+    NSURL *URL = openPanel.URL;
+    NSError *error;
+    Checklist *checklist = [CSVChecklistV2Reader checklistWithContentsOfURL:URL error:&error];
+    if (!checklist) {
+      if (error) [self presentError:error];
+      return;
+    }
+    NSDocument *document = [[DocumentController sharedDocumentController] openUntitledDocumentAndDisplay:YES withChecklist:checklist error:&error];
+    if (!document && error) [self presentError:error];
+  }];
+}
 
 - (IBAction)performExportAction:(id)sender
 {

@@ -66,7 +66,19 @@
 {
   Document *document = [super openUntitledDocumentAndDisplay:NO error:outError];
   if (!document) return nil;
-  [document prepareUntitledDocumentWithComiketNo:comiketNo];
+  [document prepareDocumentWithComiketNo:comiketNo];
+  if (displayDocument) {
+    [document makeWindowControllers];
+    [document showWindows];
+  }
+  return document;
+}
+
+- (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument withChecklist:(Checklist *)checklist error:(NSError **)outError
+{
+  Document *document = [super openUntitledDocumentAndDisplay:NO error:outError];
+  if (!document) return nil;
+  [document prepareDocumentWithChecklist:checklist];
   if (displayDocument) {
     [document makeWindowControllers];
     [document showWindows];

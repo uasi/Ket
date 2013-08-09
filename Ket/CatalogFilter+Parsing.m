@@ -61,9 +61,12 @@ static NSDictionary *blockNameToIDTable(void);
 + (NSDictionary *)propertiesOfOrdinaryWord:(NSString *)word
 {
   NSString *constraint = [NSString stringWithFormat:
-                          @"(description LIKE '%%%@%%')",
+                          @"((description LIKE '%%%1$@%%' ESCAPE '$') OR"
+                          @" (note LIKE '%%%1$@%%' ESCAPE '$'))",
                           escapeSQLMeta(word)];
-  return @{@"constraint": constraint};
+  return @{@"constraint": constraint,
+           @"requiresChecklist": @YES,
+           @"joinType": @(CatalogFilterJoinTypeLeftOuter)};
 }
 
 + (NSDictionary *)propertiesByParsingCompactAddress:(NSString *)compactAddress

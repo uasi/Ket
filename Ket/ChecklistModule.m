@@ -9,11 +9,13 @@
 #import <assert.h>
 #import <sqlite3.h>
 
-#define TABLE_DECLARATION "CREATE TABLE x(comiketNo,id,bookmarked)"
+#define TABLE_DECLARATION "CREATE TABLE x(comiketNo,id,bookmarked,colorCode,note)"
 #define COLUMN_INDEX_rowid (-1)
 #define COLUMN_INDEX_comiketNo 0
 #define COLUMN_INDEX_id 1
 #define COLUMN_INDEX_bookmarked 2
+#define COLUMN_INDEX_colorCode 3
+#define COLUMN_INDEX_note 4
 
 static NSMapTable *checklistMapTable;
 
@@ -126,13 +128,21 @@ static int checklistBestIndex(sqlite3_vtab *pVTab, sqlite3_index_info *pIdxInfo)
         // OEDER BYs (except for ones on the comiketNo column, which are no-op),
         // following ORDER BYs will make no differences.
         goto finish_consume_orderby;
-        break;
       }
       case COLUMN_INDEX_bookmarked: {
         // We don't attempt to order by the bookmarked column.
         pIdxInfo->orderByConsumed = 0;
         goto finish_consume_orderby;
-        break;
+      }
+      case COLUMN_INDEX_colorCode: {
+        // Ditto.
+        pIdxInfo->orderByConsumed = 0;
+        goto finish_consume_orderby;
+      }
+      case COLUMN_INDEX_note: {
+        // You see.
+        pIdxInfo->orderByConsumed = 0;
+        goto finish_consume_orderby;
       }
       default: {
         assert(0);
@@ -241,8 +251,25 @@ static int checklistColumn(sqlite3_vtab_cursor *pCursor, sqlite3_context *ctx, i
       break;
     }
     case COLUMN_INDEX_bookmarked: {
-      BOOL bookmarked = [snapshot bookmarksContainsCircleWithGlobalID:globalID];
+      BOOL bookmarked = [snapshot.globalIDSet containsIndex:globalID];
       sqlite3_result_int(ctx, bookmarked);
+      break;
+    }
+    case COLUMN_INDEX_colorCode: {
+      NSInteger colorCode = [snapshot colorCodeForCircleWithGlobalID:globalID];
+      sqlite3_result_int64(ctx, (sqlite_int64)colorCode);
+      break;
+    }
+    case COLUMN_INDEX_note: {
+      NSString *note = [snapshot noteForCircleWithGlobalID:globalID];
+      if (note) {
+        const char *zNote = sqlite3_mprintf("%s", [note UTF8String]);
+        if (!zNote) return SQLITE_NOMEM;
+        sqlite3_result_text(ctx, zNote, -1, sqlite3_free);
+      }
+      else {
+        sqlite3_result_null(ctx);
+      }
       break;
     }
     default: {

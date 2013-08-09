@@ -116,6 +116,7 @@
 - (void)filterWithString:(NSString *)string
 {
   self.filter = [CatalogFilter filterWithDatabase:self.database checklist:self.checklist string:string];
+  DDLogInfo(@"Filter: %@", self.filter.selectStatement);
 }
 
 #pragma mark Accessors

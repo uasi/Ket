@@ -6,7 +6,7 @@
 #import "ConversionUtils.h"
 
 static const NSUInteger kBufferCapacity = 64 * 1024;
-static NSString *const kKetVersionString = @"Ket 1.0.0 Compatible";
+static NSString *const kKetVersionString = @"Ket 0.1.0 Compatible";
 
 @interface CSVChecklistV2Writer ()
 

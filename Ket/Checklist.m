@@ -139,6 +139,40 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
   END_WRITING;
 }
 
+#pragma mark Writing - Entry Management
+
+- (NSMutableDictionary *)entryForCircle:(Circle *)circle
+{
+  return [self entryForGlobalID:circle.globalID];
+}
+
+- (NSMutableDictionary *)entryForGlobalID:(NSUInteger)globalID
+{
+  NSMutableDictionary *entry = self.entries[@(globalID)];
+  if (entry) return entry;
+
+  entry = [NSMutableDictionary dictionary];
+  self.entries[@(globalID)] = entry;
+  return entry;
+}
+
+- (void)removeObjectForKey:(id)key inEntryForGlobalID:(NSUInteger)globalID
+{
+  NSMutableDictionary *entry = self.entries[@(globalID)];
+  if (!entry) return;
+  [entry removeObjectForKey:key];
+  if (entry.count == 0) [self.entries removeObjectForKey:@(globalID)];
+}
+
+#pragma mark Writing - Cached State Management
+
+- (void)invalidateCachedState
+{
+  _globalIDSet = nil;
+  _data = nil;
+  _snapshot = nil;
+}
+
 #pragma mark Reading
 
 - (BOOL)bookmarksContainsCircle:(Circle *)circle
@@ -236,31 +270,6 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
           (void *)self];
 }
 
-#pragma mark Entry Management
-
-- (NSMutableDictionary *)entryForCircle:(Circle *)circle
-{
-  return [self entryForGlobalID:circle.globalID];
-}
-
-- (NSMutableDictionary *)entryForGlobalID:(NSUInteger)globalID
-{
-  NSMutableDictionary *entry = self.entries[@(globalID)];
-  if (entry) return entry;
-
-  entry = [NSMutableDictionary dictionary];
-  self.entries[@(globalID)] = entry;
-  return entry;
-}
-
-- (void)removeObjectForKey:(id)key inEntryForGlobalID:(NSUInteger)globalID
-{
-  NSMutableDictionary *entry = self.entries[@(globalID)];
-  if (!entry) return;
-  [entry removeObjectForKey:key];
-  if (entry.count == 0) [self.entries removeObjectForKey:@(globalID)];
-}
-
 #pragma mark Notification
 
 - (void)postNotification
@@ -269,16 +278,7 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
     [[NSNotificationCenter defaultCenter] postNotificationName:ChecklistDidChangeNotification object:self];
   };
   if ([NSThread isMainThread]) post();
-  else dispatch_async(dispatch_get_main_queue(), post);
-}
-
-#pragma mark Cached State Management
-
-- (void)invalidateCachedState
-{
-  _globalIDSet = nil;
-  _data = nil;
-  _snapshot = nil;
+  else dispatch_async(dispatch_get_main_queue(), [post copy]);
 }
 
 #pragma mark Debugging

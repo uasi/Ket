@@ -67,24 +67,6 @@
   
 }
 
-- (BOOL)isBookmarked
-{
-  if (!self.circle) return NO;
-  return [self.checklist bookmarksContainsCircle:self.circle];
-}
-
-- (void)setBookmarked:(BOOL)bookmarked {
-  if (!self.circle) return;
-  [self willChangeValueForKey:@"bookmarked"];
-  if (bookmarked) {
-    [self.checklist addCircleToBookmarks:self.circle];
-  }
-  else {
-    [self.checklist removeCircleFromBookmarks:self.circle];
-  }
-  [self didChangeValueForKey:@"bookmarked"];
-}
-
 - (NSString *)note
 {
   if (!self.circle) return nil;

@@ -84,22 +84,6 @@ NSAssert(!self.frozen, @"must not to mutate a snapshot"); \
 #define END_WRITING \
 [self postNotification];
 
-- (void)addCircleToBookmarks:(Circle *)circle
-{
-  NSAssert(circle, @"circle must not be nil");
-  BEGIN_WRITING;
-  [self entryForCircle:circle][@"colorCode"] = @(1);
-  END_WRITING;
-}
-
-- (void)removeCircleFromBookmarks:(Circle *)circle
-{
-  NSAssert(circle, @"circle must not be nil");
-  BEGIN_WRITING;
-  [self removeObjectForKey:@"colorCode" inEntryForGlobalID:circle.globalID];
-  END_WRITING;
-}
-
 - (void)setNote:(NSString *)note forCircle:(Circle *)circle
 {
   NSAssert(circle, @"circle must not be nil");

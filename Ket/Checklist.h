@@ -23,10 +23,6 @@ extern NSString *const ChecklistDidChangeNotification;
 
 @protocol ChecklistWriting <NSObject>
 
-// XXX: use setColorCode:forCircle: for marking a circle.
-- (void)addCircleToBookmarks:(Circle *)circle __deprecated;
-- (void)removeCircleFromBookmarks:(Circle *)circle __deprecated;
-
 - (void)setNote:(NSString *)note forCircle:(Circle *)circle;
 - (void)setNote:(NSString *)note forCircleWithGlobalID:(NSUInteger)globalID;
 - (void)setColorCode:(NSInteger)colorCode forCircle:(Circle *)circle;

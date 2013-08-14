@@ -92,12 +92,14 @@
     [[DocumentController sharedDocumentController] showSearchPanelForLabelSearch:self];
   }
   else if (noModKeyPressed && [NSRegularExpression testString:c withPattern:@"^[0-9]$"]) {
+    if (!self.selectedCircle) return NO;
     NSInteger colorCode;
     [[NSScanner scannerWithString:c] scanInteger:&colorCode];
     [self.checklist setColorCode:colorCode forCircle:self.selectedCircle];
   }
 #ifdef DEBUG
   else if ([c isEqualToString:@"?"]) {
+    if (!self.selectedCircle) return NO;
     NSLog(@"entry = %@", [self.checklist debug_entryForCircleWithGlobalID:self.selectedCircle.globalID]);
   }
   else if ([c isEqualToString:@"!"]) {

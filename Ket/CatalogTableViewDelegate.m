@@ -86,7 +86,6 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
   [view setBoundsSize:NSMakeSize(self.provider.cutSize.width * columns, self.provider.cutSize.height * rows)];
   view.cellSize = [self cellSizeForTableView:tableView];
-  view.highlightedCircleCutCell = nil;
 
   NSArray *circles = [self.provider circleCollectionForRow:row].circles;
 
@@ -97,6 +96,8 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
     cell.image = [self.provider imageForCircle:circle];
     cell.circle = circle;
   }
+
+  [view unhighlightAllCells];
 
   return view;
 }

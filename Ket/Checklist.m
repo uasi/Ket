@@ -62,7 +62,7 @@ NSString *const ChecklistDidChangeNotification = @"ChecklistDidChangeNotificatio
     return nil;
   }
   self.comiketNo = [comiketNo unsignedIntegerValue];
-  self.entries = [(properties[@"dictionaryOfProperties"] ?: @{}) mutableCopy];
+  self.entries = [(properties[@"entries"] ?: @{}) mutableCopy];
 
   return self;
 }

@@ -23,8 +23,6 @@
     #define STOP_ACCESSING_RESOURCE(URL) ((void *)URL) \
       [URL stopAccessingSecurityScopedURL]
   #endif
-
-  #define DO_NOT_USE(reason) __attribute__((deprecated(reason)))
 #endif
 
 extern int ddLogLevel;

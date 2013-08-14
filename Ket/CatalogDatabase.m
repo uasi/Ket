@@ -66,14 +66,14 @@ static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCu
   return [self.database intForQuery:@"SELECT comiketNo FROM ComiketInfo"];
 }
 
-- (NSSize)cutSize
+- (NSSize)cutSizeForPrinting
 {
   CGFloat w = [self.database intForQuery:@"SELECT cutSizeW FROM ComiketInfo"];
   CGFloat h = [self.database intForQuery:@"SELECT cutSizeH FROM ComiketInfo"];
   return NSMakeSize(w, h);
 }
 
-- (NSPoint)cutOrigin
+- (NSPoint)cutOriginForPrinting
 {
   CGFloat x = [self.database intForQuery:@"SELECT cutOriginX FROM ComiketInfo"];
   CGFloat y = [self.database intForQuery:@"SELECT cutOriginY FROM ComiketInfo"];

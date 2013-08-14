@@ -41,9 +41,9 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
   }];
 
   [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
-    CircleCutCell *cell = notification.userInfo[@"cell"];
-    self.selectedCircle = cell.circle;
-    NSString *blockName = [self.provider blockNameForID:cell.circle.blockID];
+    CircleCutMatrix *matrix = notification.object;
+    self.selectedCircle = matrix.highlightedCircleCutCell.circle;
+    NSString *blockName = [self.provider blockNameForID:self.selectedCircle.blockID];
     NSLog(@"Sender=%@, selected circle block name=%@",notification.object ,blockName);
   }];
 }
@@ -89,15 +89,17 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
   NSArray *circles = [self.provider circleCollectionForRow:row].circles;
 
+  [view unhighlightAllCells];
   for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];
     Circle *circle = circles[i];
-    if ([circle isEqual:self.selectedCircle]) view.highlightedCircleCutCell = cell;
+    if ([circle isEqual:self.selectedCircle]) {
+      cell.highlighted = YES;
+      view.highlightedCircleCutCell = cell;
+    }
     cell.image = [self.provider imageForCircle:circle];
     cell.circle = circle;
   }
-
-  [view unhighlightAllCells];
 
   return view;
 }

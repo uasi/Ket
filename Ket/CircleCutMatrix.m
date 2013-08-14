@@ -27,12 +27,12 @@ NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidS
   @weakify(self);
   RACDisposable *d = [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
     @strongify(self);
-    id other = notification.object;
-    NSTableView *otherTableView = notification.userInfo[@"tableView"];
-    if (self.superview.superview == otherTableView && self != other) {
+    CircleCutMatrix *other = notification.object;
+    if (self != other && self.superview.superview == other.superview.superview) {
       [self unhighlightAllCells];
     }
   }];
+  if (self.disposableForDidSelectCell) [self.disposableForDidSelectCell dispose];
   self.disposableForDidSelectCell = d;
 
   return self;
@@ -50,6 +50,7 @@ NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidS
   RACDisposable *d = [[[NSNotificationCenter defaultCenter] rac_addObserverForName:ChecklistDidChangeNotification object:checklist] subscribeNext:^(NSNotification *notification) {
     self.needsDisplay = YES;
   }];
+  if (self.disposableForChecklistDidChange) [self.disposableForChecklistDidChange dispose];
   self.disposableForChecklistDidChange = d;
 }
 
@@ -67,10 +68,7 @@ NSString *const CircleCutMatrixDidSelectCellNotification = @"CircleCutMatrixDidS
   self.highlightedCircleCutCell = cell;
 
   // Post a notification to tell other matrices to unhighlight cells.
-  NSDictionary *userInfo =
-  @{@"tableView": self.superview.superview,
-    @"cell": cell};
-  [[NSNotificationCenter defaultCenter] postNotificationName:CircleCutMatrixDidSelectCellNotification object:self userInfo:userInfo];
+  [[NSNotificationCenter defaultCenter] postNotificationName:CircleCutMatrixDidSelectCellNotification object:self userInfo:nil];
 }
 
 - (void)unhighlightAllCells

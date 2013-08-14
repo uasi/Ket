@@ -1,6 +1,7 @@
 #import "WelcomeWindowController.h"
 
 #import "CatalogImportWindowController.h"
+#import "ConversionUtils.h"
 #import "DocumentController.h"
 #import "NSRegularExpression+Extensions.h"
 #import "PathUtils.h"

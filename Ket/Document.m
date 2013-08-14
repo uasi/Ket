@@ -6,6 +6,7 @@
 #import "Checklist.h"
 #import "Circle.h"
 #import "CircleDataProvider.h"
+#import "ConversionUtils.h"
 #import "DocumentController.h"
 #import "NSRegularExpression+Extensions.h"
 #import "PathUtils.h"

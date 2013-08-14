@@ -2,6 +2,7 @@
 
 #import "CatalogImportWindowController.h"
 #import "CircleInspectorController.h"
+#import "ConversionUtils.h"
 #import "Document.h"
 #import "PathUtils.h"
 #import "SearchPanelController.h"

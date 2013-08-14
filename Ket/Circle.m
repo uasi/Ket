@@ -1,5 +1,6 @@
 #import "Circle.h"
 
+#import "ConversionUtils.h"
 #import "PathUtils.h"
 #import <FMDB/FMResultSet.h>
 

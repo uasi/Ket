@@ -1,6 +1,7 @@
 #import "CatalogImportWindowController.h"
 
 #import "CircleCutArchive.h"
+#import "ConversionUtils.h"
 #import "PathUtils.h"
 
 static const char *const kImportQueueLabel = "org.exsen.Ket.CatalogImportController.ImportQueue";

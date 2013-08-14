@@ -8,14 +8,6 @@
 static const NSUInteger kBufferCapacity = 64 * 1024;
 static NSString *const kKetVersionString = @"Ket 0.1.0 Compatible";
 
-@interface CSVChecklistV2Writer ()
-
-@property (nonatomic) Checklist *checklist;
-@property (nonatomic) CatalogDatabase *database;
-@property (nonatomic) NSMutableString *buffer;
-
-@end
-
 @implementation CSVChecklistV2Writer
 
 + (BOOL)writeChecklist:(Checklist *)checklist withDatabase:(CatalogDatabase *)database toURL:(NSURL *)URL error:(NSError **)error

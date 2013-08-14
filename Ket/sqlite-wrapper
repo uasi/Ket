@@ -1,0 +1,3 @@
+#!/bin/bash
+dir=$(cd "$(dirname $BASH_SOURCE)"; pwd)
+DYLD_FALLBACK_LIBRARY_PATH=$dir "$dir/sqlite" "$1" "$2"

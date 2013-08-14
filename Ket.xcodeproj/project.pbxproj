@@ -7,13 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5811D62117B38D87000DA233 /* ConversionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811D62017B38D86000DA233 /* ConversionUtils.m */; };
+		5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160539179B0F460039AAAB /* SearchPanelController.m */; };
+		5816053F179B12800039AAAB /* DocumentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5816053E179B12800039AAAB /* DocumentWindow.m */; };
+		58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 58160541179BD9B80039AAAB /* CircleDataProvider.m */; };
 		5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */ = {isa = PBXBuildFile; fileRef = 5823A3871722F30100B2A946 /* Placeholder210x300.png */; };
 		5823A38B1722F43200B2A946 /* CircleCutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38A1722F43200B2A946 /* CircleCutCell.m */; };
 		5823A38E1723D65200B2A946 /* CircleCutMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5823A38D1723D65200B2A946 /* CircleCutMatrix.m */; };
 		58553FD21724DA6400D8387C /* CircleCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58553FD11724DA6400D8387C /* CircleCollection.m */; };
+		5870B4F6176E9DEC00B449DA /* CircleInspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */; };
+		5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FA176ECBE800B449DA /* PathUtils.m */; };
+		5870B4FE176EF41800B449DA /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B4FD176EF41700B449DA /* Checklist.m */; };
+		587FDA4317AFA4EA00CD412D /* ChecklistModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FDA4217AFA4E900CD412D /* ChecklistModule.m */; };
+		587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */; };
+		587FDA4917B1783800CD412D /* CatalogImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA4B17B1783800CD412D /* CatalogImportWindow.xib */; };
+		587FDA4C17B1783D00CD412D /* CircleInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA4E17B1783D00CD412D /* CircleInspector.xib */; };
+		587FDA4F17B1784600CD412D /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA5117B1784600CD412D /* SearchPanel.xib */; };
+		587FDA5217B1784C00CD412D /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587FDA5417B1784C00CD412D /* WelcomeWindow.xib */; };
+		588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */ = {isa = PBXBuildFile; fileRef = 588F563F1791A8C900219BA6 /* sqlite-wrapper */; };
+		588F56471791B31E00219BA6 /* CatalogImportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56451791B31E00219BA6 /* CatalogImportWindowController.m */; };
+		588F564B1791D26600219BA6 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F564A1791D26600219BA6 /* DocumentController.m */; };
+		588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F564D179697AB00219BA6 /* WelcomeWindowController.m */; };
+		588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */; };
 		58A039A81722698500A81DEE /* CircleCutArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A31722698400A81DEE /* CircleCutArchive.m */; };
 		58A039A91722698500A81DEE /* CatalogDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A51722698400A81DEE /* CatalogDatabase.m */; };
 		58A039AA1722698500A81DEE /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A039A71722698500A81DEE /* Circle.m */; };
+		58AAE6EA17AAAACC005DA52D /* CatalogFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAE6E917AAAACA005DA52D /* CatalogFilter.m */; };
 		58C381031705BBE9001FF665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C381021705BBE9001FF665 /* Cocoa.framework */; };
 		58C3810D1705BBE9001FF665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58C3810B1705BBE9001FF665 /* InfoPlist.strings */; };
 		58C3810F1705BBE9001FF665 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3810E1705BBE9001FF665 /* main.m */; };
@@ -26,6 +45,9 @@
 		58C3812D1705BBE9001FF665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58C3812B1705BBE9001FF665 /* InfoPlist.strings */; };
 		58C381301705BBE9001FF665 /* KetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3812F1705BBE9001FF665 /* KetTests.m */; };
 		58C381411706005A001FF665 /* CatalogTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C3814017060059001FF665 /* CatalogTableViewDelegate.m */; };
+		58C6335917B2B84500FA4840 /* Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335817B2B84400FA4840 /* Error.m */; };
+		58C6335C17B35CD100FA4840 /* CSVChecklistV2Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C6335B17B35CD100FA4840 /* CSVChecklistV2Writer.m */; };
+		58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */; };
 		B4555F2754AD441394AF843F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A502AAB8DED24878B65D96F6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +61,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		588F56411791A99800219BA6 /* Copy Binaries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				588F56421791A9B100219BA6 /* sqlite-wrapper in Copy Binaries */,
+			);
+			name = "Copy Binaries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0D255A44D37B47C1AD9EB543 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		5811D61F17B38D86000DA233 /* ConversionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversionUtils.h; sourceTree = "<group>"; };
+		5811D62017B38D86000DA233 /* ConversionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversionUtils.m; sourceTree = "<group>"; };
+		58160538179B0F450039AAAB /* SearchPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPanelController.h; sourceTree = "<group>"; };
+		58160539179B0F460039AAAB /* SearchPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPanelController.m; sourceTree = "<group>"; };
+		5816053D179B127F0039AAAB /* DocumentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindow.h; sourceTree = "<group>"; };
+		5816053E179B12800039AAAB /* DocumentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindow.m; sourceTree = "<group>"; };
+		58160540179BD9B80039AAAB /* CircleDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDataProvider.h; sourceTree = "<group>"; };
+		58160541179BD9B80039AAAB /* CircleDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDataProvider.m; sourceTree = "<group>"; };
 		5823A3871722F30100B2A946 /* Placeholder210x300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder210x300.png; sourceTree = "<group>"; };
 		5823A3891722F43100B2A946 /* CircleCutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutCell.h; sourceTree = "<group>"; };
 		5823A38A1722F43200B2A946 /* CircleCutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutCell.m; sourceTree = "<group>"; };
@@ -48,12 +92,37 @@
 		5823A38D1723D65200B2A946 /* CircleCutMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutMatrix.m; sourceTree = "<group>"; };
 		58553FD01724DA6400D8387C /* CircleCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCollection.h; sourceTree = "<group>"; };
 		58553FD11724DA6400D8387C /* CircleCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCollection.m; sourceTree = "<group>"; };
+		5870B4F3176E9DEC00B449DA /* CircleInspectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleInspectorController.h; sourceTree = "<group>"; };
+		5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleInspectorController.m; sourceTree = "<group>"; };
+		5870B4F9176ECBE700B449DA /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtils.h; sourceTree = "<group>"; };
+		5870B4FA176ECBE800B449DA /* PathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtils.m; sourceTree = "<group>"; };
+		5870B4FC176EF41700B449DA /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
+		5870B4FD176EF41700B449DA /* Checklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checklist.m; sourceTree = "<group>"; };
+		587FDA4117AFA4E800CD412D /* ChecklistModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChecklistModule.h; sourceTree = "<group>"; };
+		587FDA4217AFA4E900CD412D /* ChecklistModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChecklistModule.m; sourceTree = "<group>"; };
+		587FDA4617B13EAB00CD412D /* CatalogFilter+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CatalogFilter+Parsing.h"; sourceTree = "<group>"; };
+		587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CatalogFilter+Parsing.m"; sourceTree = "<group>"; };
+		587FDA4A17B1783800CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CatalogImportWindow.xib; sourceTree = "<group>"; };
+		587FDA4D17B1783D00CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CircleInspector.xib; sourceTree = "<group>"; };
+		587FDA5017B1784600CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SearchPanel.xib; sourceTree = "<group>"; };
+		587FDA5317B1784C00CD412D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WelcomeWindow.xib; sourceTree = "<group>"; };
+		588F563F1791A8C900219BA6 /* sqlite-wrapper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "sqlite-wrapper"; sourceTree = "<group>"; };
+		588F56441791B31D00219BA6 /* CatalogImportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogImportWindowController.h; sourceTree = "<group>"; };
+		588F56451791B31E00219BA6 /* CatalogImportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogImportWindowController.m; sourceTree = "<group>"; };
+		588F56491791D26600219BA6 /* DocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentController.h; sourceTree = "<group>"; };
+		588F564A1791D26600219BA6 /* DocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentController.m; sourceTree = "<group>"; };
+		588F564C179697AB00219BA6 /* WelcomeWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeWindowController.h; sourceTree = "<group>"; };
+		588F564D179697AB00219BA6 /* WelcomeWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeWindowController.m; sourceTree = "<group>"; };
+		588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Extensions.h"; sourceTree = "<group>"; };
+		588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+Extensions.m"; sourceTree = "<group>"; };
 		58A039A21722698300A81DEE /* CircleCutArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCutArchive.h; sourceTree = "<group>"; };
 		58A039A31722698400A81DEE /* CircleCutArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCutArchive.m; sourceTree = "<group>"; };
 		58A039A41722698400A81DEE /* CatalogDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogDatabase.h; sourceTree = "<group>"; };
 		58A039A51722698400A81DEE /* CatalogDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogDatabase.m; sourceTree = "<group>"; };
 		58A039A61722698400A81DEE /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
 		58A039A71722698500A81DEE /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
+		58AAE6E817AAAAC9005DA52D /* CatalogFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogFilter.h; sourceTree = "<group>"; };
+		58AAE6E917AAAACA005DA52D /* CatalogFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogFilter.m; sourceTree = "<group>"; };
 		58C380FF1705BBE9001FF665 /* Ket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58C381021705BBE9001FF665 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		58C381051705BBE9001FF665 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -76,6 +145,13 @@
 		58C3812F1705BBE9001FF665 /* KetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KetTests.m; sourceTree = "<group>"; };
 		58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewDelegate.h; sourceTree = "<group>"; };
 		58C3814017060059001FF665 /* CatalogTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewDelegate.m; sourceTree = "<group>"; };
+		58C6335017B21F9300FA4840 /* DocumentWindowDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentWindowDelegate.h; sourceTree = "<group>"; };
+		58C6335717B2B84300FA4840 /* Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
+		58C6335817B2B84400FA4840 /* Error.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Error.m; sourceTree = "<group>"; };
+		58C6335A17B35CD000FA4840 /* CSVChecklistV2Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVChecklistV2Writer.h; sourceTree = "<group>"; };
+		58C6335B17B35CD100FA4840 /* CSVChecklistV2Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVChecklistV2Writer.m; sourceTree = "<group>"; };
+		58DD7D7D17A7E3B000EA36C8 /* CatalogPerspective.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogPerspective.h; sourceTree = "<group>"; };
+		58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogPerspective.m; sourceTree = "<group>"; };
 		A502AAB8DED24878B65D96F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -101,6 +177,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5870B4F8176EABB700B449DA /* NIBs */ = {
+			isa = PBXGroup;
+			children = (
+				587FDA4B17B1783800CD412D /* CatalogImportWindow.xib */,
+				587FDA4E17B1783D00CD412D /* CircleInspector.xib */,
+				58C381171705BBE9001FF665 /* Document.xib */,
+				58C3811A1705BBE9001FF665 /* MainMenu.xib */,
+				587FDA5117B1784600CD412D /* SearchPanel.xib */,
+				587FDA5417B1784C00CD412D /* WelcomeWindow.xib */,
+			);
+			name = NIBs;
+			sourceTree = "<group>";
+		};
 		58C380F61705BBE9001FF665 = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +236,20 @@
 			children = (
 				58A039A41722698400A81DEE /* CatalogDatabase.h */,
 				58A039A51722698400A81DEE /* CatalogDatabase.m */,
+				587FDA4617B13EAB00CD412D /* CatalogFilter+Parsing.h */,
+				587FDA4717B13EAB00CD412D /* CatalogFilter+Parsing.m */,
+				58AAE6E817AAAAC9005DA52D /* CatalogFilter.h */,
+				58AAE6E917AAAACA005DA52D /* CatalogFilter.m */,
+				588F56441791B31D00219BA6 /* CatalogImportWindowController.h */,
+				588F56451791B31E00219BA6 /* CatalogImportWindowController.m */,
+				58DD7D7D17A7E3B000EA36C8 /* CatalogPerspective.h */,
+				58DD7D7E17A7E3B000EA36C8 /* CatalogPerspective.m */,
 				58C3813F17060059001FF665 /* CatalogTableViewDelegate.h */,
 				58C3814017060059001FF665 /* CatalogTableViewDelegate.m */,
+				5870B4FC176EF41700B449DA /* Checklist.h */,
+				5870B4FD176EF41700B449DA /* Checklist.m */,
+				587FDA4117AFA4E800CD412D /* ChecklistModule.h */,
+				587FDA4217AFA4E900CD412D /* ChecklistModule.m */,
 				58A039A61722698400A81DEE /* Circle.h */,
 				58A039A71722698500A81DEE /* Circle.m */,
 				58553FD01724DA6400D8387C /* CircleCollection.h */,
@@ -159,11 +260,33 @@
 				5823A38A1722F43200B2A946 /* CircleCutCell.m */,
 				5823A38C1723D65200B2A946 /* CircleCutMatrix.h */,
 				5823A38D1723D65200B2A946 /* CircleCutMatrix.m */,
+				58160540179BD9B80039AAAB /* CircleDataProvider.h */,
+				58160541179BD9B80039AAAB /* CircleDataProvider.m */,
+				5870B4F3176E9DEC00B449DA /* CircleInspectorController.h */,
+				5870B4F4176E9DEC00B449DA /* CircleInspectorController.m */,
+				5811D61F17B38D86000DA233 /* ConversionUtils.h */,
+				5811D62017B38D86000DA233 /* ConversionUtils.m */,
+				58C6335A17B35CD000FA4840 /* CSVChecklistV2Writer.h */,
+				58C6335B17B35CD100FA4840 /* CSVChecklistV2Writer.m */,
 				58C381141705BBE9001FF665 /* Document.h */,
 				58C381151705BBE9001FF665 /* Document.m */,
-				58C381171705BBE9001FF665 /* Document.xib */,
-				58C3811A1705BBE9001FF665 /* MainMenu.xib */,
+				588F56491791D26600219BA6 /* DocumentController.h */,
+				588F564A1791D26600219BA6 /* DocumentController.m */,
+				5816053D179B127F0039AAAB /* DocumentWindow.h */,
+				5816053E179B12800039AAAB /* DocumentWindow.m */,
+				58C6335017B21F9300FA4840 /* DocumentWindowDelegate.h */,
+				58C6335717B2B84300FA4840 /* Error.h */,
+				58C6335817B2B84400FA4840 /* Error.m */,
+				5870B4F8176EABB700B449DA /* NIBs */,
+				588F56511796DBDE00219BA6 /* NSRegularExpression+Extensions.h */,
+				588F56521796DBDE00219BA6 /* NSRegularExpression+Extensions.m */,
+				5870B4F9176ECBE700B449DA /* PathUtils.h */,
+				5870B4FA176ECBE800B449DA /* PathUtils.m */,
+				58160538179B0F450039AAAB /* SearchPanelController.h */,
+				58160539179B0F460039AAAB /* SearchPanelController.m */,
 				58C381091705BBE9001FF665 /* Supporting Files */,
+				588F564C179697AB00219BA6 /* WelcomeWindowController.h */,
+				588F564D179697AB00219BA6 /* WelcomeWindowController.m */,
 			);
 			path = Ket;
 			sourceTree = "<group>";
@@ -171,6 +294,7 @@
 		58C381091705BBE9001FF665 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				588F563F1791A8C900219BA6 /* sqlite-wrapper */,
 				5823A3871722F30100B2A946 /* Placeholder210x300.png */,
 				58C3810A1705BBE9001FF665 /* Ket-Info.plist */,
 				58C3810B1705BBE9001FF665 /* InfoPlist.strings */,
@@ -210,7 +334,10 @@
 				58C380FB1705BBE9001FF665 /* Sources */,
 				58C380FC1705BBE9001FF665 /* Frameworks */,
 				58C380FD1705BBE9001FF665 /* Resources */,
+				588F56411791A99800219BA6 /* Copy Binaries */,
 				21877FCBDDFC4FF8843AAB13 /* Copy Pods Resources */,
+				588F563D1791A5BD00219BA6 /* Build SQLite2 */,
+				588F56431791AD0200219BA6 /* Copy SQLite2 Binaries */,
 			);
 			buildRules = (
 			);
@@ -276,6 +403,10 @@
 				58C381131705BBE9001FF665 /* Credits.rtf in Resources */,
 				58C381191705BBE9001FF665 /* Document.xib in Resources */,
 				58C3811C1705BBE9001FF665 /* MainMenu.xib in Resources */,
+				587FDA4C17B1783D00CD412D /* CircleInspector.xib in Resources */,
+				587FDA4917B1783800CD412D /* CatalogImportWindow.xib in Resources */,
+				587FDA5217B1784C00CD412D /* WelcomeWindow.xib in Resources */,
+				587FDA4F17B1784600CD412D /* SearchPanel.xib in Resources */,
 				5823A3881722F30100B2A946 /* Placeholder210x300.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +435,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		588F563D1791A5BD00219BA6 /* Build SQLite2 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build SQLite2";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${SRCROOT}/Externals/sqlite-2.8.17\"\nif [ ! -e .libs/sqlite ]; then\n    ./configure --enable-utf8\n    make\nfi";
+		};
+		588F56431791AD0200219BA6 /* Copy SQLite2 Binaries */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy SQLite2 Binaries";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${SRCROOT}/Externals/sqlite-2.8.17/.libs\"\ncp {sqlite,libsqlite.0.dylib} \"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_FOLDER_PATH}\"";
 		};
 		58C381201705BBE9001FF665 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -334,6 +493,23 @@
 				5823A38B1722F43200B2A946 /* CircleCutCell.m in Sources */,
 				5823A38E1723D65200B2A946 /* CircleCutMatrix.m in Sources */,
 				58553FD21724DA6400D8387C /* CircleCollection.m in Sources */,
+				5870B4F6176E9DEC00B449DA /* CircleInspectorController.m in Sources */,
+				5870B4FB176ECBE800B449DA /* PathUtils.m in Sources */,
+				5870B4FE176EF41800B449DA /* Checklist.m in Sources */,
+				588F56471791B31E00219BA6 /* CatalogImportWindowController.m in Sources */,
+				588F564B1791D26600219BA6 /* DocumentController.m in Sources */,
+				588F564F179697AB00219BA6 /* WelcomeWindowController.m in Sources */,
+				588F56531796DBDE00219BA6 /* NSRegularExpression+Extensions.m in Sources */,
+				5816053B179B0F460039AAAB /* SearchPanelController.m in Sources */,
+				5816053F179B12800039AAAB /* DocumentWindow.m in Sources */,
+				58160542179BD9B80039AAAB /* CircleDataProvider.m in Sources */,
+				58DD7D7F17A7E3B000EA36C8 /* CatalogPerspective.m in Sources */,
+				58AAE6EA17AAAACC005DA52D /* CatalogFilter.m in Sources */,
+				587FDA4317AFA4EA00CD412D /* ChecklistModule.m in Sources */,
+				587FDA4817B13EAB00CD412D /* CatalogFilter+Parsing.m in Sources */,
+				58C6335917B2B84500FA4840 /* Error.m in Sources */,
+				58C6335C17B35CD100FA4840 /* CSVChecklistV2Writer.m in Sources */,
+				5811D62117B38D87000DA233 /* ConversionUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +532,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		587FDA4B17B1783800CD412D /* CatalogImportWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA4A17B1783800CD412D /* en */,
+			);
+			name = CatalogImportWindow.xib;
+			sourceTree = "<group>";
+		};
+		587FDA4E17B1783D00CD412D /* CircleInspector.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA4D17B1783D00CD412D /* en */,
+			);
+			name = CircleInspector.xib;
+			sourceTree = "<group>";
+		};
+		587FDA5117B1784600CD412D /* SearchPanel.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA5017B1784600CD412D /* en */,
+			);
+			name = SearchPanel.xib;
+			sourceTree = "<group>";
+		};
+		587FDA5417B1784C00CD412D /* WelcomeWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587FDA5317B1784C00CD412D /* en */,
+			);
+			name = WelcomeWindow.xib;
+			sourceTree = "<group>";
+		};
 		58C3810B1705BBE9001FF665 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

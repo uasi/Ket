@@ -1,10 +1,11 @@
 PODS:
-  - BlocksKit (1.8.1):
+  - BlocksKit (1.8.2):
     - libffi
-  - FMDB (2.0):
+  - CocoaLumberjack (1.6.2)
+  - FMDB (2.1):
     - FMDB/standard
-  - FMDB/common (2.0)
-  - FMDB/standard (2.0):
+  - FMDB/common (2.1)
+  - FMDB/standard (2.1):
     - FMDB/common
   - JRSwizzle (1.0)
   - libextobjc (0.2.5):
@@ -91,23 +92,28 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.2.5)
   - libextobjc/UmbrellaHeader (0.2.5)
-  - libffi (3.0.11)
-  - ReactiveCocoa (1.4.0):
+  - libffi (3.0.13)
+  - Mantle (1.2):
+    - Mantle/extobjc
+  - Mantle/extobjc (1.2)
+  - ReactiveCocoa (1.9.6):
     - ReactiveCocoa/Core
     - ReactiveCocoa/RACExtensions
-  - ReactiveCocoa/Core (1.4.0):
+  - ReactiveCocoa/Core (1.9.6):
     - JRSwizzle (~> 1.0)
     - libextobjc/EXTConcreteProtocol (~> 0.2.5)
     - libextobjc/EXTKeyPathCoding (~> 0.2.5)
     - libextobjc/EXTScope (~> 0.2.5)
-  - ReactiveCocoa/RACExtensions (1.4.0):
+  - ReactiveCocoa/RACExtensions (1.9.6):
     - ReactiveCocoa/Core
   - zipzap (5.1)
 
 DEPENDENCIES:
   - BlocksKit
+  - CocoaLumberjack
   - FMDB
   - libextobjc
+  - Mantle
   - ReactiveCocoa
   - zipzap (from `https://github.com/uasi/zipzap.git`, branch `support-osx`)
 
@@ -117,12 +123,14 @@ EXTERNAL SOURCES:
     :git: https://github.com/uasi/zipzap.git
 
 SPEC CHECKSUMS:
-  BlocksKit: 18102744fd7c44b54f1e54ce6ffe9258bcb5df81
-  FMDB: 30a7cbcdbd354f5ee1ba081a8773fd9130c43b48
+  BlocksKit: 7396526b0816734103f6133fbb1a520c8b04e80c
+  CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
+  FMDB: 66010e9b750838dea71748df591fc118598f21c7
   JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
   libextobjc: 2cbc74caf8bdc74a86fdf24673f773c83424ea98
-  libffi: 8a1d9ba43c0c84b546b42c6f742714e73aa07ae1
-  ReactiveCocoa: c74ea503b368dacc985d1b9e328872a1051be7eb
+  libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
+  Mantle: f5b5cba1b112273fe3bb4433cdcf1da76203c2b4
+  ReactiveCocoa: 0586996422c05830e2f70ca8c8a5214e9070983f
   zipzap: 2cf055aceb34521032823b0464402956f48b96aa
 
-COCOAPODS: 0.18.1
+COCOAPODS: 0.20.2

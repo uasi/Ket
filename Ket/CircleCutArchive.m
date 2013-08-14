@@ -5,23 +5,18 @@
 
 @interface CircleCutArchive ()
 
-@property (nonatomic, readwrite, assign) NSUInteger comiketNo;
-@property (nonatomic, readwrite, assign) NSSize cutSize;
+@property (nonatomic, readwrite) NSUInteger comiketNo;
+@property (nonatomic, readwrite) NSSize cutSize;
 
 @property (nonatomic) ZZArchive *archive;
 @property (nonatomic, copy) NSDictionary *fileNameToEntry;
-@property (nonatomic, assign) NSUInteger indexOfFirstCircleCutEntry;
+@property (nonatomic) NSUInteger indexOfFirstCircleCutEntry;
 
 @end
 
 @implementation CircleCutArchive
 
-+ (CircleCutArchive *)archiveWithContentsOfURL:(NSURL *)URL
-{
-  return [[[self class] alloc] initWithContentsOfURL:URL];
-}
-
-- (instancetype)initWithContentsOfURL:(NSURL *)URL
+- (instancetype)initWithURL:(NSURL *)URL
 {
   self = [super init];
   if (!self) return nil;

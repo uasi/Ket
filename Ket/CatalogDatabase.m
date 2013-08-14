@@ -1,5 +1,6 @@
 #import "CatalogDatabase.h"
 
+#import "ChecklistModule.h"
 #import "Circle.h"
 #import "CircleCollection.h"
 #import <FMDB/FMDatabase.h>
@@ -7,9 +8,9 @@
 #import <FMDB/FMResultSet.h>
 #import <sqlite3.h>
 
-static const NSUInteger NUMBER_OF_CUTS_IN_ROW = 6;
-static const NSUInteger NUMBER_OF_CUTS_IN_COLUMN = 6;
-static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_CUTS_IN_COLUMN;
+static const NSUInteger kNumberOfCutsPerRow = 6;
+static const NSUInteger kNumberOfCutsPerColmun = 6;
+static const NSUInteger kNumberOfCutsPerPage = kNumberOfCutsPerRow * kNumberOfCutsPerColmun;
 
 @interface CatalogDatabase ()
 
@@ -19,32 +20,40 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 
 @implementation CatalogDatabase
 
-@dynamic comiketNo;
-@dynamic cutSize;
-@dynamic cutOrigin;
-@dynamic numberOfCutsInRow;
-@dynamic numberOfCutsInColumn;
-@synthesize pageNoIndexSet = _pageNoIndexSet;
+@synthesize pageSet = _pageSet;
 
-+ (CatalogDatabase *)databaseWithContentsOfFile:(NSString *)file
++ (void)load
 {
-  return [[[self class] alloc] initWithContentsOfFile:file];
+  sqlite3_config(SQLITE_CONFIG_URI, 1);
 }
 
-- (instancetype)initWithContentsOfFile:(NSString *)file
+- (instancetype)initWithURL:(NSURL *)URL
 {
   self = [super init];
   if (!self) return nil;
 
-  self.database = [FMDatabase databaseWithPath:file];
-  if (![self.database openWithFlags:SQLITE_OPEN_READONLY]) return nil;
+  // Here we create a writable in-memory database at first, then attach a
+  // read-only database to it. This enables us to execute a statement which has
+  // a side effect.
+  // If we do the opposite - in other words if we open a read-only database and
+  // then attach a writable database, we will not be able to execute such a
+  // statement even on the writable one. This is supposedly because the SQLite
+  // engine tries to aquire a mutex or something in the main database
+  // (which is read-only in this case).
+
+  self.database = [FMDatabase databaseWithPath:@":memory:"];
+  if (![self.database open]) return nil;
+
+  NSString *URLString = [URL.absoluteString stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+  NSString *sqlFormat = @"ATTACH DATABASE '%@?mode=ro' AS Comiket";
+  NSString *sql = [NSString stringWithFormat:sqlFormat, URLString];
+  if (![self.database executeUpdate:sql]) return nil;
+
+  int rc = ChecklistModuleInit(self.database.sqliteHandle);
+  NSAssert(rc == SQLITE_OK, @"ChecklistModuleInit() must succeed: %@", self.database.lastError);
+  if (rc != SQLITE_OK) return nil;
 
   return self;
-}
-
-- (instancetype)init
-{
-  @throw NSInternalInconsistencyException;
 }
 
 - (void)dealloc
@@ -54,13 +63,13 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 
 - (NSInteger)comiketNo
 {
-  return [self.database intForQuery:@"SELECT comiketNo FROM ComiketInfo;"];
+  return [self.database intForQuery:@"SELECT comiketNo FROM ComiketInfo"];
 }
 
 - (NSSize)cutSize
 {
-  CGFloat w = [self.database intForQuery:@"SELECT cutSizeW FROM ComiketInfo;"];
-  CGFloat h = [self.database intForQuery:@"SELECT cutSizeH FROM ComiketInfo;"];
+  CGFloat w = [self.database intForQuery:@"SELECT cutSizeW FROM ComiketInfo"];
+  CGFloat h = [self.database intForQuery:@"SELECT cutSizeH FROM ComiketInfo"];
   return NSMakeSize(w, h);
 }
 
@@ -73,39 +82,48 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
 
 - (NSUInteger)numberOfCutsInRow
 {
-  return NUMBER_OF_CUTS_IN_ROW;
+  return kNumberOfCutsPerRow;
 }
 
 - (NSUInteger)numberOfCutsInColumn
 {
-  return NUMBER_OF_CUTS_IN_COLUMN;
+  return kNumberOfCutsPerColmun;
 }
 
-- (NSIndexSet *)pageNoIndexSet
+- (NSIndexSet *)pageSet
 {
-  if (_pageNoIndexSet) return _pageNoIndexSet;
+  if (_pageSet) return _pageSet;
 
   NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
 
-  NSString *query = (@"SELECT DISTINCT pageNo FROM ComiketCircle"
-                     @"  WHERE pageNo > 0"
-                     @"  ORDER BY pageNo ASC;");
-  FMResultSet *result = [self.database executeQuery:query];
+  NSString *sql = (@"SELECT DISTINCT pageNo FROM ComiketCircle"
+                   @"  WHERE pageNo > 0"
+                   @"  ORDER BY pageNo ASC");
+  FMResultSet *result = [self.database executeQuery:sql];
   while ([result next]) {
     [indexSet addIndex:[result intForColumnIndex:0]];
   }
 
-  return _pageNoIndexSet = [indexSet copy];
+  return _pageSet = [indexSet copy];
+}
+
+- (Circle *)circleForGlobalID:(NSUInteger)globalID
+{
+  NSUInteger circleID = CircleIdentifierFromGlobalCircleID(globalID);
+  NSString *sql = @"SELECT * FROM ComiketCircle WHERE id = (?)";
+  FMResultSet *result = [self.database executeQuery:sql, @(circleID)];
+  if (![result next]) return nil;
+  return [Circle circleWithResultSet:result];
 }
 
 - (NSArray *)circlesInPage:(NSUInteger)page
 {
-  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:CUT_COUNT_PER_PAGE];
+  NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCutsPerPage];
 
-  NSString *query = (@"SELECT * FROM ComiketCircle"
-                     @"  WHERE pageNo = (?)"
-                     @"  ORDER BY cutIndex ASC;");
-  FMResultSet *result = [self.database executeQuery:query, [NSNumber numberWithUnsignedInteger:page]];
+  NSString *sql = (@"SELECT * FROM ComiketCircle"
+                   @"  WHERE pageNo = (?)"
+                   @"  ORDER BY cutIndex ASC;");
+  FMResultSet *result = [self.database executeQuery:sql, [NSNumber numberWithUnsignedInteger:page]];
   while ([result next]) {
     [circles addObject:[Circle circleWithResultSet:result]];
   }
@@ -113,10 +131,28 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
   return [circles copy];
 }
 
-- (CircleCollection *)circleCollectionForPage:(NSUInteger)page
+- (NSDictionary *)dateInfoOfDay:(NSInteger)day
 {
-  NSArray *circles = [self circlesInPage:page];
-  return [[CircleCollection alloc] initWithCircles:circles cutCountPerPage:CUT_COUNT_PER_PAGE];
+  NSString *sql = @"SELECT * FROM ComiketDate WHERE id = (?)";
+  FMResultSet *result = [self.database executeQuery:sql, @(day)];
+  NSMutableDictionary *dateInfo = [NSMutableDictionary dictionary];
+  if (![result next]) return nil;
+  dateInfo[@"year"] = @([result intForColumn:@"year"]);
+  dateInfo[@"month"] = @([result intForColumn:@"month"]);
+  dateInfo[@"day"] = @([result intForColumn:@"day"]);
+  dateInfo[@"weekday"] = @([result intForColumn:@"weekday"]);
+  return [dateInfo copy];
+}
+
+- (NSString *)simpleAreaNameForBlockID:(NSInteger)blockID
+{
+  NSString *sql = (@"SELECT simpleName FROM ComiketArea"
+                   @"  INNER JOIN ComiketBlock"
+                   @"  ON ComiketArea.id = ComiketBlock.areaId"
+                   @"  WHERE ComiketBlock.id = (?)");
+  FMResultSet *result = [self.database executeQuery:sql, @(blockID)];
+  if (![result next]) return nil;
+  return [result stringForColumn:@"simpleName"];
 }
 
 - (NSString *)blockNameForID:(NSInteger)blockID
@@ -124,7 +160,8 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
   static NSArray *blockIDToBlockName;
   if (!blockIDToBlockName) {
     blockIDToBlockName =
-    @[@"A",
+    @[@"*",
+      @"A",
       @"B",
       @"C",
       @"D",
@@ -242,7 +279,7 @@ static const NSUInteger CUT_COUNT_PER_PAGE = NUMBER_OF_CUTS_IN_ROW * NUMBER_OF_C
       @"れ"];
   }
 
-  return blockIDToBlockName[blockID - 1];
+  return blockIDToBlockName[blockID];
 }
 
 @end

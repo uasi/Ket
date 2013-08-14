@@ -1,6 +1,8 @@
 #import "CircleCutCell.h"
 
+#import "Checklist.h"
 #import "Circle.h"
+#import "CircleCutMatrix.h"
 
 #define CUT_SHOULDER_RECT_FOR_CUT_OF_210x300 NSMakeRect(7, 7, 49, 49)
 
@@ -10,9 +12,15 @@
 {
   [super drawInteriorWithFrame:cellFrame inView:controlView];
 
-  if (self.circle) {
-    [self drawCutShoulderRect:[self cutShoulderRectForCutRect:cellFrame]];
-  };
+  CircleCutMatrix *matrix = (CircleCutMatrix *)controlView;
+
+  if (self.circle && ![self.circle isEqual:[Circle emptyCircle]]) {
+    if ([matrix.checklist bookmarksContainsCircle:self.circle]) {
+      NSColor *color = [matrix.checklist colorForCircle:self.circle];
+      [self drawCutShoulderBackgroundRect:[self cutShoulderRectForCutRect:cellFrame] withColor:color];
+    }
+    [self drawCutShoulderForegroundRect:[self cutShoulderRectForCutRect:cellFrame]];
+  }
 
   if (self.isHighlighted) {
     [NSGraphicsContext saveGraphicsState];
@@ -24,12 +32,22 @@
   }
 }
 
-- (void)drawCutShoulderRect:(NSRect)rect
+- (void)drawCutShoulderBackgroundRect:(NSRect)rect withColor:(NSColor *)color
 {
   NSGraphicsContext *context = [NSGraphicsContext currentContext];
   [context saveGraphicsState];
 
-  [[NSColor yellowColor] drawSwatchInRect:rect];
+  if (![color isEqual:[NSColor clearColor]]) {
+    [color drawSwatchInRect:rect];
+  }
+
+  [context restoreGraphicsState];
+}
+
+- (void)drawCutShoulderForegroundRect:(NSRect)rect
+{
+  NSGraphicsContext *context = [NSGraphicsContext currentContext];
+  [context saveGraphicsState];
 
   NSDictionary *attributes =
   @{NSFontAttributeName: [NSFont systemFontOfSize:24]};

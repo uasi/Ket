@@ -1,0 +1,13 @@
+sqlite-2.8.17/.libs/
+sqlite-2.8.17/Makefile
+sqlite-2.8.17/config.*
+sqlite-2.8.17/lemon
+sqlite-2.8.17/libsqlite.la
+sqlite-2.8.17/libtool
+sqlite-2.8.17/parse.*
+sqlite-2.8.17/sqlite
+sqlite-2.8.17/sqlite.*
+sqlite-2.8.17/*.c
+sqlite-2.8.17/*.dSYM
+sqlite-2.8.17/*.h
+sqlite-2.8.17/*.lo

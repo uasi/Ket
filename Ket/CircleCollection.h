@@ -1,10 +1,13 @@
 @interface CircleCollection : NSObject
 
-@property (nonatomic, readonly, copy) NSArray *circles;
-@property (nonatomic, readonly, copy) NSArray *circlesPaddedWithNull;
-@property (nonatomic, readonly) NSUInteger page;
+@property (nonatomic, copy, readonly) NSArray *nonEmptyCircles;
+@property (nonatomic, copy, readonly) NSArray *circles;
+@property (nonatomic, readonly) NSString *summary;
 
-- (instancetype)initWithCircles:(NSArray *)circles
-                cutCountPerPage:(NSUInteger)count;
++ (CircleCollection *)emptyCircleCollectionWithMaxCount:(NSUInteger)maxCount;
+
+- (instancetype)initWithCircles:(NSArray *)circles maxCount:(NSUInteger)count respectsCutIndex:(BOOL)respectsCutIndex;
+
+- (NSString *)summary;
 
 @end

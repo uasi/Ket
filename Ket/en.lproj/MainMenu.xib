@@ -271,8 +271,9 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
-								<object class="NSMenuItem" id="838977049">
+								<object class="NSMenuItem" id="396263877">
 									<reference key="NSMenu" ref="720053764"/>
+									<bool key="NSIsDisabled">YES</bool>
 									<string key="NSTitle">Import…</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1272,7 +1273,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">performImportAction:</string>
 						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="838977049"/>
+						<reference key="destination" ref="396263877"/>
 					</object>
 					<int key="connectionID">555</int>
 				</object>
@@ -1373,7 +1374,7 @@
 							<reference ref="978459111"/>
 							<reference ref="9100315"/>
 							<reference ref="885450970"/>
-							<reference ref="838977049"/>
+							<reference ref="396263877"/>
 						</array>
 						<reference key="parent" ref="379814623"/>
 					</object>
@@ -1937,7 +1938,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">554</int>
-						<reference key="object" ref="838977049"/>
+						<reference key="object" ref="396263877"/>
 						<reference key="parent" ref="720053764"/>
 					</object>
 				</array>

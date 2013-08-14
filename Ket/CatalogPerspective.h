@@ -13,7 +13,7 @@
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database;
 + (CatalogPerspective *)perspectiveWithDatabase:(CatalogDatabase *)database filter:(CatalogFilter *)filter;
 
-- (NSUInteger)pageAtIndex:(NSUInteger)index; // XXX: remove in favor of -[CircleCollection page];
+- (NSUInteger)pageAtIndex:(NSUInteger)index;
 - (CircleCollection *)circleCollectionAtIndex:(NSUInteger)index;
 
 @end

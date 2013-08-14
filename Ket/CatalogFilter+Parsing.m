@@ -42,7 +42,17 @@ static NSDictionary *blockNameToIDTable(void);
 {
   NSString *constraint;
   CatalogFilterJoinType joinType;
-  if ([@":bookmarked" hasPrefix:label]) {
+  if ([NSRegularExpression testString:label withPattern:@"^:[0-9]+$"]) {
+    NSMutableArray *digits = [NSMutableArray arrayWithCapacity:label.length - 1];
+    for (NSUInteger i = 1; i < label.length; i++) {
+      [digits addObject:[label substringWithRange:NSMakeRange(i, 1)]];
+    }
+    constraint = [NSString stringWithFormat:
+                  @"(colorCode IN (%@))",
+                  [digits componentsJoinedByString:@","]];
+    joinType = CatalogFilterJoinTypeInner;
+  }
+  else if ([@":bookmarked" hasPrefix:label]) {
     constraint = @"(bookmarked)";
     joinType = CatalogFilterJoinTypeInner;
   }

@@ -62,7 +62,10 @@ static NSDictionary *blockNameToIDTable(void);
 {
   NSString *constraint = [NSString stringWithFormat:
                           @"((description LIKE '%%%1$@%%' ESCAPE '$') OR"
-                          @" (note LIKE '%%%1$@%%' ESCAPE '$'))",
+                          @" (circleName  LIKE '%%%1$@%%' ESCAPE '$') OR"
+                          @" (penName     LIKE '%%%1$@%%' ESCAPE '$') OR"
+                          @" (bookName    LIKE '%%%1$@%%' ESCAPE '$') OR"
+                          @" (note        LIKE '%%%1$@%%' ESCAPE '$'))",
                           escapeSQLMeta(word)];
   return @{@"constraint": constraint,
            @"requiresChecklist": @YES,

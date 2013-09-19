@@ -48,7 +48,7 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
   [super windowControllerDidLoadNib:aController];
-  RACBind(selectedCircle) = RACBind(self.tableViewDelegate, selectedCircle);
+  RACChannelTo(self, selectedCircle) = RACChannelTo(self.tableViewDelegate, selectedCircle);
 }
 
 + (BOOL)autosavesInPlace

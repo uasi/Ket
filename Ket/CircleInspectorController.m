@@ -34,7 +34,7 @@
   if (!self) return nil;
 
   // Bind self.document to NSApplication.sharedApplication.mainWindow.
-  [RACAble([NSApplication sharedApplication], mainWindow) subscribeNext:^(NSWindow *window) {
+  [RACObserve([NSApplication sharedApplication], mainWindow) subscribeNext:^(NSWindow *window) {
     if (self.window.isVisible) {
       self.document = [[DocumentController sharedDocumentController] documentForWindow:window];
     }
@@ -57,14 +57,15 @@
 
   // Bind self.circle to self.document.selectedCircle.
   if (self.circleBindingDisposable) [self.circleBindingDisposable dispose];
-  RACBinding *binding = RACBind(self.circle);
-  self.circleBindingDisposable = [binding bindTo:RACBind(document, selectedCircle)];
+  self.circle = document.selectedCircle;
+  RACChannelTerminal *terminal = RACChannelTo(self, circle);
+  self.circleBindingDisposable = [terminal subscribe:RACChannelTo(document, selectedCircle)];
 
   // Bind self.checklist to self.document.checklist.
   if (self.checklistBindingDisposable) [self.checklistBindingDisposable dispose];
-  binding = RACBind(self.checklist);
-  self.checklistBindingDisposable = [binding bindTo:RACBind(document, checklist)];
-  
+  self.checklist = document.checklist;
+  terminal = RACChannelTo(self, checklist);
+  self.checklistBindingDisposable = [terminal subscribe:RACChannelTo(document, checklist)];
 }
 
 - (NSString *)note

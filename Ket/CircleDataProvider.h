@@ -14,6 +14,7 @@
 @property (nonatomic, readonly) NSUInteger numberOfCutsInColumn;
 @property (nonatomic, readonly) RACSignal *dataDidChangeSignal;
 @property (nonatomic) CatalogFilter *filter;
+@property (nonatomic) Circle *selectedCircle;
 
 - (instancetype)initWithChecklist:(Checklist *)checklist;
 

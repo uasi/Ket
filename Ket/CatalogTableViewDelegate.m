@@ -18,8 +18,6 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
 @property (nonatomic, weak) CircleDataProvider *provider;
 
-@property (nonatomic, readwrite) Circle *selectedCircle;
-
 @property (nonatomic) RACSubject *tableViewColumnDidResizeSignal;
 
 @end
@@ -42,8 +40,8 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
 
   [[[NSNotificationCenter defaultCenter] rac_addObserverForName:CircleCutMatrixDidSelectCellNotification object:nil] subscribeNext:^(NSNotification *notification) {
     CircleCutMatrix *matrix = notification.object;
-    self.selectedCircle = matrix.highlightedCircleCutCell.circle;
-    NSString *blockName = [self.provider blockNameForID:self.selectedCircle.blockID];
+    self.provider.selectedCircle = matrix.highlightedCircleCutCell.circle;
+    NSString *blockName = [self.provider blockNameForID:self.provider.selectedCircle.blockID];
     NSLog(@"Sender=%@, selected circle block name=%@",notification.object ,blockName);
   }];
 }
@@ -93,7 +91,7 @@ static const NSTimeInterval kThrottleForReloadingDataOnResizing = 0.1;
   for (NSInteger i = 0; i < rows * columns; i++) {
     CircleCutCell *cell = view.cells[i];
     Circle *circle = circles[i];
-    if ([circle isEqual:self.selectedCircle]) {
+    if ([circle isEqual:self.provider.selectedCircle]) {
       cell.highlighted = YES;
       view.highlightedCircleCutCell = cell;
     }

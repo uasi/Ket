@@ -2,6 +2,7 @@
 
 #import "Checklist.h"
 #import "Circle.h"
+#import "CircleDataProvider.h"
 #import "Document.h"
 #import "DocumentController.h"
 
@@ -55,17 +56,17 @@
 {
   [super setDocument:document];
 
-  // Bind self.circle to self.document.selectedCircle.
+  // Bind self.circle to self.document.circleDataProvider.selectedCircle.
   if (self.circleBindingDisposable) [self.circleBindingDisposable dispose];
-  self.circle = document.selectedCircle;
+  self.circle = document.circleDataProvider.selectedCircle;
   RACChannelTerminal *terminal = RACChannelTo(self, circle);
-  self.circleBindingDisposable = [terminal subscribe:RACChannelTo(document, selectedCircle)];
+  self.circleBindingDisposable = [terminal subscribe:RACChannelTo(self, document.circleDataProvider.selectedCircle)];
 
   // Bind self.checklist to self.document.checklist.
   if (self.checklistBindingDisposable) [self.checklistBindingDisposable dispose];
   self.checklist = document.checklist;
   terminal = RACChannelTo(self, checklist);
-  self.checklistBindingDisposable = [terminal subscribe:RACChannelTo(document, checklist)];
+  self.checklistBindingDisposable = [terminal subscribe:RACChannelTo(self, document.checklist)];
 }
 
 - (NSString *)note

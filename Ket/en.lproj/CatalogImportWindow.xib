@@ -25,8 +25,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="570" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="Database Path Text Field">
-                        <rect key="frame" x="20" y="81" width="434" height="22"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="Database Path Text Field">
+                        <rect key="frame" x="20" y="81" width="435" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Catalog Database (CCATALOGxx.DB)" drawsBackground="YES" id="6">
                             <font key="font" metaFont="system"/>
@@ -34,8 +34,8 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10" userLabel="Archive Path Text Field">
-                        <rect key="frame" x="20" y="49" width="434" height="22"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10" userLabel="Archive Path Text Field">
+                        <rect key="frame" x="20" y="49" width="435" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Hi-rez Circle Cut Archive (CxxxCUTH.CCZ)" drawsBackground="YES" id="11">
                             <font key="font" metaFont="system"/>
@@ -54,8 +54,8 @@
                             <action selector="performImport:" target="-2" id="32"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35" userLabel="Choose Database Button">
-                        <rect key="frame" x="456" y="75" width="100" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35" userLabel="Choose Database Button">
+                        <rect key="frame" x="457" y="75" width="99" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Choose..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="36">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -65,8 +65,8 @@
                             <action selector="performChooseDatabase:" target="-2" id="52"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="Choose Archive Button">
-                        <rect key="frame" x="456" y="43" width="100" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="Choose Archive Button">
+                        <rect key="frame" x="457" y="43" width="99" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Choose..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="40">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
